@@ -1,0 +1,365 @@
+[
+  {
+    "test_id": "TC-01-MP-01",
+    "category": "Multi-Parameter Patient Context",
+    "disease": "diabetes",
+    "query": "What primary prevention guidelines and Rasayana medicines such as Obecon or Sannidha Rasayan are recommended for an overweight patient with BMI >= 25 and family history of diabetes mellitus?",
+    "expected_sections": [
+      "PRIMARY PREVENTION HELPFUL GUIDELINES (HELP TO PREVENT ONSET OF DIABETES IN IMPAIRED GLUCOSE TOLERANCE AND IMPAIRED FASTING GLYCAEMIA/PRE-DIABETES, FAMILY HISTORY OF DM/RISKY PATIENTS)"
+    ],
+    "expected_pages": [
+      6
+    ],
+    "expected_chunk_ids": [
+      "DOC-5FFD839CD910-0010-2230A8F5F621"
+    ],
+    "expected_section": "PRIMARY PREVENTION HELPFUL GUIDELINES (HELP TO PREVENT ONSET OF DIABETES IN IMPAIRED GLUCOSE TOLERANCE AND IMPAIRED FASTING GLYCAEMIA/PRE-DIABETES, FAMILY HISTORY OF DM/RISKY PATIENTS)",
+    "expected_page": 6,
+    "expected_chunk_id": "DOC-5FFD839CD910-0010-2230A8F5F621"
+  },
+  {
+    "test_id": "TC-01-MP-02",
+    "category": "Multi-Parameter Patient Context",
+    "disease": "respiratory_viral_infection",
+    "query": "For an adult patient with respiratory viral infection who has diabetes mellitus comorbidity (Udakvah srotas vyadhi) and mild HRCT score 0 to 8 with SpO2 above 94, what are the recommended medicines and doses?",
+    "expected_sections": [
+      "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES"
+    ],
+    "expected_pages": [
+      14
+    ],
+    "expected_chunk_ids": [
+      "DOC-FC76496810AB-0028-4F2CFBD3E05E"
+    ],
+    "expected_section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+    "expected_page": 14,
+    "expected_chunk_id": "DOC-FC76496810AB-0028-4F2CFBD3E05E"
+  },
+  {
+    "test_id": "TC-02-SEV-01",
+    "category": "Severity / Clinical Stage",
+    "disease": "diabetes",
+    "query": "In diabetic nephropathy Stage 3 complications with GFR 30-59% and creatinine 4 to 6 presenting with Shoth and Agnimandya, what are the prescribed medicines, Matra, Sahpaan, and Aushadh Kal?",
+    "expected_sections": [
+      "TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)"
+    ],
+    "expected_pages": [
+      16
+    ],
+    "expected_chunk_ids": [
+      "DOC-5FFD839CD910-0046-FDEAEE382E98"
+    ],
+    "expected_section": "TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)",
+    "expected_page": 16,
+    "expected_chunk_id": "DOC-5FFD839CD910-0046-FDEAEE382E98"
+  },
+  {
+    "test_id": "TC-02-SEV-02",
+    "category": "Severity / Clinical Stage",
+    "disease": "respiratory_viral_infection",
+    "query": "What is the therapeutic Rasayana protocol for severe respiratory viral infection with HRCT score greater than 15 and SpO2 below 90 in patients above 15 years with Pranvah Srotas vyadhi?",
+    "expected_sections": [
+      "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES"
+    ],
+    "expected_pages": [
+      17
+    ],
+    "expected_chunk_ids": [
+      "DOC-FC76496810AB-0036-20ED5DC46A3C"
+    ],
+    "expected_section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+    "expected_page": 17,
+    "expected_chunk_id": "DOC-FC76496810AB-0036-20ED5DC46A3C"
+  },
+  {
+    "test_id": "TC-03-COM-01",
+    "category": "Comorbidity & Previous Conditions",
+    "disease": "respiratory_viral_infection",
+    "query": "In respiratory viral infection prophylaxis as per Sahvyadhi (comorbidity), what medicines like Pranvir and Sutendra are recommended for Annavah srotas Vyadhi (Chronic Gastrointestinal illnesses)?",
+    "expected_sections": [
+      "RASAYANA GUIDELINES FOR PRANVAH SROTAS VYADHI VYADHIKSHAMATVA (RESPIRATORY VIRAL INFECTION PROPHYLAXIS) AS PER SAHVYADHI (COMRBIDITY)"
+    ],
+    "expected_pages": [
+      8
+    ],
+    "expected_chunk_ids": [
+      "DOC-FC76496810AB-0018-9C5D894BDCF1"
+    ],
+    "expected_section": "RASAYANA GUIDELINES FOR PRANVAH SROTAS VYADHI VYADHIKSHAMATVA (RESPIRATORY VIRAL INFECTION PROPHYLAXIS) AS PER SAHVYADHI (COMRBIDITY)",
+    "expected_page": 8,
+    "expected_chunk_id": "DOC-FC76496810AB-0018-9C5D894BDCF1"
+  },
+  {
+    "test_id": "TC-03-COM-02",
+    "category": "Comorbidity & Previous Conditions",
+    "disease": "respiratory_viral_infection",
+    "query": "What prophylactic Rasayana medicines like Sinurbhushan Rasayan or Arpisa Rasayan are recommended for respiratory viral infection in patients with past history of malignancy or active Granthi/Arbud under treatment?",
+    "expected_sections": [
+      "Nitya Rasayan Sevan as prophilaxis for seasonal or epidemic viral infections"
+    ],
+    "expected_pages": [
+      10
+    ],
+    "expected_chunk_ids": [
+      "DOC-FC76496810AB-0022-E78671F0BE7D"
+    ],
+    "expected_section": "Nitya Rasayan Sevan as prophilaxis for seasonal or epidemic viral infections",
+    "expected_page": 10,
+    "expected_chunk_id": "DOC-FC76496810AB-0022-E78671F0BE7D"
+  },
+  {
+    "test_id": "TC-04-AGE-01",
+    "category": "Age / Patient Type",
+    "disease": "respiratory_viral_infection",
+    "query": "What are the prophylactic Rasayana guidelines, medicine dosages, and Aushadh Kal for pediatric patients in the 3 to 15 years age group without comorbidities?",
+    "expected_sections": [
+      "PRANVAH SROTAS VYADHI KSHAMATVA MANAGEMENT (PROPHYLACTIC GUIDELINES FOR RESPIRATORY VIRAL INFECTION)"
+    ],
+    "expected_pages": [
+      7
+    ],
+    "expected_chunk_ids": [
+      "DOC-FC76496810AB-0014-4E7A77A5A6BD"
+    ],
+    "expected_section": "PRANVAH SROTAS VYADHI KSHAMATVA MANAGEMENT (PROPHYLACTIC GUIDELINES FOR RESPIRATORY VIRAL INFECTION)",
+    "expected_page": 7,
+    "expected_chunk_id": "DOC-FC76496810AB-0014-4E7A77A5A6BD"
+  },
+  {
+    "test_id": "TC-04-AGE-02",
+    "category": "Age / Patient Type",
+    "disease": "respiratory_viral_infection",
+    "query": "What are the prophylactic guidelines and Rasayana medicines like Rasvir and Pranvir for elderly patients aged more than 60 years with Pranvah Srotas Vyadhi?",
+    "expected_sections": [
+      "PRANVAH SROTAS VYADHI KSHAMATVA MANAGEMENT (PROPHYLACTIC GUIDELINES FOR RESPIRATORY VIRAL INFECTION)"
+    ],
+    "expected_pages": [
+      6
+    ],
+    "expected_chunk_ids": [
+      "DOC-FC76496810AB-0010-7E85F872A528"
+    ],
+    "expected_section": "PRANVAH SROTAS VYADHI KSHAMATVA MANAGEMENT (PROPHYLACTIC GUIDELINES FOR RESPIRATORY VIRAL INFECTION)",
+    "expected_page": 6,
+    "expected_chunk_id": "DOC-FC76496810AB-0010-7E85F872A528"
+  },
+  {
+    "test_id": "TC-05-INT-01",
+    "category": "Clinical Intent / Treatment Objective",
+    "disease": "diabetes",
+    "query": "What secondary prevention guidelines help to prevent the onset of complications of Prameh (DM) such as Vidradhi non-healing wounds, Murchha, or Punstvopghaat?",
+    "expected_sections": [
+      "HELPS IN SECONDARY PREVENTION"
+    ],
+    "expected_pages": [
+      13
+    ],
+    "expected_chunk_ids": [
+      "DOC-5FFD839CD910-0030-09A49E32354B"
+    ],
+    "expected_section": "HELPS IN SECONDARY PREVENTION",
+    "expected_page": 13,
+    "expected_chunk_id": "DOC-5FFD839CD910-0030-09A49E32354B"
+  },
+  {
+    "test_id": "TC-05-INT-02",
+    "category": "Clinical Intent / Treatment Objective",
+    "disease": "respiratory_viral_infection",
+    "query": "In post viral respiratory infection Upadrav, what treatments help to prevent Rasa-raktagat saamata and raktagranthi (thrombosis) and secondary infections like mucormycosis?",
+    "expected_sections": [
+      "Upadrav (Post Viral Respiratory Infection)"
+    ],
+    "expected_pages": [
+      22
+    ],
+    "expected_chunk_ids": [
+      "DOC-FC76496810AB-0051-899AAA565E5D"
+    ],
+    "expected_section": "Upadrav (Post Viral Respiratory Infection)",
+    "expected_page": 22,
+    "expected_chunk_id": "DOC-FC76496810AB-0051-899AAA565E5D"
+  },
+  {
+    "test_id": "TC-06-SYM-01",
+    "category": "Symptoms & Clinical Presentation",
+    "disease": "diabetes",
+    "query": "According to the diabetes management protocol, what medicines, Matra, Sahpaan, and Aushadh Kal are indicated for Trushna (Polydipsia) and Aruchi (Impaired Taste)?",
+    "expected_sections": [
+      "All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms."
+    ],
+    "expected_pages": [
+      8
+    ],
+    "expected_chunk_ids": [
+      "DOC-5FFD839CD910-0017-60F78AB81D60"
+    ],
+    "expected_section": "All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.",
+    "expected_page": 8,
+    "expected_chunk_id": "DOC-5FFD839CD910-0017-60F78AB81D60"
+  },
+  {
+    "test_id": "TC-06-SYM-02",
+    "category": "Symptoms & Clinical Presentation",
+    "disease": "respiratory_viral_infection",
+    "query": "What specific symptom management is recommended during respiratory viral infection for Rasabhinodan vruddhi (abnormal rise in blood pressure), Santat Jwar (persistent fever), and Mukhshushkata?",
+    "expected_sections": [
+      "GUIDELINES FOR MANAGEMENT OF SPECIFIC SYMPTOMS DURING (RESPIRATORY VIRAL INFECTION)"
+    ],
+    "expected_pages": [
+      22
+    ],
+    "expected_chunk_ids": [
+      "DOC-FC76496810AB-0050-34669FA57D74"
+    ],
+    "expected_section": "GUIDELINES FOR MANAGEMENT OF SPECIFIC SYMPTOMS DURING (RESPIRATORY VIRAL INFECTION)",
+    "expected_page": 22,
+    "expected_chunk_id": "DOC-FC76496810AB-0050-34669FA57D74"
+  },
+  {
+    "test_id": "TC-07-MED-01",
+    "category": "Current Medication / Therapy Context",
+    "disease": "respiratory_viral_infection",
+    "query": "For a patient with respiratory viral infection who has Asthma or COPD and is on regular inhalers, what Rasayana medicine, Matra, Sahpaan, and Aushadh Kal are recommended?",
+    "expected_sections": [
+      "Nitya Rasayan Sevan as prophilaxis for seasonal or epidemic viral infections"
+    ],
+    "expected_pages": [
+      10
+    ],
+    "expected_chunk_ids": [
+      "DOC-FC76496810AB-0022-E78671F0BE7D"
+    ],
+    "expected_section": "Nitya Rasayan Sevan as prophilaxis for seasonal or epidemic viral infections",
+    "expected_page": 10,
+    "expected_chunk_id": "DOC-FC76496810AB-0022-E78671F0BE7D"
+  },
+  {
+    "test_id": "TC-07-MED-02",
+    "category": "Current Medication / Therapy Context",
+    "disease": "diabetes",
+    "query": "What general clinical advice is given regarding patients who are already taking some medications for other illnesses when visiting an Ayurvedic physician for diabetes management?",
+    "expected_sections": [
+      ""
+    ],
+    "expected_pages": [
+      3
+    ],
+    "expected_chunk_ids": [
+      "DOC-5FFD839CD910-0009-9567185C5928"
+    ],
+    "expected_section": "",
+    "expected_page": 3,
+    "expected_chunk_id": "DOC-5FFD839CD910-0009-9567185C5928"
+  },
+  {
+    "test_id": "TC-08-BND-01",
+    "category": "Boundary / Threshold Conditions",
+    "disease": "respiratory_viral_infection",
+    "query": "Under the investigation protocol, what are the criteria and required investigations for Moderate state with SpO2 in the range of 90-94% and respiratory rate 24 or more per min?",
+    "expected_sections": [
+      "INVESTIGATION PROTOCOL"
+    ],
+    "expected_pages": [
+      24
+    ],
+    "expected_chunk_ids": [
+      "DOC-FC76496810AB-0055-97B327D64EF1"
+    ],
+    "expected_section": "INVESTIGATION PROTOCOL",
+    "expected_page": 24,
+    "expected_chunk_id": "DOC-FC76496810AB-0055-97B327D64EF1"
+  },
+  {
+    "test_id": "TC-08-BND-02",
+    "category": "Boundary / Threshold Conditions",
+    "disease": "diabetes",
+    "query": "What is the management protocol for Stage 5 diabetic complications characterized by kidney failure with a GFR threshold under 15% and creatinine above 8?",
+    "expected_sections": [
+      "TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)"
+    ],
+    "expected_pages": [
+      17
+    ],
+    "expected_chunk_ids": [
+      "DOC-5FFD839CD910-0049-CAAFB3892A41",
+      "DOC-5FFD839CD910-0050-BC2F6E2D7067"
+    ],
+    "expected_section": "TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)",
+    "expected_page": 17,
+    "expected_chunk_id": "DOC-5FFD839CD910-0049-CAAFB3892A41"
+  },
+  {
+    "test_id": "TC-09-MIS-01",
+    "category": "Missing / Partial Patient Information",
+    "disease": "diabetes",
+    "query": "What routine pathological investigations should be assessed and watched every 4 or 6 months by an Ayurvedic physician managing Prameh (Diabetes Mellitus)?",
+    "expected_sections": [
+      "PRAMEH (DIABETES MELLITUS) MANAGEMENT",
+      "Generally, patients bring these reports while visiting ayurvedic physician and may use for follow-up as well."
+    ],
+    "expected_pages": [
+      8
+    ],
+    "expected_chunk_ids": [
+      "DOC-5FFD839CD910-0015-D2DE2A52FC13",
+      "DOC-5FFD839CD910-0016-BCE98ADED9D4"
+    ],
+    "expected_section": "PRAMEH (DIABETES MELLITUS) MANAGEMENT",
+    "expected_page": 8,
+    "expected_chunk_id": "DOC-5FFD839CD910-0015-D2DE2A52FC13"
+  },
+  {
+    "test_id": "TC-09-MIS-02",
+    "category": "Missing / Partial Patient Information",
+    "disease": "respiratory_viral_infection",
+    "query": "What daily Rasayana prophylaxis (Nitya Rasayan Sevan) is recommended for people with no significant comorbidities during seasonal or epidemic viral infections?",
+    "expected_sections": [
+      "Nitya Rasayan Sevan as prophilaxis for seasonal or epidemic viral infections"
+    ],
+    "expected_pages": [
+      10
+    ],
+    "expected_chunk_ids": [
+      "DOC-FC76496810AB-0022-E78671F0BE7D"
+    ],
+    "expected_section": "Nitya Rasayan Sevan as prophilaxis for seasonal or epidemic viral infections",
+    "expected_page": 10,
+    "expected_chunk_id": "DOC-FC76496810AB-0022-E78671F0BE7D"
+  },
+  {
+    "test_id": "TC-10-PAR-01",
+    "category": "Paraphrase / Clinical Language Robustness",
+    "disease": "diabetes",
+    "query": "What Ayurvedic medicines such as Sunetra Rasayan or Niketa Rasayan are recommended for treating eye complications and blurred vision in patients with diabetes (diabetic retinopathy)?",
+    "expected_sections": [
+      "3.PRAMEHAJ NETRAGAT VYAADHI (DIABETIC RETINOPATHY)"
+    ],
+    "expected_pages": [
+      20
+    ],
+    "expected_chunk_ids": [
+      "DOC-5FFD839CD910-0057-CEEF567088AF"
+    ],
+    "expected_section": "3.PRAMEHAJ NETRAGAT VYAADHI (DIABETIC RETINOPATHY)",
+    "expected_page": 20,
+    "expected_chunk_id": "DOC-5FFD839CD910-0057-CEEF567088AF"
+  },
+  {
+    "test_id": "TC-10-PAR-02",
+    "category": "Paraphrase / Clinical Language Robustness",
+    "disease": "respiratory_viral_infection",
+    "query": "What home care procedures including salt and turmeric gargles and steam inhalation with eucalyptus oil are instructed during the active respiratory viral infection stage?",
+    "expected_sections": [
+      "Other details/instructions to be given during sansarga (infection.)"
+    ],
+    "expected_pages": [
+      23
+    ],
+    "expected_chunk_ids": [
+      "DOC-FC76496810AB-0053-A4375A0D73E5"
+    ],
+    "expected_section": "Other details/instructions to be given during sansarga (infection.)",
+    "expected_page": 23,
+    "expected_chunk_id": "DOC-FC76496810AB-0053-A4375A0D73E5"
+  }
+]

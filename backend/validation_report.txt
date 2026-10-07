@@ -1,0 +1,33 @@
+Total chunks: 131
+Issues: ERROR=0 | WARNING=10 | REVIEW=1 | INFO=2
+
+CONTENT TYPES
+- list_item: 6
+- table: 94
+- text: 31
+
+DISEASES
+- diabetes: 75
+- respiratory_viral_infection: 56
+
+ERRORS
+- None
+
+WARNINGS
+- DOC-5FFD839CD910-0015-D2DE2A52FC13: short fragment (259 chars): 'Section: PRAMEH (DIABETES MELLITUS) MANAGEMENT\n\nFor an ayurvedic physician, it is advisable to assess patients as per ayurvedic criteria and some pathological investigations may be watched for every 4 or 6 months or even at lesser interval as the case may be.'
+- DOC-5FFD839CD910-0016-BCE98ADED9D4: short fragment (292 chars): 'Section: PRAMEH (DIABETES MELLITUS) MANAGEMENT\nSubsection: Generally, patients bring these reports while visiting ayurvedic physician and may use for follow-up as well.\n\nCBC, LFT, RFT, URINE -R, SR. ELECRTROLYTES, SR. PHOSPHOROUS\nBSL-F, PP, HbA1C, BSL- R, Lipid profile, Sr.insulin, C peptide'
+- DOC-FC76496810AB-0009-21E97C7E5C44: short fragment (263 chars): 'Section: PROPHYLACTIC GUIDELINES\nSubsection: PRANVAH SROTAS VYADHI KSHAMATVA MANAGEMENT (PROPHYLACTIC GUIDELINES FOR RESPIRATORY VIRAL INFECTION)\n\nDuration of the treatment- 90 days, {after that depending on situation (exposure/symptoms/ outbreak situation etc.)}'
+- DOC-FC76496810AB-0039-135EAD18877F: short fragment (214 chars): 'Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\nAnnavah Srotas vyadhi (IBS/Ulcerative colitis etc.)'
+- DOC-FC76496810AB-0042-0C1FEC101AFD: short fragment (222 chars): 'Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\nMootravah Srotas vyadhi (Chronic /Acute renal failure etc.)'
+- DOC-FC76496810AB-0045-16E9DFC627D9: short fragment (209 chars): 'Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\nManovah Srotas vyadhi (Anxiety, Insomnia etc.)'
+- DOC-FC76496810AB-0048-B1E60D250011: short fragment (171 chars): 'Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\nSymptoms'
+- DOC-FC76496810AB-0049-B1B3A43097B9: short fragment (156 chars): 'Section: GUIDELINES FOR MANAGEMENT OF SPECIFIC SYMPTOMS DURING (RESPIRATORY VIRAL INFECTION)\n\nMedicine Matra Sahpaan Aushadh Kal\nDuring Sansarga (Infection)'
+- DOC-FC76496810AB-0052-7270BD56BFCF: short fragment (84 chars): 'Section: Upadrav (Post Viral Respiratory Infection)\n\nStreescon 2-0-2 with warm water'
+- DOC-FC76496810AB-0054-C84D4CA83EF1: short fragment (83 chars): 'Section: INVESTIGATION PROTOCOL\n\nRef: Govt. of Maharashtra Corona2020/CR No.58/Aa-5'
+
+REVIEW
+- DOC-5FFD839CD910-0004-C041A5942B91: likely mid-sentence split before DOC-5FFD839CD910-0005-01EE75431B6D
+
+INFO
+- DOC-5FFD839CD910-0035-D88F844451E5: short table fragment retained as structure
+- DOC-5FFD839CD910-0048-218A80DAF38B: short table fragment retained as structure

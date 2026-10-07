@@ -1,0 +1,259 @@
+{
+  "metadata": {
+    "status": "DRAFT",
+    "description": "DRAFT Golden Dataset for Phase 1 Disease-Specific Retrieval Evaluation. All questions and chunk IDs are derived strictly from actual chunks in backend/chunked_output/chunks.json. Requires manual expert verification before final benchmarking.",
+    "version": "1.0.0-draft",
+    "is_draft": true,
+    "last_updated": "2026-10-06T11:35:00Z",
+    "total_test_cases": 10,
+    "disease_breakdown": {
+      "diabetes": 5,
+      "respiratory_viral_infection": 5
+    },
+    "verification_instructions": "Review each question against the specified relevant_chunk_ids and expected_pages. Ensure the chunk contains the exact answer required by the clinical query."
+  },
+  "test_cases": [
+    {
+      "test_id": "TC-DM-001",
+      "disease": "diabetes",
+      "title": "Diabetes - Trushna and Aruchi Treatment Protocol",
+      "question": "A patient with diabetes mellitus presents with Trushna (polydipsia) and Aruchi (impaired taste). According to the guideline, what are the prescribed medicines, Matra, Sahpaan, and Aushadh Kal?",
+      "relevant_chunk_ids": [
+        "DOC-5FFD839CD910-0017-60F78AB81D60"
+      ],
+      "expected_pages": [
+        8
+      ],
+      "document_name": "DM RR.md",
+      "section": "All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.",
+      "key_ground_truth_terms": [
+        "Trushna",
+        "Polydipsia",
+        "Zincare",
+        "Kansya Rasayan",
+        "Aruchi",
+        "Warm water",
+        "Honey"
+      ],
+      "verified": false,
+      "verification_notes": "Chunk contains exact clinical table for Trushna (Polydipsia) and Aruchi with Zincare 2-0-2 and Kansya Rasayan 0-0-1."
+    },
+    {
+      "test_id": "TC-DM-002",
+      "disease": "diabetes",
+      "title": "Diabetes - Primary Prevention for Overweight and Family History",
+      "question": "What are the primary prevention guidelines and recommended Rasayana medications for high-risk individuals with family history of diabetes mellitus or overweight (BMI >= 25)?",
+      "relevant_chunk_ids": [
+        "DOC-5FFD839CD910-0010-2230A8F5F621"
+      ],
+      "expected_pages": [
+        6
+      ],
+      "document_name": "DM RR.md",
+      "section": "PRIMARY PREVENTION HELPFUL GUIDELINES (HELP TO PREVENT ONSET OF DIABETES IN IMPAIRED GLUCOSE TOLERANCE AND IMPAIRED FASTING GLYCAEMIA/PRE-DIABETES, FAMILY HISTORY OF DM/RISKY PATIENTS)",
+      "key_ground_truth_terms": [
+        "Over wt.",
+        "BMI",
+        "Obecon",
+        "Family History Of DM",
+        "Sannidha Rasayan",
+        "Vyanodaan kal"
+      ],
+      "verified": false,
+      "verification_notes": "Chunk specifies prophylactic treatment for At-Risk BMI >= 25 (Obecon 2-2-2) and Family History of DM (Sannidha Rasayan 2-0-2)."
+    },
+    {
+      "test_id": "TC-DM-003",
+      "disease": "diabetes",
+      "title": "Diabetes - Diabetic Nephropathy with Hypertension Comorbidity",
+      "question": "According to the diabetes complications guidelines, what treatment is recommended for Diabetic Nephropathy (Mutraghaat/Mutravah Srotas Vyadhi) when complicated by hypertension (Rasaabhinodan-vruddhi)?",
+      "relevant_chunk_ids": [
+        "DOC-5FFD839CD910-0036-D94138D743E9"
+      ],
+      "expected_pages": [
+        15
+      ],
+      "document_name": "DM RR.md",
+      "section": "TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)",
+      "key_ground_truth_terms": [
+        "MUTRAGHAAT",
+        "DIABETIC NEPHROPATHY",
+        "Rasaabhinodan-vruddhi",
+        "Sutendra Rasayana",
+        "Normoten"
+      ],
+      "verified": false,
+      "verification_notes": "Chunk provides dosage and medicines for Mutraghaat / Diabetic Nephropathy with Rasaabhinodan-vruddhi (Hypertension): Sutendra Rasayana and Normoten."
+    },
+    {
+      "test_id": "TC-DM-004",
+      "disease": "diabetes",
+      "title": "Diabetes - Pramehaj Moorcha with Ketonuria and Abdominal Pain",
+      "question": "In diabetic patients presenting with Pramehaj Moorcha and ketones in urine along with Hrulaas (nausea and vomiting) and Udarshool (abdominal pain), what is the basic medical guideline?",
+      "relevant_chunk_ids": [
+        "DOC-5FFD839CD910-0054-3F3AD61AF582"
+      ],
+      "expected_pages": [
+        19
+      ],
+      "document_name": "DM RR.md",
+      "section": "TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)",
+      "key_ground_truth_terms": [
+        "Pramehaj Moorcha",
+        "Ketones in urine",
+        "Hrulaas",
+        "Udarshool",
+        "Heerak Rasayan",
+        "Meha Rasayan",
+        "Zincare"
+      ],
+      "verified": false,
+      "verification_notes": "Chunk contains exact management table for Pramehaj Moorcha (Ketones in urine routine) with Heerak Rasayan 1-0-0, Meha Rasayan 0-0-1, and Zincare 2-0-2 or 2-2-2."
+    },
+    {
+      "test_id": "TC-DM-005",
+      "disease": "diabetes",
+      "title": "Diabetes - Diabetic Retinopathy Early Stage Management",
+      "question": "What are the recommended Ayurvedic medicines and administration timings for Diabetic Retinopathy (Pramehaj Netragat Vyaadhi) in patients experiencing blurred vision and floaters?",
+      "relevant_chunk_ids": [
+        "DOC-5FFD839CD910-0057-CEEF567088AF"
+      ],
+      "expected_pages": [
+        20
+      ],
+      "document_name": "DM RR.md",
+      "section": "3.PRAMEHAJ NETRAGAT VYAADHI (DIABETIC RETINOPATHY)",
+      "key_ground_truth_terms": [
+        "Blurred vision",
+        "Floaters in vision",
+        "Sunetra Rasayan",
+        "Rasaka Rasayana",
+        "Heerak Rasayan",
+        "Meha Rasayan"
+      ],
+      "verified": false,
+      "verification_notes": "Chunk details treatment for early stage Diabetic Retinopathy with Sunetra Rasayan 1-0-1 and Rasaka Rasayana 1-0-1."
+    },
+    {
+      "test_id": "TC-RESP-001",
+      "disease": "respiratory_viral_infection",
+      "title": "Respiratory - Prophylaxis for Chronic Diabetic Patients",
+      "question": "A patient with respiratory viral infection has Udakvah Srotas Vyadhi or chronic diabetes comorbidity. What medicine, Matra, Sahpaan and Aushadh Kal are advised for prophylaxis?",
+      "relevant_chunk_ids": [
+        "DOC-FC76496810AB-0017-772EE7F9E940"
+      ],
+      "expected_pages": [
+        8
+      ],
+      "document_name": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+      "section": "RASAYANA GUIDELINES FOR PRANVAH SROTAS VYADHI VYADHIKSHAMATVA (RESPIRATORY VIRAL INFECTION PROPHYLAXIS) AS PER SAHVYADHI (COMRBIDITY)",
+      "key_ground_truth_terms": [
+        "Udakvah Srotas Vyadhi",
+        "Chronic Diabetic Patients",
+        "Rasvir",
+        "Pranvir",
+        "Rasaka Rasayana",
+        "Meha"
+      ],
+      "verified": false,
+      "verification_notes": "Chunk lists prophylaxis for Udakvah Srotas Vyadhi (Chronic Diabetic Patients) including Rasvir 1-0-0, Pranvir 2-0-2, Rasaka Rasayana 0-0-1, and Meha 1-0-0."
+    },
+    {
+      "test_id": "TC-RESP-002",
+      "disease": "respiratory_viral_infection",
+      "title": "Respiratory - Prophylaxis for Asthma and COPD on Inhalers",
+      "question": "A patient with respiratory viral infection has Pranvah Srotas Vyadhi such as Asthma or COPD on regular inhalers. What Rasayana medicine, Matra, Sahpaan and Aushadh Kal are recommended?",
+      "relevant_chunk_ids": [
+        "DOC-FC76496810AB-0022-E78671F0BE7D"
+      ],
+      "expected_pages": [
+        10
+      ],
+      "document_name": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+      "section": "RASAYANA GUIDELINES FOR PRANVAH SROTAS VYADHI VYADHIKSHAMATVA (RESPIRATORY VIRAL INFECTION PROPHYLAXIS) AS PER SAHVYADHI (COMRBIDITY)",
+      "key_ground_truth_terms": [
+        "Pranvah srotas Vyadhi",
+        "Asthama",
+        "COPD",
+        "regular inhalers",
+        "Pranvallabh Rasayan",
+        "Mahalaxmi Vilas"
+      ],
+      "verified": false,
+      "verification_notes": "Chunk specifies that patients on regular inhalers should receive Pranvallabh Rasayan 1-0-0 with Honey/warm water at Rasayan kal."
+    },
+    {
+      "test_id": "TC-RESP-003",
+      "disease": "respiratory_viral_infection",
+      "title": "Respiratory - Pediatric Therapeutic Protocol (3-15 Years)",
+      "question": "For pediatric patients aged 3 to 15 years with respiratory viral infection, retrieve the therapeutic guidelines including medicine, Matra, Sahpaan and Aushadh Kal.",
+      "relevant_chunk_ids": [
+        "DOC-FC76496810AB-0027-AB7B9E833842"
+      ],
+      "expected_pages": [
+        13
+      ],
+      "document_name": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+      "section": "PRANVAH SROTAS VYADHI (RESPIRATORY VIRAL INFECTION) THERAPEUTIC GUIDELINES",
+      "key_ground_truth_terms": [
+        "3-15 yrs",
+        "Pranvir",
+        "Rasaka Rasayana",
+        "Mahalakshmi Vilas Ras",
+        "Bal Rasayana"
+      ],
+      "verified": false,
+      "verification_notes": "Chunk contains exact dosing for pediatric group 3-15 yrs: Pranvir 1-1-1, Rasaka Rasayana 1-0-1, Mahalakshmi Vilas Ras 1-0-1, and Bal Rasayana 1-0-0."
+    },
+    {
+      "test_id": "TC-RESP-004",
+      "disease": "respiratory_viral_infection",
+      "title": "Respiratory - Moderate Disease with Cardiac Comorbidity (HRCT 9-15)",
+      "question": "A patient with respiratory viral infection has cardiac comorbidity and moderate disease with HRCT score 9 to 15 and SpO2 90 to 94 percent. According to the guideline, retrieve the treatment including medicine, Matra, Sahpaan and Aushadh Kal.",
+      "relevant_chunk_ids": [
+        "DOC-FC76496810AB-0030-F98CE66700F2",
+        "DOC-FC76496810AB-0031-D7F6627AC304"
+      ],
+      "expected_pages": [
+        15
+      ],
+      "document_name": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+      "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+      "key_ground_truth_terms": [
+        "MODERATE (9 to 15)",
+        "SpO2 90 to 94",
+        "Somtajvir",
+        "Pranvir",
+        "Rasaka Rasayana",
+        "Sutendra Rasayana",
+        "Arpisa Rasayan",
+        "Heeraka Rasayana"
+      ],
+      "verified": false,
+      "verification_notes": "Chunk pair 0038 and 0039 covers the complete MODERATE table split on page 15 for cardiac comorbidity."
+    },
+    {
+      "test_id": "TC-RESP-005",
+      "disease": "respiratory_viral_infection",
+      "title": "Respiratory - Symptom Management for Tachycardia and High BP",
+      "question": "During respiratory viral infection, a patient develops tachycardia (Jalad Hrudgati) or abnormal rise in blood pressure (Rasabhinodan vruddhi). Retrieve the recommended medicine, Matra and Sahpaan.",
+      "relevant_chunk_ids": [
+        "DOC-FC76496810AB-0050-34669FA57D74"
+      ],
+      "expected_pages": [
+        22
+      ],
+      "document_name": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+      "section": "During Sansarga (Infection)",
+      "key_ground_truth_terms": [
+        "Rasabhinodan vruddhi",
+        "Sutendra Rasayana",
+        "Tachycardia",
+        "Jalad Hrudgati",
+        "Pranvallabh"
+      ],
+      "verified": false,
+      "verification_notes": "Chunk contains symptom-specific table during infection for Rasabhinodan vruddhi (Sutendra Rasayana 1-1-1) and Tachycardia/Jalad Hrudgati (Pranvallabh 1 cap SOS)."
+    }
+  ]
+}

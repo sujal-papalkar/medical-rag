@@ -1,0 +1,34 @@
+{
+  "document_count": 2,
+  "total_chunks": 131,
+  "max_chunk_chars": 1795,
+  "target_chars": 1800,
+  "min_chunk_chars": 300,
+  "excluded_placeholder_count": 0,
+  "duplicates_removed": 0,
+  "page_provenance_available": true,
+  "documents": [
+    {
+      "document_id": "DOC-5FFD839CD910",
+      "document_name": "DM RR.md",
+      "disease": "diabetes",
+      "chunk_count": 75,
+      "max_chunk_chars": 1795,
+      "short_chunk_count": 4,
+      "table_chunk_count": 59,
+      "page_provenance_chunk_count": 75,
+      "duplicates_removed": 0
+    },
+    {
+      "document_id": "DOC-FC76496810AB",
+      "document_name": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+      "disease": "respiratory_viral_infection",
+      "chunk_count": 56,
+      "max_chunk_chars": 1791,
+      "short_chunk_count": 8,
+      "table_chunk_count": 35,
+      "page_provenance_chunk_count": 56,
+      "duplicates_removed": 0
+    }
+  ]
+}
