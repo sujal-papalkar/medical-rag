@@ -1,75 +1,34 @@
 import React from 'react';
-import { Activity, Play, FileText, CheckCircle2, AlertTriangle } from 'lucide-react';
-import type { EvaluationReport } from '../types';
+import { Stethoscope, ShieldCheck, Database, CheckCircle2 } from 'lucide-react';
 
 interface HeaderProps {
-  report: EvaluationReport | null;
-  isRunning: boolean;
-  onRunEvaluation: () => void;
-  onOpenReport: () => void;
-  datasetStatus: string;
+  backendConnected?: boolean;
 }
 
-export const Header: React.FC<HeaderProps> = ({
-  report,
-  isRunning,
-  onRunEvaluation,
-  onOpenReport,
-  datasetStatus
-}) => {
-  const isDraft = datasetStatus === 'DRAFT' || report?.metadata?.is_draft;
-
+export const Header: React.FC<HeaderProps> = ({ backendConnected = true }) => {
   return (
-    <header className="dashboard-header">
-      <div className="brand-section">
-        <div className="badge-row">
-          <span className="phase-pill">
-            <Activity size={13} />
-            Phase 1 Evaluation
-          </span>
-          <span className={`status-pill ${isDraft ? 'draft' : 'verified'}`}>
-            {isDraft ? <AlertTriangle size={13} /> : <CheckCircle2 size={13} />}
-            {isDraft ? 'Golden Dataset: DRAFT' : 'Golden Dataset: VERIFIED'}
-          </span>
-          <span className="phase-pill" style={{ background: 'rgba(255,255,255,0.04)', borderColor: 'rgba(255,255,255,0.08)', color: '#cbd5e1' }}>
-            Exact chunk_id matching (No LLM)
-          </span>
+    <header className="clinical-header">
+      <div className="clinical-header-brand">
+        <div className="clinical-logo-icon">
+          <Stethoscope size={28} />
         </div>
-        <h1 className="dashboard-title">Medical RAG Retrieval Evaluation</h1>
-        <p className="dashboard-subtitle">
-          Benchmarking disease-specific guideline retrieval against verified ground truth across Diabetes Mellitus and Respiratory Viral Infection protocols.
-        </p>
+        <div>
+          <h1 className="clinical-header-title">AI-Powered Ayurvedic Clinical RAG</h1>
+          <p className="clinical-header-subtitle">
+            Guideline-grounded clinical decision support for registered Ayurvedic physicians
+          </p>
+        </div>
       </div>
 
-      <div className="header-actions">
-        <button
-          className="btn btn-secondary"
-          onClick={onOpenReport}
-          title="Inspect raw evaluation JSON report"
-          id="btn-view-raw-json"
-        >
-          <FileText size={16} />
-          View JSON Report
-        </button>
-
-        <button
-          className="btn btn-primary"
-          onClick={onRunEvaluation}
-          disabled={isRunning}
-          id="btn-run-evaluation"
-        >
-          {isRunning ? (
-            <>
-              <div className="spinner" />
-              Evaluating 10 Test Cases...
-            </>
-          ) : (
-            <>
-              <Play size={16} fill="white" />
-              Run Full Evaluation
-            </>
-          )}
-        </button>
+      <div className="clinical-header-status">
+        <span className="status-badge info">
+          <ShieldCheck size={14} />
+          <span>Decision Support System</span>
+        </span>
+        <span className={`status-badge ${backendConnected ? 'online' : 'staged'}`}>
+          {backendConnected ? <CheckCircle2 size={14} /> : <Database size={14} />}
+          <span>{backendConnected ? 'Knowledge Base Online (131 Chunks)' : 'Connecting to Knowledge Base...'}</span>
+        </span>
       </div>
     </header>
   );

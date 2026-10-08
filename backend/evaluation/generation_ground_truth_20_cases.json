@@ -1,0 +1,420 @@
+{
+  "metadata": {
+    "name": "Generation Ground Truth - 10 Categories / 20 Test Cases",
+    "version": "1.0.0-draft",
+    "status": "DRAFT",
+    "purpose": "Answer-level ground truth for generation evaluation using the same 20 retrieval scenarios.",
+    "source_dataset": "retrieval_scenarios.json",
+    "source_documents": [
+      "DM RR (1)(5).docx",
+      "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1)(5).pdf"
+    ],
+    "verification_required": true,
+    "evaluation_note": "Expected answer elements are derived from the cited source pages/chunks and should be clinically reviewed before being treated as an official benchmark."
+  },
+  "cases": [
+    {
+      "test_id": "TC-01-MP-01",
+      "category": "Multi-Parameter Patient Context",
+      "disease": "diabetes",
+      "query": "What primary prevention guidelines and Rasayana medicines such as Obecon or Sannidha Rasayan are recommended for an overweight patient with BMI >= 25 and family history of diabetes mellitus?",
+      "source": {
+        "document": "DM RR (1)(5).docx",
+        "pages": [
+          6
+        ],
+        "expected_chunk_ids": [
+          "DOC-5FFD839CD910-0010-2230A8F5F621"
+        ]
+      },
+      "expected_answer_elements": [
+        "Overweight/at-risk (BMI >=25): Obecon — Matra 2-2-2; Sahpaan warm water; Aushadh Kal Vyanodaan kal, three times a day after food.",
+        "Family history of DM: Sannidha Rasayan — Matra 2-0-2; Sahpaan warm water; Aushadh Kal Vyanodaan kal, twice a day after food."
+      ]
+    },
+    {
+      "test_id": "TC-01-MP-02",
+      "category": "Multi-Parameter Patient Context",
+      "disease": "respiratory_viral_infection",
+      "query": "For an adult patient with respiratory viral infection who has diabetes mellitus comorbidity (Udakvah srotas vyadhi) and mild HRCT score 0 to 8 with SpO2 above 94, what are the recommended medicines and doses?",
+      "source": {
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1)(5).pdf",
+        "pages": [
+          14
+        ],
+        "expected_chunk_ids": [
+          "DOC-FC76496810AB-0028-4F2CFBD3E05E"
+        ]
+      },
+      "expected_answer_elements": [
+        "Mild (HRCT 0–8, SpO2 >94) with Udakvah srotas vyadhi (Diabetes Mellitus): Somtajvir 1-0-0 with honey/warm water, Rasayan kal early morning empty stomach.",
+        "Pranvir 2-2-2 with warm water, three times a day after food.",
+        "Rasaka Rasayana 1-0-1 with honey/warm water, Rasayan kal and Nisha kal.",
+        "Meha Rasayan 1-0-0 with honey/warm water, Rasayan kal early morning empty stomach."
+      ]
+    },
+    {
+      "test_id": "TC-02-SEV-01",
+      "category": "Severity / Clinical Stage",
+      "disease": "diabetes",
+      "query": "In diabetic nephropathy Stage 3 complications with GFR 30-59% and creatinine 4 to 6 presenting with Shoth and Agnimandya, what are the prescribed medicines, Matra, Sahpaan, and Aushadh Kal?",
+      "source": {
+        "document": "DM RR (1)(5).docx",
+        "pages": [
+          16
+        ],
+        "expected_chunk_ids": [
+          "DOC-5FFD839CD910-0046-FDEAEE382E98"
+        ]
+      },
+      "expected_answer_elements": [
+        "Stage 3 (GFR 30–59%, creatinine 4–6) includes Zincare 2-2-2 with warm water, three times a day after food.",
+        "Sannidha Rasayan 2-0-2 with warm water, Vyanodaan kal twice a day after food.",
+        "Rasaka Rasayana 1-0-1 with honey/warm water, Rasayan kal and Nisha kal.",
+        "Urokine 2-0-2 with warm water, Vyanodaan kal twice a day after food.",
+        "Meha Rasayan 1-0-0 with honey/warm water, Rasayan kal early morning empty stomach."
+      ]
+    },
+    {
+      "test_id": "TC-02-SEV-02",
+      "category": "Severity / Clinical Stage",
+      "disease": "respiratory_viral_infection",
+      "query": "What is the therapeutic Rasayana protocol for severe respiratory viral infection with HRCT score greater than 15 and SpO2 below 90 in patients above 15 years with Pranvah Srotas vyadhi?",
+      "source": {
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1)(5).pdf",
+        "pages": [
+          17
+        ],
+        "expected_chunk_ids": [
+          "DOC-FC76496810AB-0036-20ED5DC46A3C"
+        ]
+      },
+      "expected_answer_elements": [
+        "Severe (>15, SpO2 <90), Pranvah Srotas vyadhi above 15 years: Somtajvir 1-1-1 with honey/warm water, Rasayan kal and Vyanodaan kal.",
+        "Pranvir 2-2-2 with warm water, three times a day after food.",
+        "Rasaka Rasayana 1-0-1 with honey/warm water, Rasayan kal and Nisha kal.",
+        "Sindhurbhushan Rasayan 1-0-0 with honey/warm water, Rasayan kal early morning empty stomach.",
+        "Mahalakshmi Vilas 0-0-1 with honey/warm water, Nisha kal.",
+        "Pranvallabha Rasayan 1-0-0 with honey/warm water, Rasayan kal early morning empty stomach."
+      ]
+    },
+    {
+      "test_id": "TC-03-COM-01",
+      "category": "Comorbidity & Previous Conditions",
+      "disease": "respiratory_viral_infection",
+      "query": "In respiratory viral infection prophylaxis as per Sahvyadhi (comorbidity), what medicines like Pranvir and Sutendra are recommended for Annavah srotas Vyadhi (Chronic Gastrointestinal illnesses)?",
+      "source": {
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1)(5).pdf",
+        "pages": [
+          8
+        ],
+        "expected_chunk_ids": [
+          "DOC-FC76496810AB-0018-9C5D894BDCF1"
+        ]
+      },
+      "expected_answer_elements": [
+        "Annavah srotas vyadhi (chronic gastrointestinal illnesses): Pranvir 2-0-2 with warm water, Vyanodaan kal twice a day after food.",
+        "Rasaka Rasayana 1-0-0 with honey/warm water, Rasayan kal early morning empty stomach.",
+        "Sutendra 1-0-0 with honey/warm water, Rasayan kal early morning empty stomach."
+      ]
+    },
+    {
+      "test_id": "TC-03-COM-02",
+      "category": "Comorbidity & Previous Conditions",
+      "disease": "respiratory_viral_infection",
+      "query": "What prophylactic Rasayana medicines like Sinurbhushan Rasayan or Arpisa Rasayan are recommended for respiratory viral infection in patients with past history of malignancy or active Granthi/Arbud under treatment?",
+      "source": {
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1)(5).pdf",
+        "pages": [
+          10
+        ],
+        "expected_chunk_ids": [
+          "DOC-FC76496810AB-0022-E78671F0BE7D"
+        ]
+      },
+      "expected_answer_elements": [
+        "Past history of malignancy: Sinurbhushan Rasayan 1-0-0 with honey/warm water, Rasayan kal early morning empty stomach.",
+        "Active/under treatment malignancy: Arpisa Rasayan 1-0-0 with honey/warm water, Rasayan kal early morning empty stomach."
+      ]
+    },
+    {
+      "test_id": "TC-04-AGE-01",
+      "category": "Age / Patient Type",
+      "disease": "respiratory_viral_infection",
+      "query": "What are the prophylactic Rasayana guidelines, medicine dosages, and Aushadh Kal for pediatric patients in the 3 to 15 years age group without comorbidities?",
+      "source": {
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1)(5).pdf",
+        "pages": [
+          7
+        ],
+        "expected_chunk_ids": [
+          "DOC-FC76496810AB-0014-4E7A77A5A6BD"
+        ]
+      },
+      "expected_answer_elements": [
+        "General patients without known comorbidities, age 3–15 years: Pranvir 1-0-1 with warm water, Vyanodaan kal twice a day after food.",
+        "Rasaka Rasayana 0-0-1 with honey/warm water, Nisha kal at bedtime."
+      ]
+    },
+    {
+      "test_id": "TC-04-AGE-02",
+      "category": "Age / Patient Type",
+      "disease": "respiratory_viral_infection",
+      "query": "What are the prophylactic guidelines and Rasayana medicines like Rasvir and Pranvir for elderly patients aged more than 60 years with Pranvah Srotas Vyadhi?",
+      "source": {
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1)(5).pdf",
+        "pages": [
+          6
+        ],
+        "expected_chunk_ids": [
+          "DOC-FC76496810AB-0010-7E85F872A528"
+        ]
+      },
+      "expected_answer_elements": [
+        "Age >60 years with Pranvah Srotas Vyadhi: Rasvir 1-0-0 with honey/warm water, Rasayan kal early morning empty stomach.",
+        "Pranvir 2-0-2 with warm water, Vyanodaan kal twice a day after food.",
+        "Rasaka Rasayana 1-0-1 with honey/warm water, Rasayan kal and Nisha kal."
+      ]
+    },
+    {
+      "test_id": "TC-05-INT-01",
+      "category": "Clinical Intent / Treatment Objective",
+      "disease": "diabetes",
+      "query": "What secondary prevention guidelines help to prevent the onset of complications of Prameh (DM) such as Vidradhi non-healing wounds, Murchha, or Punstvopghaat?",
+      "source": {
+        "document": "DM RR (1)(5).docx",
+        "pages": [
+          13,
+          14
+        ],
+        "expected_chunk_ids": [
+          "DOC-5FFD839CD910-0030-09A49E32354B"
+        ]
+      },
+      "expected_answer_elements": [
+        "For Murchha: Meha Rasayan 1-0-0 honey/warm water, Rasayan Kal; Rasaka Rasayana 0-0-1 honey/warm water, Nisha kal; Aarevat Kalpa 0-0-1 warm water, Nisha kal; and additional combinations listed in the guideline.",
+        "For Punstvopghaat (erectile dysfunction): Sindurbhushan Rasayan 1-0-0 honey/warm water, Rasayan Kal; plus the listed Chandraprabha/bhasma/ashwagandha/praval/jasad/vanga combination 0-1-1 with warm water, Vyanodaan kal.",
+        "For Vidradhi/recurrent non-healing wound: Meha Rasayan 1-0-0 honey/warm water, Rasayan Kal; Zincare 2-0-2 warm water, Vyanodaan kal; Rasaka Rasayana 0-0-1 honey/warm water, Nisha kal."
+      ]
+    },
+    {
+      "test_id": "TC-05-INT-02",
+      "category": "Clinical Intent / Treatment Objective",
+      "disease": "respiratory_viral_infection",
+      "query": "In post viral respiratory infection Upadrav, what treatments help to prevent Rasa-raktagat saamata and raktagranthi (thrombosis) and secondary infections like mucormycosis?",
+      "source": {
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1)(5).pdf",
+        "pages": [
+          22
+        ],
+        "expected_chunk_ids": [
+          "DOC-FC76496810AB-0051-899AAA565E5D"
+        ]
+      },
+      "expected_answer_elements": [
+        "To help prevent Rasa-raktagat saamata and raktagranthi (thrombosis): continue Pranvir and Rasak for 90 days.",
+        "For other infections such as mucormycosis: Shamani Tail nasya 2 drops under Vatadhikya; Jyeshtha ghrita nasya 3 drops under Kaphadhikya/Pittadhikya, using Pratimarsha nasya kal."
+      ]
+    },
+    {
+      "test_id": "TC-06-SYM-01",
+      "category": "Symptoms & Clinical Presentation",
+      "disease": "diabetes",
+      "query": "According to the diabetes management protocol, what medicines, Matra, Sahpaan, and Aushadh Kal are indicated for Trushna (Polydipsia) and Aruchi (Impaired Taste)?",
+      "source": {
+        "document": "DM RR (1)(5).docx",
+        "pages": [
+          8
+        ],
+        "expected_chunk_ids": [
+          "DOC-5FFD839CD910-0017-60F78AB81D60"
+        ]
+      },
+      "expected_answer_elements": [
+        "Trushna: Zincare 2-0-2 with warm water, Vyanodaan kal twice a day after food; Kansya Rasayan 0-0-1 with honey/warm water, Nisha kal at bedtime.",
+        "Aruchi: Zincare 2-0-2 with warm water, Vyanodaan kal twice a day after food; Ruchir 0-1-1 with cow ghee, Pran kal; Zinzi chips for chewing 3–4 times a day; Sannidha Rasayan 2-0-2 with warm water, Vyanodaan kal twice a day after food."
+      ]
+    },
+    {
+      "test_id": "TC-06-SYM-02",
+      "category": "Symptoms & Clinical Presentation",
+      "disease": "respiratory_viral_infection",
+      "query": "What specific symptom management is recommended during respiratory viral infection for Rasabhinodan vruddhi (abnormal rise in blood pressure), Santat Jwar (persistent fever), and Mukhshushkata?",
+      "source": {
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1)(5).pdf",
+        "pages": [
+          22
+        ],
+        "expected_chunk_ids": [
+          "DOC-FC76496810AB-0050-34669FA57D74"
+        ]
+      },
+      "expected_answer_elements": [
+        "Rasabhinodan vruddhi: Sutendra Rasayana 1-1-1 with honey, Muhurmuhur.",
+        "Santat Jwar (persistent fever >5 days) and weakness: Mahalakshmi Vilas 1-1-1 with honey + ginger juice, Rasayan kal and Vyanodaan kal.",
+        "Mukhshushkata: Jyeshta Ghrita by oral application once/twice a day and OHC oil 10–20 ml, Gandushkal."
+      ]
+    },
+    {
+      "test_id": "TC-07-MED-01",
+      "category": "Current Medication / Therapy Context",
+      "disease": "respiratory_viral_infection",
+      "query": "For a patient with respiratory viral infection who has Asthma or COPD and is on regular inhalers, what Rasayana medicine, Matra, Sahpaan, and Aushadh Kal are recommended?",
+      "source": {
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1)(5).pdf",
+        "pages": [
+          10
+        ],
+        "expected_chunk_ids": [
+          "DOC-FC76496810AB-0022-E78671F0BE7D"
+        ]
+      },
+      "expected_answer_elements": [
+        "Asthma/COPD on regular inhalers: Pranvallabh Rasayan 1-0-0 with honey/warm water, Rasayan kal early morning empty stomach."
+      ]
+    },
+    {
+      "test_id": "TC-07-MED-02",
+      "category": "Current Medication / Therapy Context",
+      "disease": "diabetes",
+      "query": "What general clinical advice is given regarding patients who are already taking some medications for other illnesses when visiting an Ayurvedic physician for diabetes management?",
+      "source": {
+        "document": "DM RR (1)(5).docx",
+        "pages": [
+          4
+        ],
+        "expected_chunk_ids": [
+          "DOC-5FFD839CD910-0009-9567185C5928"
+        ]
+      },
+      "expected_answer_elements": [
+        "Patients already taking medications for other illnesses should be advised to continue those medications after thorough examination by an Ayurveda physician."
+      ]
+    },
+    {
+      "test_id": "TC-08-BND-01",
+      "category": "Boundary / Threshold Conditions",
+      "disease": "respiratory_viral_infection",
+      "query": "Under the investigation protocol, what are the criteria and required investigations for Moderate state with SpO2 in the range of 90-94% and respiratory rate 24 or more per min?",
+      "source": {
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1)(5).pdf",
+        "pages": [
+          24
+        ],
+        "expected_chunk_ids": [
+          "DOC-FC76496810AB-0055-97B327D64EF1"
+        ]
+      },
+      "expected_answer_elements": [
+        "Moderate criteria: pneumonia; adolescent/adult with dyspnea and/or hypoxia, fever, cough, SpO2 <94% (90–94% on room air), respiratory rate >=24/min.",
+        "Investigations: CBC, RFT, LFT, RBS, ECG, ABG, ESR, CRP, serum ferritin, D-dimer/LDH; HRCT chest; follow-up CRP, D-dimer and serum ferritin every 48–72 hours if available; CBC with DLC/absolute lymphocyte count and KFT/LFT daily.",
+        "If QTc prolongation on ECG: daily serum electrolytes, ionic calcium and magnesium."
+      ]
+    },
+    {
+      "test_id": "TC-08-BND-02",
+      "category": "Boundary / Threshold Conditions",
+      "disease": "diabetes",
+      "query": "What is the management protocol for Stage 5 diabetic complications characterized by kidney failure with a GFR threshold under 15% and creatinine above 8?",
+      "source": {
+        "document": "DM RR (1)(5).docx",
+        "pages": [
+          17
+        ],
+        "expected_chunk_ids": [
+          "DOC-5FFD839CD910-0049-CAAFB3892A41",
+          "DOC-5FFD839CD910-0050-BC2F6E2D7067"
+        ]
+      },
+      "expected_answer_elements": [
+        "Stage 5 kidney failure (GFR under 15%, creatinine above 8): Zincare 2-2-2 with warm water, three times a day after food.",
+        "Sannidha Rasayan 2-0-2 with warm water, Vyanodaan kal twice a day after food.",
+        "Urokine 2-2-2 with warm water, three times a day after food.",
+        "Meha Rasayan 0-0-1 with honey/warm water, Nisha kal.",
+        "Heerak Rasayan 1-0-0 with honey/warm water, Rasayan Kal early morning empty stomach.",
+        "Aarevat Kalpa 0-0-1 or 0-0-2 with warm water, Nisha kal; Lavan replaces table salt as needed; Ayukshar 5 g per 1 litre drinking water."
+      ]
+    },
+    {
+      "test_id": "TC-09-MIS-01",
+      "category": "Missing / Partial Patient Information",
+      "disease": "diabetes",
+      "query": "What routine pathological investigations should be assessed and watched every 4 or 6 months by an Ayurvedic physician managing Prameh (Diabetes Mellitus)?",
+      "source": {
+        "document": "DM RR (1)(5).docx",
+        "pages": [
+          8
+        ],
+        "expected_chunk_ids": [
+          "DOC-5FFD839CD910-0015-D2DE2A52FC13",
+          "DOC-5FFD839CD910-0016-BCE98ADED9D4"
+        ]
+      },
+      "expected_answer_elements": [
+        "The guideline says some pathological investigations may be watched every 4 or 6 months or at a shorter interval as needed.",
+        "Investigations listed: CBC, LFT, RFT, urine routine, serum electrolytes, serum phosphorus; BSL-F, PP, HbA1C, BSL-R, lipid profile, serum insulin and C-peptide."
+      ]
+    },
+    {
+      "test_id": "TC-09-MIS-02",
+      "category": "Missing / Partial Patient Information",
+      "disease": "respiratory_viral_infection",
+      "query": "What daily Rasayana prophylaxis (Nitya Rasayan Sevan) is recommended for people with no significant comorbidities during seasonal or epidemic viral infections?",
+      "source": {
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1)(5).pdf",
+        "pages": [
+          10
+        ],
+        "expected_chunk_ids": [
+          "DOC-FC76496810AB-0022-E78671F0BE7D"
+        ]
+      },
+      "expected_answer_elements": [
+        "People with no significant comorbidities: Pranvir 2-0-2 with warm water, Vyanodaan kal twice a day after food.",
+        "Rasaka Rasayana 1-0-0 with honey/warm water, Rasayan kal early morning empty stomach.",
+        "The guideline advises regular use until infection risk is significantly reduced."
+      ]
+    },
+    {
+      "test_id": "TC-10-PAR-01",
+      "category": "Paraphrase / Clinical Language Robustness",
+      "disease": "diabetes",
+      "query": "What Ayurvedic medicines such as Sunetra Rasayan or Niketa Rasayan are recommended for treating eye complications and blurred vision in patients with diabetes (diabetic retinopathy)?",
+      "source": {
+        "document": "DM RR (1)(5).docx",
+        "pages": [
+          20
+        ],
+        "expected_chunk_ids": [
+          "DOC-5FFD839CD910-0057-CEEF567088AF"
+        ]
+      },
+      "expected_answer_elements": [
+        "Early-stage diabetic retinopathy/blurred vision: Sunetra Rasayan 1-0-1 with honey + cow ghee, Vyanodaan kal twice a day after food; Rasaka Rasayana 1-0-1 with honey/warm water, Rasayan kal and Nisha kal.",
+        "Late-stage dark spots/active bleeding: Niketa Rasayan 1-0-1 with honey/warm water, Vyanodaan kal twice a day after food; Netraj Rasayan 1-0-1 with honey/warm water, Vyanodaan kal twice a day after food.",
+        "If diabetes: add Zincare 2-0-2 with warm water, Vyanodaan kal; if nephropathy: add Urokine 2-0-2; if IHD: add Arpisa Rasayana 1-0-0; if hypertension: add Sutendra Rasayana 1-0-0."
+      ]
+    },
+    {
+      "test_id": "TC-10-PAR-02",
+      "category": "Paraphrase / Clinical Language Robustness",
+      "disease": "respiratory_viral_infection",
+      "query": "What home care procedures including salt and turmeric gargles and steam inhalation with eucalyptus oil are instructed during the active respiratory viral infection stage?",
+      "source": {
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1)(5).pdf",
+        "pages": [
+          23
+        ],
+        "expected_chunk_ids": [
+          "DOC-FC76496810AB-0053-A4375A0D73E5"
+        ]
+      },
+      "expected_answer_elements": [
+        "Gargles with salt + haldi three times a day if Kapha doshaadhikya; with yashtichurna + haldi if Pittadhikya.",
+        "Steam with 1 or 2 drops of eucalyptus oil in water three times a day.",
+        "Monitor daily SpO2, PR, symptoms, appetite, bowel and urine, and inform the treating physician.",
+        "Post-respiratory-viral-infection diet: avoid Viruddhashan, fish and Adhyashan."
+      ]
+    }
+  ]
+}
