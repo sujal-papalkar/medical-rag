@@ -1,4 +1,4 @@
-# Medical RAG Retrieval Evaluation System
+# Medical RAG Retrieval Evaluation Systems
 ## Phase 1: Disease-Specific Retrieval Benchmarking
 
 An evaluation module and modern frontend dashboard for benchmarking retrieval performance on clinical guideline documents without modifying the underlying ingestion, chunking, embedding, ChromaDB, or retrieval pipelines.
