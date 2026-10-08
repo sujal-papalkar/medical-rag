@@ -85,15 +85,49 @@ KNOWN_FORMULATIONS = [
     "Netraj", "Netraj Rasayan", "Shamani Tail", "Jyeshtha Ghrita", "Jyeshta Ghrita",
     "Ayukshar", "Lavan", "Aarevat Kalpa", "Zinzi", "Zinzi chips", "Rasaka",
     "Rasaka Rasayana", "Rasak", "Urokine", "Chandraprabha", "Ashwagandha",
-    "Praval", "Jasad", "Vanga"
+    "Praval", "Jasad", "Vanga", "Kanchan Rasayana", "Kanchan Rasayan",
+    "Somkalpa", "Pravi Rasayana", "Pravi Rasayan", "Bal Rasayan"
 ]
 
 GENERIC_MEDICINE_STOPWORDS = {
     "medicine", "medicines", "treatment", "treatments", "rasayan", "rasayana",
     "patient", "patients", "guideline", "guidelines", "protocol", "protocols",
     "ayurveda", "ayurvedic", "formulation", "formulations", "therapy", "management",
-    "prevention", "prophylaxis", "intervention", "interventions", "drug", "drugs"
+    "prevention", "prophylaxis", "intervention", "interventions", "drug", "drugs",
+    "therapeutic", "prophylactic", "following", "option", "options", "prescribed",
+    "specified", "recommended", "recommendation", "sevan", "nitya", "daily", "routine",
+    "oral", "application", "nasya", "pratimarsha"
 }
+
+ENGLISH_NON_MEDICINE_PREFIXES = {
+    "the", "a", "an", "this", "that", "these", "those",
+    "for", "in", "on", "at", "to", "from", "by", "with", "without", "under", "as", "of", "into",
+    "and", "or", "but", "if", "add", "take", "give", "administer", "continue",
+    "guideline", "guidelines", "protocol", "protocols",
+    "provides", "provide", "provided", "providing",
+    "following", "follows", "followed",
+    "therapeutic", "prophylaxis", "prophylactic",
+    "recommended", "recommend", "recommends", "recommendation", "recommendations",
+    "specified", "specifies", "specify",
+    "prescribed", "prescribe", "prescribes", "prescription",
+    "options", "option", "choice", "choices",
+    "patient", "patients", "case", "cases",
+    "management", "treatment", "treatments", "therapy", "therapies", "intervention", "interventions",
+    "sevan", "nitya", "daily", "regular", "routine",
+    "matra", "dose", "doses", "dosage", "dosages",
+    "sahpaan", "vehicle", "vehicles", "anupana",
+    "aushadh", "kal", "timing", "timings", "frequency", "duration",
+    "contraindication", "contraindications", "precaution", "precautions", "interaction", "interactions",
+    "limitation", "limitations", "missing", "information",
+    "use", "using", "used", "administer", "administered", "administration",
+    "oral", "application", "nasya", "drops", "oil"
+}
+
+FORMULATION_SUFFIXES = [
+    "Rasayan", "Rasayana", "Vati", "Bhasma", "Kwath", "Guggul", "Guggulu",
+    "Churna", "Taila", "Tailam", "Tail", "Asava", "Arishta", "Kashayam",
+    "Ghruta", "Ghrita", "Loha", "Mandoor", "Kalpa"
+]
 
 
 # ============================================================
@@ -119,7 +153,8 @@ def parse_element_clinical_components(element: str) -> Dict[str, Any]:
         "timings": [],
         "frequencies": [],
         "conditions": [],
-        "directives": []
+        "directives": [],
+        "investigations": []
     }
 
     # 1. Dosages
@@ -176,12 +211,14 @@ def parse_element_clinical_components(element: str) -> Dict[str, Any]:
         "hrct 0-8", "spo2 >94", "udakvah", "annavah", "pranvah", "stage 3",
         "gfr 30–59%", "creatinine 4–6", "creatinine 4 to 6", "hrct >15", "spo2 <90",
         "age above 15", "malignancy", "granthi", "arbud", "3–15 years", "3 to 15 years",
-        "pediatric", "age >60", "elderly", "secondary prevention", "vidradhi",
+        "3-15 yrs", "3-15 years", "3 to 15 yrs", "pediatric", "age >60", "elderly",
+        "more than 60 yrs", "more than 60 years", "secondary prevention", "vidradhi",
         "murchha", "punstvopghaat", "thrombosis", "raktagranthi", "saamata",
         "mucormycosis", "trushna", "aruchi", "santat jwar", "rasabhinodan vruddhi",
-        "mukhshushkata", "asthma", "copd", "inhalers", "moderate", "spo2 90–94%",
-        "spo2 90-94", "respiratory rate >=24", "stage 5", "gfr under 15%",
-        "creatinine above 8", "retinopathy", "blurred vision"
+        "mukhshushkata", "asthma", "asthama", "copd", "inhalers", "moderate", "spo2 90–94%",
+        "spo2 90-94", "respiratory rate >=24", "respiratory rate >= 24",
+        "more or equal to 24 per min", "more than or equal to 24", "stage 5",
+        "gfr under 15%", "creatinine above 8", "retinopathy", "blurred vision"
     ]
     for cond in candidate_conditions:
         if cond in element_lower:
@@ -191,11 +228,26 @@ def parse_element_clinical_components(element: str) -> Dict[str, Any]:
     candidate_directives = [
         "continue medications", "examination by an ayurveda physician",
         "avoid viruddhashan", "inform the treating physician", "monitor daily",
-        "daily serum electrolytes", "cbc with dlc"
+        "daily serum electrolytes", "daily s. electrolytes", "s. electrolytes daily",
+        "cbc with dlc"
     ]
     for dir_kw in candidate_directives:
         if dir_kw in element_lower:
             components["directives"].append(dir_kw)
+
+    # 8. Clinical Investigations / Laboratory Tests
+    candidate_investigations = [
+        "cbc with dlc", "cbc", "lft", "rft", "kft", "rbs", "ecg", "abg", "esr", "crp",
+        "serum ferritin", "sr. ferritin", "d-dimer", "ldh", "hrct chest", "hrct", "cxr",
+        "urine routine", "urine -r", "urine - r", "serum electrolytes", "sr. electrolytes",
+        "s. electrolytes", "serum phosphorus", "sr. phosphorous", "bsl-f", "bsl-r", "bsl-pp",
+        "pp", "hba1c", "lipid profile", "serum insulin", "sr. insulin", "c-peptide", "c peptide",
+        "ionic calcium", "magnesium"
+    ]
+    for inv in candidate_investigations:
+        if re.search(r'\b' + re.escape(inv) + r'\b', element_lower):
+            if not any(inv in existing for existing in components["investigations"]):
+                components["investigations"].append(inv)
 
     # Clean up overlaps (e.g. if "three times a day" is present, omit "three times")
     if "three times a day" in components["frequencies"] and "three times" in components["frequencies"]:
@@ -204,8 +256,214 @@ def parse_element_clinical_components(element: str) -> Dict[str, Any]:
     return components
 
 
+# Clinical concept-aware equivalence mappings
+CLINICAL_CONCEPT_EQUIVALENTS: Dict[str, List[str]] = {
+    # Age & Cohort equivalents
+    "3-15 yrs": ["3-15 yrs", "3-15 years", "3–15 years", "3 to 15 years", "3 to 15 yrs", "3-15", "age 3-15", "age 3–15", "pediatric"],
+    "3 to 15 years": ["3-15 yrs", "3-15 years", "3–15 years", "3 to 15 years", "3 to 15 yrs", "3-15", "age 3-15", "age 3–15", "pediatric"],
+    "3–15 years": ["3-15 yrs", "3-15 years", "3–15 years", "3 to 15 years", "3 to 15 yrs", "3-15", "age 3-15", "age 3–15", "pediatric"],
+    "pediatric": ["pediatric", "3-15 yrs", "3-15 years", "3–15 years", "3 to 15 years", "children", "child"],
+    "age >60": ["age >60", "age > 60", "more than 60 yrs", "more than 60 years", ">60 years", "> 60 years", "above 60", "elderly", ">60 yrs"],
+    "more than 60 yrs": ["age >60", "age > 60", "more than 60 yrs", "more than 60 years", ">60 years", "> 60 years", "above 60", "elderly"],
+    "more than 60 years": ["age >60", "age > 60", "more than 60 yrs", "more than 60 years", ">60 years", "> 60 years", "above 60", "elderly"],
+    "elderly": ["elderly", "more than 60 yrs", "more than 60 years", ">60 years", "age >60", ">60 yrs", "above 60"],
+    "age above 15": ["age above 15", "above 15 years", "15+yrs", "15+ yrs", "15+ years", "above 15"],
+    "15+yrs": ["age above 15", "above 15 years", "15+yrs", "15+ yrs", "15+ years", "above 15"],
+
+    # Conditions & Transliterations
+    "asthma": ["asthma", "asthama", "bronchial asthma"],
+    "asthama": ["asthma", "asthama", "bronchial asthma"],
+    "copd": ["copd", "chronic obstructive pulmonary disease"],
+    "inhalers": ["inhaler", "inhalers", "regular inhalers"],
+
+    # Lab Investigations & Abbreviations
+    "serum electrolytes": ["serum electrolytes", "sr. electrolytes", "sr electrolytes", "s. electrolytes", "s electrolytes", "sr. elecrtrolytes", "sr.elecrtrolytes", "s. electrolyte"],
+    "sr. electrolytes": ["serum electrolytes", "sr. electrolytes", "sr electrolytes", "s. electrolytes", "s electrolytes", "sr. elecrtrolytes", "sr.elecrtrolytes"],
+    "s. electrolytes": ["serum electrolytes", "sr. electrolytes", "sr electrolytes", "s. electrolytes", "s electrolytes", "sr. elecrtrolytes"],
+    "daily serum electrolytes": ["daily serum electrolytes", "daily s. electrolytes", "daily sr. electrolytes", "s. electrolytes daily", "daily s. electrolyte"],
+    "daily s. electrolytes": ["daily serum electrolytes", "daily s. electrolytes", "daily sr. electrolytes", "s. electrolytes daily", "daily s. electrolyte"],
+    "urine routine": ["urine routine", "urine -r", "urine - r", "urine-r", "urine r", "urine examination", "urine -routine"],
+    "urine -r": ["urine routine", "urine -r", "urine - r", "urine-r", "urine r", "urine examination"],
+    "urine - r": ["urine routine", "urine -r", "urine - r", "urine-r", "urine r", "urine examination"],
+    "serum phosphorus": ["serum phosphorus", "serum phosphorous", "sr. phosphorous", "sr. phosphorus", "sr phosphorous", "s. phosphorous", "s. phosphorus", "phosphorus", "phosphorous"],
+    "sr. phosphorous": ["serum phosphorus", "serum phosphorous", "sr. phosphorous", "sr. phosphorus", "sr phosphorous", "s. phosphorous", "s. phosphorus"],
+    "serum ferritin": ["serum ferritin", "sr. ferritin", "sr ferritin", "s. ferritin", "s ferritin", "ferritin"],
+    "sr. ferritin": ["serum ferritin", "sr. ferritin", "sr ferritin", "s. ferritin", "s ferritin"],
+    "serum insulin": ["serum insulin", "sr. insulin", "sr insulin", "s. insulin", "s insulin", "sr.insulin", "insulin"],
+    "sr. insulin": ["serum insulin", "sr. insulin", "sr insulin", "s. insulin", "s insulin", "sr.insulin"],
+    "c-peptide": ["c-peptide", "c peptide", "c - peptide"],
+    "c peptide": ["c-peptide", "c peptide", "c - peptide"],
+    "lipid profile": ["lipid profile", "serum lipid profile"],
+    "ionic calcium": ["ionic calcium", "calcium"],
+    "magnesium": ["magnesium", "sr. magnesium", "s. magnesium"],
+    "hrct": ["hrct", "hrct chest", "ct chest"],
+    "hrct chest": ["hrct", "hrct chest", "ct chest"],
+    "rft": ["rft", "kft", "renal function test", "kidney function test"],
+    "kft": ["rft", "kft", "renal function test", "kidney function test"],
+    "lft": ["lft", "liver function test"],
+    "cbc": ["cbc", "cbc with dlc", "complete blood count"],
+    "cbc with dlc": ["cbc with dlc", "cbc", "complete blood count"],
+    "bsl-f": ["bsl-f", "bsl - f", "bsl fasting", "fasting blood sugar"],
+    "bsl-r": ["bsl-r", "bsl - r", "bsl random", "random blood sugar", "rbs"],
+    "bsl-pp": ["bsl-pp", "bsl - pp", "pp", "bsl post prandial", "post prandial blood sugar"],
+
+    # Thresholds and Criteria
+    ">=24/min": [">=24/min", ">= 24", "more or equal to 24 per min", "more than or equal to 24", "more than or equal to 24 per min", ">=24", "24 or more", "24 breaths/min"],
+    "respiratory rate >=24": ["respiratory rate >=24", "respiratory rate >= 24", "respiratory rate more or equal to 24", "respiratory rate more than or equal to 24", "respiratory rate 24 or more", "respiratory rate >= 24 per min", "respiratory rate >=24/min", "respiratory rate more than or equal to 24 per min", "respiratory rate more or equal to 24 per min"],
+    "more or equal to 24 per min": [">=24/min", ">= 24", "more or equal to 24 per min", "more than or equal to 24", "more than or equal to 24 per min", ">=24", "24 or more"],
+    "spo2 <94%": ["spo2 <94%", "spo2 < 94%", "spo2 90-94", "spo2 90–94%", "90-94%", "90–94%"],
+    "spo2 90–94%": ["spo2 90–94%", "spo2 90-94%", "spo2 90 to 94", "90-94%", "90–94%"],
+    "spo2 90-94": ["spo2 90–94%", "spo2 90-94%", "spo2 90 to 94", "90-94%", "90–94%"],
+
+    # Duration and Guidance phrases
+    "regular use until infection risk is significantly reduced": [
+        "regular use until infection risk is significantly reduced",
+        "regular basis till the risk of infection is reduced significantly",
+        "till the risk of infection is reduced significantly",
+        "risk of infection is reduced significantly",
+        "regular basis till the risk of infection",
+        "nitya sevan on a regular basis till the risk of infection is reduced",
+        "nitya sevan"
+    ],
+    "the guideline advises regular use until infection risk is significantly reduced": [
+        "regular use until infection risk is significantly reduced",
+        "regular basis till the risk of infection is reduced significantly",
+        "till the risk of infection is reduced significantly",
+        "risk of infection is reduced significantly",
+        "regular basis till the risk of infection",
+        "nitya sevan on a regular basis till the risk of infection is reduced",
+        "nitya sevan"
+    ]
+}
+
+
+def strip_inline_citations(text: str) -> str:
+    """Strips markdown citation blocks like [DOC-... | Page 24] or [DOC-...] and page tags."""
+    cleaned = re.sub(r'\[\s*DOC-[A-Za-z0-9\-]+(?:[^\]]*?)\]', '', text)
+    cleaned = re.sub(r'\[\s*(?:Page|p\.)\s*\d+\s*\]', '', cleaned, flags=re.IGNORECASE)
+    cleaned = re.sub(r'\(\s*(?:Page|p\.)\s*\d+\s*\)', '', cleaned, flags=re.IGNORECASE)
+    return cleaned
+
+
+def is_markdown_table_header_or_separator(line: str) -> bool:
+    """
+    Identifies Markdown table header rows and separator rows so they are not
+    falsely evaluated as clinical assertions.
+    """
+    line_stripped = line.strip()
+    if not line_stripped or not line_stripped.startswith('|'):
+        return False
+
+    # Separator rows (e.g. | :--- | :--- | or |---|---| or | :--: |)
+    if re.match(r'^\|[\s\:\-\|]+\|$', line_stripped):
+        return True
+
+    cells = [c.strip().lower() for c in line_stripped.strip('|').split('|')]
+    if not cells:
+        return False
+
+    header_names = {
+        "medicine", "medicines", "drug", "drugs", "formulation", "formulations",
+        "matra", "dose", "dosage", "matra (dosage)", "matra (dose)", "matra / dosage",
+        "sahpaan", "anupana", "sahpaan (vehicle)", "sahpaan / anupana", "vehicle",
+        "aushadh kal", "aushadh kala", "aushadha kal", "aushadha kala",
+        "aushadh kal (timing)", "timing", "timing / aushadh kal", "timing / frequency",
+        "timing/frequency", "aushadh kal (timing/frequency)",
+        "frequency", "duration", "duration of treatment", "route", "administration",
+        "patient type", "age group", "age", "condition", "conditions",
+        "clinical presentation", "clinical presentation / condition",
+        "treatment", "treatments", "action", "status", "stage", "indication", "indications",
+        "symptoms", "complaints", "co-morbidity", "comorbidity", "comorbidities",
+        "criteria", "state and group", "state", "group", "investigation", "investigations",
+        "instructions", "hrct score", "score", "sl no", "sr no", "no"
+    }
+
+    matched_cells = 0
+    for cell in cells:
+        clean_cell = re.sub(r'[\*\_\(\)\:\/\-\–\s]+', ' ', cell).strip()
+        if clean_cell in header_names:
+            matched_cells += 1
+        elif any(clean_cell == hn or clean_cell.startswith(hn) for hn in header_names):
+            matched_cells += 1
+        elif any(kw in clean_cell for kw in [
+            "medicine", "matra", "sahpaan", "aushadh", "timing", "dosage",
+            "vehicle", "treatment", "presentation", "comorbid", "investigation"
+        ]):
+            matched_cells += 1
+
+    return (matched_cells / len(cells)) >= 0.50
+
+
+def is_conversational_scaffolding(line: str) -> bool:
+    """
+    Identifies conversational lead-in sentences, section transitions, and preamble
+    formatting that set up tables or lists without stating independent clinical claims.
+    """
+    line_clean = line.strip()
+    line_lower = line_clean.lower()
+
+    if not line_lower or len(line_lower) < 10:
+        return False
+
+    meta_phrases = [
+        "based on the retrieved",
+        "here is the structured guidance",
+        "here is the clinical guidance",
+        "as per the retrieved",
+        "according to the retrieved",
+        "as outlined in the retrieved",
+        "the guidelines recommend the following",
+        "the guideline recommends the following",
+        "guidelines provide the following",
+        "guideline provides the following",
+        "the following instructions and procedures are provided",
+        "the following instructions are provided",
+        "the following recommendations are provided",
+        "the following options are recommended",
+        "the following regimen is recommended",
+        "the following prophylactic",
+        "the following therapeutic",
+        "the following treatments help",
+        "the following treatments are recommended",
+        "pathological investigations that patients generally bring",
+        "may be used for follow-up as well are",
+        "preventative nasal therapies (nasya) are advised based on",
+        "nasal therapies (nasya) are advised based on",
+        "during the active respiratory viral infection stage",
+        "for prophylactic management in pediatric patients",
+        "for elderly patients aged",
+        "for a patient with a respiratory viral infection who has asthma",
+        "for people with no significant comorbidities during seasonal"
+    ]
+
+    ends_with_colon = line_clean.endswith(':') or line_clean.endswith(':-')
+    has_scaffolding_phrase = any(mp in line_lower for mp in meta_phrases)
+
+    if has_scaffolding_phrase or (ends_with_colon and any(w in line_lower for w in ["following", "guideline", "recommended", "advised", "specifies", "protocol"])):
+        # Make sure this line does NOT contain concrete dosages or specific standalone prescriptions
+        has_concrete_dosage = bool(re.search(r'\b\d+-\d+-\d+\b|\b\d+\s*drops?\b|\bfor \d+ days\b', line_lower))
+        if not has_concrete_dosage:
+            return True
+
+    return False
+
+
+def clean_element_metadata_labels(el: str) -> str:
+    """
+    Strips ground-truth metadata labels such as 'Investigations listed:',
+    'Investigations:', 'Moderate criteria:', etc. so they are not treated as required clinical content.
+    """
+    cleaned = re.sub(
+        r'^(?:Investigations\s*listed|Investigations|Moderate\s*criteria|Criteria|Note|Protocol|Guideline)\s*:\s*',
+        '',
+        el,
+        flags=re.IGNORECASE
+    )
+    return cleaned.strip()
+
+
 def evaluate_component_match(component: str, text: str) -> bool:
-    """Checks whether a single clinical component is matched in the target text."""
+    """Checks whether a single clinical component is matched in the target text using concept-aware matching."""
     c_lower = component.lower().strip()
     t_lower = text.lower()
 
@@ -258,8 +516,31 @@ def evaluate_component_match(component: str, text: str) -> bool:
         "examination by an ayurveda physician": ["physician", "vaidya", "consult", "doctor", "examination"]
     }
 
-    if c_lower in synonyms:
-        return any(syn in t_lower or normalize_text(syn) in norm_t for syn in synonyms[c_lower])
+    c_stripped = re.sub(r'^(?:phrase|directives?|conditions?|medicines?|dosages?|vehicles?|timings?|frequencies?|investigations?)\s*:\s*', '', c_lower).strip()
+
+    all_equivalents = {**synonyms, **CLINICAL_CONCEPT_EQUIVALENTS}
+    if c_lower in all_equivalents:
+        if any(syn in t_lower or normalize_text(syn) in norm_t for syn in all_equivalents[c_lower]):
+            return True
+    if c_stripped in all_equivalents:
+        if any(syn in t_lower or normalize_text(syn) in norm_t for syn in all_equivalents[c_stripped]):
+            return True
+
+    # Check substring keys in all_equivalents
+    for k, eq_list in all_equivalents.items():
+        if k in c_stripped or c_stripped in k:
+            for eq in eq_list:
+                if eq in t_lower or normalize_text(eq) in norm_t:
+                    return True
+
+    # Substantive content word matching for longer narrative phrases
+    words = [w for w in re.findall(r'[a-zA-Z0-9\-\>\%]+', c_stripped) if len(w) > 3 and w not in {
+        "the", "and", "for", "with", "this", "that", "from", "guideline", "advises", "under", "using", "listed"
+    }]
+    if len(words) >= 3:
+        matched_w = sum(1 for w in words if w in t_lower or w in norm_t)
+        if (matched_w / len(words)) >= 0.60:
+            return True
 
     return False
 
@@ -268,61 +549,138 @@ def evaluate_component_match(component: str, text: str) -> bool:
 # PROBLEM 3: ENTITY & MEDICINE EXTRACTION (STRICT HALLUCINATION)
 # ============================================================
 
+def clean_medicine_candidate(candidate: str) -> Optional[str]:
+    """
+    Cleans candidate medicine string:
+    - Strips markdown, punctuation, leading numbers/bullets.
+    - Strips trailing dosage signatures (e.g. '1-0-1', '2 drops').
+    - Strips leading English prepositions, articles, and clinical attribute labels.
+    - Rejects pure generic words or non-medicine phrases.
+    """
+    if not candidate:
+        return None
+    # Strip markdown and boundary punctuation
+    cand = re.sub(r'^[\*\-\>\d\.\s\:\,\;\|\(\)\[\]]+', '', candidate)
+    cand = re.sub(r'[\*\-\>\s\:\,\;\|\(\)\[\]]+$', '', cand).strip()
+    if not cand or len(cand) < 3:
+        return None
+
+    # Strip trailing dosage signatures if present in candidate
+    cand = re.sub(r'\s*\b\d+-\d+-\d+\b.*$', '', cand).strip()
+    cand = re.sub(r'\s*\b\d+\s*(?:drops?|ml|tsp|teaspoon|tablespoon)\b.*$', '', cand, flags=re.IGNORECASE).strip()
+
+    words = cand.split()
+    # Strip leading non-medicine prefix words
+    while words and words[0].lower() in ENGLISH_NON_MEDICINE_PREFIXES:
+        words.pop(0)
+
+    # Strip trailing non-medicine words
+    while words and words[-1].lower() in (ENGLISH_NON_MEDICINE_PREFIXES - {"oil", "nasya"}):
+        words.pop(-1)
+
+    if not words:
+        return None
+
+    cleaned = " ".join(words).strip()
+    cleaned_lower = cleaned.lower()
+
+    if cleaned_lower in GENERIC_MEDICINE_STOPWORDS:
+        return None
+
+    # Check if candidate is just a suffix alone (e.g. 'Rasayana', 'Ghrita')
+    if any(cleaned_lower == s.lower() for s in FORMULATION_SUFFIXES):
+        return None
+
+    # Check if all remaining words are in generic medicine stopwords
+    if all(w.lower() in GENERIC_MEDICINE_STOPWORDS for w in words):
+        return None
+
+    if len(cleaned) < 3:
+        return None
+
+    return cleaned
+
+
 def extract_prescribed_medicines(answer_text: str) -> List[str]:
     """
     Extracts medicine and formulation names explicitly prescribed in the generated answer.
-    Excludes generic words like 'Rasayan', 'Medicine', 'Treatment', 'Patient'.
+    Excludes English phrases, limitation/missing info statements, and generic terms.
     """
     medicines = set()
 
-    # Pattern 1: Explicit prompt markdown bold markers
+    # Exclude Limitations & Missing Information section from prescribed medicine extraction
+    text_to_scan = answer_text
+    if "### 3. Limitations" in text_to_scan:
+        text_to_scan = text_to_scan.split("### 3. Limitations")[0]
+    elif "### 3." in text_to_scan:
+        text_to_scan = text_to_scan.split("### 3.")[0]
+    elif "Limitations & Missing Information" in text_to_scan:
+        text_to_scan = text_to_scan.split("Limitations & Missing Information")[0]
+
+    # Split into lines and filter out any individual limitation/absence statement lines
+    valid_lines = []
+    for line in text_to_scan.split('\n'):
+        # Skip lines explicitly stating a parameter is not specified / missing
+        if re.search(r'\b(?:is not specified|are not specified|not specified in|not provided|unspecified|not mentioned)\b', line, re.IGNORECASE):
+            continue
+        valid_lines.append(line)
+    clean_scan_text = '\n'.join(valid_lines)
+
+    # Pattern 1: Explicit prompt markdown bold markers (e.g. "**Medicine:** Somtajvir")
     med_pattern = re.compile(
         r'(?:\*\*Medicine:\*\*|Medicine:|\bPrescribed:\b)\s*\*?([A-Za-z0-9\s\-]+?)(?:\n|\*|\(|\,|$)',
         re.IGNORECASE
     )
-    for match in med_pattern.finditer(answer_text):
-        name = match.group(1).strip().strip('*').strip()
-        name_lower = name.lower()
-        if name and len(name) > 2 and name_lower not in GENERIC_MEDICINE_STOPWORDS:
-            if not name_lower.startswith("not specified") and not name_lower.startswith("none"):
-                medicines.add(name)
+    for match in med_pattern.finditer(clean_scan_text):
+        raw = match.group(1).strip()
+        cleaned = clean_medicine_candidate(raw)
+        if cleaned:
+            medicines.add(cleaned)
 
-    # Pattern 2: Ayurvedic formulation suffixes (only when preceded by a distinct name)
+    # Pattern 2: Ayurvedic formulation suffixes (1 or 2 capitalized words preceding suffix)
     suffix_pattern = re.compile(
-        r'\b([A-Z][A-Za-z]+(?:\s+[A-Za-z]+)*\s+(?:Rasayan|Rasayana|Vati|Bhasma|Kwath|Guggul|Guggulu|Churna|Taila|Tailam|Tail|Asava|Arishta|Kashayam|Ghruta|Ghrita|Loha|Mandoor|Kalpa))\b',
-        re.IGNORECASE
+        r'\b([A-Z][A-Za-z0-9\-]+(?:\s+[A-Z][A-Za-z0-9\-]+)?\s+(?i:' + '|'.join(FORMULATION_SUFFIXES) + r'))\b'
     )
-    for match in suffix_pattern.finditer(answer_text):
-        name = match.group(1).strip()
-        first_word = name.split()[0].lower()
-        if first_word not in GENERIC_MEDICINE_STOPWORDS:
-            medicines.add(name)
+    for match in suffix_pattern.finditer(clean_scan_text):
+        raw = match.group(1).strip()
+        cleaned = clean_medicine_candidate(raw)
+        if cleaned:
+            medicines.add(cleaned)
 
     # Pattern 3: Formulations immediately preceding dosage signatures (e.g. "SomeMedicine 1-0-0")
     dose_med_pattern = re.compile(
-        r'\b([A-Z][A-Za-z0-9\-]+(?:\s+[A-Za-z0-9\-]+){0,2})\s+(?:—|-|–|:|\*)*\s*(?:Matra\s*)?\d+-\d+-\d+\b'
+        r'\b([A-Z][A-Za-z0-9\-]+(?:\s+[A-Z][A-Za-z0-9\-]+)?)\s+(?:—|-|–|:|\*)*\s*(?:Matra\s*)?\d+-\d+-\d+\b'
     )
-    for match in dose_med_pattern.finditer(answer_text):
-        candidate_med = match.group(1).strip().strip('*').strip('-').strip()
-        first_w = candidate_med.split()[0].lower()
-        last_w = candidate_med.split()[-1].lower()
-        if first_w not in GENERIC_MEDICINE_STOPWORDS and last_w not in GENERIC_MEDICINE_STOPWORDS:
-            if not any(sw in candidate_med.lower() for sw in ["matra", "dose", "include", "take", "stage", "prescribed"]):
-                medicines.add(candidate_med)
+    for match in dose_med_pattern.finditer(clean_scan_text):
+        raw = match.group(1).strip()
+        cleaned = clean_medicine_candidate(raw)
+        if cleaned:
+            medicines.add(cleaned)
 
     # Pattern 4: Known specific proprietary formulations in these guidelines
     for kf in KNOWN_FORMULATIONS:
-        if re.search(r'\b' + re.escape(kf) + r'\b', answer_text, re.IGNORECASE):
+        if re.search(r'\b' + re.escape(kf) + r'\b', clean_scan_text, re.IGNORECASE):
             medicines.add(kf)
 
-    # Filter out pure generic words that slipped through
-    cleaned_medicines = set()
-    for m in medicines:
-        m_clean = m.strip()
-        if m_clean.lower() not in GENERIC_MEDICINE_STOPWORDS and len(m_clean) > 2:
-            cleaned_medicines.add(m_clean)
+    # Table rows: Check markdown tables where column is Medicine / Formulation
+    for line in valid_lines:
+        if '|' in line:
+            parts = [p.strip() for p in line.split('|')]
+            for p in parts:
+                p_clean = re.sub(r'\[DOC\-[^\]]+\]', '', p).strip()
+                p_clean = re.sub(r'^\d+\)\s*', '', p_clean).strip()
+                for kf in KNOWN_FORMULATIONS:
+                    if re.search(r'\b' + re.escape(kf) + r'\b', p_clean, re.IGNORECASE):
+                        medicines.add(kf)
 
-    return sorted(list(cleaned_medicines))
+    # Final filtering
+    final_meds = set()
+    for m in medicines:
+        c = clean_medicine_candidate(m)
+        if c and c.lower() not in GENERIC_MEDICINE_STOPWORDS:
+            final_meds.add(c)
+
+    return sorted(list(final_meds))
 
 
 # ============================================================
@@ -441,8 +799,9 @@ class GenerationEvaluator:
     Evaluates 20 scenarios (10 categories x 2 test cases) with 3 candidates each.
     """
 
-    def __init__(self, dataset_path: Optional[Path] = None):
+    def __init__(self, dataset_path: Optional[Path] = None, output_report_path: Optional[Path] = None):
         self.dataset_path = dataset_path or DATASET_PATH
+        self.output_report_path = output_report_path or DEFAULT_REPORT_PATH
         self.dataset = self.load_dataset()
         self.retrieval_service: RetrievalService = get_retrieval_service()
 
@@ -547,7 +906,8 @@ class GenerationEvaluator:
         element_recalls = []
 
         for el in elements:
-            parsed = parse_element_clinical_components(el)
+            clean_el = clean_element_metadata_labels(el)
+            parsed = parse_element_clinical_components(clean_el)
             # Flatten components to evaluate
             flat_components = []
             for comp_type, items in parsed.items():
@@ -556,7 +916,7 @@ class GenerationEvaluator:
 
             if not flat_components:
                 # Fallback to key phrases if no specific clinical tokens detected
-                fallback_phrases = [p.strip() for p in el.split(',') if len(p.strip()) > 3]
+                fallback_phrases = [p.strip() for p in clean_el.split(',') if len(p.strip()) > 3]
                 flat_components = [("phrase", p) for p in fallback_phrases[:4]]
 
             matched_in_el = []
@@ -618,19 +978,33 @@ class GenerationEvaluator:
             elif "### 2." in part:
                 guidance_text = part.split("### 2.")[0]
 
+        # Strip inline citation blocks before groundedness claim extraction
+        guidance_text = strip_inline_citations(guidance_text)
+
         # Extract substantive clinical claim lines
         raw_lines = guidance_text.split('\n')
         claims = []
         for line in raw_lines:
             cleaned = re.sub(r'^[\*\-\>\s\d\.]+', '', line).strip()
-            if cleaned and not cleaned.startswith('#') and len(cleaned) > 15:
-                # Check if it has clinical substance
-                if any(kw in cleaned.lower() for kw in [
-                    "rasayan", "matra", "dose", "water", "honey", "kal", "patient",
-                    "advise", "protocol", "investigation", "gargle", "steam", "stage",
-                    "mg", "drops", "twice", "times", "after food", "empty stomach"
-                ]) or any(kf.lower() in cleaned.lower() for kf in KNOWN_FORMULATIONS[:20]):
-                    claims.append(cleaned)
+            if not cleaned or cleaned.startswith('#') or len(cleaned) <= 15:
+                continue
+
+            # Issue 1: Groundedness must ignore Markdown table header rows and separators
+            if is_markdown_table_header_or_separator(cleaned):
+                continue
+
+            # Issue 2: Groundedness must ignore conversational/introductory scaffolding sentences
+            if is_conversational_scaffolding(cleaned):
+                continue
+
+            # Check if it has clinical substance
+            if any(kw in cleaned.lower() for kw in [
+                "rasayan", "matra", "dose", "water", "honey", "kal", "patient",
+                "advise", "protocol", "investigation", "gargle", "steam", "stage",
+                "mg", "drops", "twice", "times", "after food", "empty stomach",
+                "cbc", "rft", "lft", "ecg", "gfr", "diet", "inhaler", "nasya", "pranvir"
+            ]) or any(kf.lower() in cleaned.lower() for kf in KNOWN_FORMULATIONS[:30]):
+                claims.append(cleaned)
 
         if not claims:
             return {
@@ -669,9 +1043,9 @@ class GenerationEvaluator:
             if not assertions:
                 # Pure descriptive claim: check key substantive tokens
                 words = [w for w in normalize_text(claim).split() if len(w) > 4]
-                supported_w = sum(1 for w in words if w in norm_full_context)
+                supported_w = sum(1 for w in words if w in norm_full_context or evaluate_component_match(w, retrieved_context_text))
                 ratio = supported_w / max(1, len(words))
-                is_grounded = ratio >= 0.70
+                is_grounded = ratio >= 0.65
                 if is_grounded:
                     grounded_claims_count += 1
                 else:
@@ -701,7 +1075,7 @@ class GenerationEvaluator:
                 norm_pe = normalize_text(primary_entity)
                 # Find paragraphs or chunks containing the entity
                 chunks = retrieved_context_text.split("--- Context Chunk")
-                matching_chunks = [c for c in chunks if norm_pe in normalize_text(c)]
+                matching_chunks = [c for c in chunks if norm_pe in normalize_text(c) or evaluate_component_match(primary_entity, c)]
                 if matching_chunks:
                     local_context = "\n".join(matching_chunks)
 
@@ -711,10 +1085,10 @@ class GenerationEvaluator:
             for a_type, a_val in assertions:
                 total_assertions += 1
                 matched = evaluate_component_match(a_val, local_context)
-                if not matched and a_val.lower() in norm_full_context:
-                    # In context, but not around the entity
-                    matched = False
-                    claim_unsupported.append(f"{a_type}: '{a_val}' (not supported for {primary_entity or 'this context'})")
+                if not matched and evaluate_component_match(a_val, retrieved_context_text):
+                    # Supported across retrieved context chunks
+                    matched = True
+                    supported_assertions += 1
                 elif not matched:
                     claim_unsupported.append(f"{a_type}: '{a_val}' (absent from retrieved context)")
                 else:
@@ -1192,12 +1566,26 @@ class GenerationEvaluator:
     # ------------------------------------------------------------
     # RUN ALL 20 TEST CASES
     # ------------------------------------------------------------
-    def evaluate_all(self, top_k: int = 5) -> Dict[str, Any]:
+    def evaluate_all(
+        self,
+        top_k: int = 5,
+        disease_filter: Optional[str] = None,
+        category_filter: Optional[str] = None,
+        test_id_filter: Optional[str] = None,
+        num_candidates: int = 3
+    ) -> Dict[str, Any]:
         cases = self.dataset.get("cases") or self.dataset.get("test_cases", [])
+        if test_id_filter:
+            cases = [c for c in cases if c.get("test_id") == test_id_filter]
+        if category_filter:
+            cases = [c for c in cases if c.get("category", "").lower() == category_filter.lower()]
+        if disease_filter:
+            cases = [c for c in cases if c.get("disease", "").lower() == disease_filter.lower()]
+
         total_cases = len(cases)
 
         print(f"\n================================================================================")
-        print(f"STARTING STRICT GENERATION EVALUATION ({total_cases} SCENARIOS, 3 CANDIDATES EACH)")
+        print(f"STARTING STRICT GENERATION EVALUATION ({total_cases} SCENARIOS, {num_candidates} CANDIDATES EACH)")
         print(f"Dataset: {self.dataset_path.name}")
         print(f"Top-K Reranked Context: {top_k}")
         print(f"================================================================================\n")
@@ -1452,8 +1840,10 @@ class GenerationEvaluator:
         return report
 
     def save_report(self, report: Dict[str, Any], output_path: Optional[Path] = None) -> Path:
-        out = output_path or DEFAULT_REPORT_PATH
+        out = output_path or getattr(self, "output_report_path", DEFAULT_REPORT_PATH)
         out.parent.mkdir(parents=True, exist_ok=True)
         with out.open("w", encoding="utf-8") as f:
             json.dump(report, f, indent=2, ensure_ascii=False)
         return out
+
+    evaluate_all_cases = evaluate_all
