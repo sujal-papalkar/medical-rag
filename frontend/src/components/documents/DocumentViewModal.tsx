@@ -1,5 +1,6 @@
 import { X, FileText, CheckCircle2, Layers } from 'lucide-react';
-import type { GuidelineDocument } from '../types';
+import type { GuidelineDocument } from '../../types';
+import { resolveDocumentName } from '../../utils/citationResolver';
 
 interface DocumentViewModalProps {
   document: GuidelineDocument | null;
@@ -11,6 +12,7 @@ export const DocumentViewModal: React.FC<DocumentViewModalProps> = ({
   onClose,
 }) => {
   if (!document) return null;
+  const humanName = resolveDocumentName(document.name || document.id);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-xs">
@@ -38,7 +40,7 @@ export const DocumentViewModal: React.FC<DocumentViewModalProps> = ({
             <label className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block mb-1">
               Document Name
             </label>
-            <p className="font-semibold text-slate-900 text-sm break-all">{document.name}</p>
+            <p className="font-semibold text-slate-900 text-sm break-all">{humanName}</p>
           </div>
 
           <div className="grid grid-cols-2 gap-3 pt-2 border-t border-slate-100">

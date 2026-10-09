@@ -58,24 +58,13 @@ export const CLINICAL_PATIENTS: PatientProfile[] = [
   },
   {
     id: 'PAT-RESP-003',
-    name: 'Ananya Joshi',
-    age: 29,
+    name: 'Anjali Verma',
+    age: 41,
     gender: 'Female',
     disease: 'respiratory_viral_infection',
     diseaseLabel: 'Respiratory Viral Infection (Kasa / Jwara)',
-    presentation: 'Moderate respiratory viral infection with HRCT score 9 to 15, SpO2 90-94%, persistent cough, and mild breathlessness',
+    presentation: 'Post-viral convalescence with persistent fatigue, dry cough, and reduced vital capacity',
     clinicalQuery:
-      'What is the recommended Ayurvedic treatment guideline for moderate respiratory viral infection (HRCT score 9 to 15, SpO2 90-94%) presenting with persistent fever and cough?',
-  },
-  {
-    id: 'PAT-RESP-004',
-    name: 'Suresh Verma',
-    age: 67,
-    gender: 'Male',
-    disease: 'respiratory_viral_infection',
-    diseaseLabel: 'Respiratory Viral Infection (Kasa / Jwara)',
-    presentation: 'Acute respiratory viral infection with severe Pratishyaya (rhinorrhea), Kasa (cough), and Shwasa krichrata',
-    clinicalQuery:
-      'In acute respiratory viral infection with severe Pratishyaya (rhinorrhea), Kasa (cough), and Shwasa krichrata, what specific Ayurvedic therapeutic formulations are indicated?',
+      'What are the recommended post-recovery Rasayana and restorative formulations for patients recovering from acute respiratory viral infection?',
   },
 ];
