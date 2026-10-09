@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ayur-rag-prescription-backend"
+version = "1.0.0"
+description = "Grounded Ayurvedic Clinical Prescription RAG Backend"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.110.0",
+    "uvicorn[standard]>=0.28.0",
+    "pydantic>=2.6.0",
+    "chromadb>=0.4.22",
+    "google-genai>=1.0.0",
+    "python-dotenv>=1.0.0",
+    "docling>=2.0.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "httpx>=0.27.0"
+]
