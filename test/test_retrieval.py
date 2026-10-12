@@ -12,8 +12,10 @@ from google import genai
 # ============================================================
 
 load_dotenv()
+if not os.getenv("GEMINI_API_KEY") and Path("backend/.env").exists():
+    load_dotenv("backend/.env")
 
-CHROMA_DB_PATH = "chroma_db"
+CHROMA_DB_PATH = "backend/chroma_db" if Path("backend/chroma_db").exists() else "chroma_db"
 COLLECTION_NAME = "medical_guidelines"
 
 EMBEDDING_MODEL = "gemini-embedding-001"
@@ -168,7 +170,8 @@ def print_results(results, mode):
 def check_expected_content(
     results,
     expected_terms,
-    test_name
+    test_name,
+    expect_absence=False
 ):
 
     print("\n")
@@ -221,15 +224,20 @@ def check_expected_content(
     print(f"Found   : {len(found_terms)}")
     print(f"Missing : {len(missing_terms)}")
 
-    if missing_terms:
-
-        print("\nMissing terms:")
-        for term in missing_terms:
-            print(f"  - {term}")
-
+    if expect_absence:
+        if found_terms:
+            print("\n[FAIL] Unsupported terms were unexpectedly found in retrieved evidence:")
+            for term in found_terms:
+                print(f"  - {term}")
+        else:
+            print("\n[PASS] Negative test passed: Unsupported terms correctly absent from retrieved evidence.")
     else:
-
-        print("\n[PASS] All expected terms were retrieved.")
+        if missing_terms:
+            print("\n[FAIL] Missing expected terms:")
+            for term in missing_terms:
+                print(f"  - {term}")
+        else:
+            print("\n[PASS] All expected terms were retrieved.")
 
     return {
         "found_terms": found_terms,
@@ -300,9 +308,243 @@ TEST_CASES = [
             "Arpisa Rasayan",
             "Heeraka Rasayana"
         ]
+    },
+
+    {
+        "test_number": 3,
+        "name": "Diabetes - Trushna Treatment (Paraphrased Query)",
+        "query": (
+            "What are the recommended Ayurvedic medicines, dosages (Matra), "
+            "adjuvants (Sahpaan), and administration timings (Aushadh Kal) "
+            "for managing severe thirst (polydipsia / Trushna) in a diabetic patient?"
+        ),
+        "disease": "diabetes",
+        "expected_page": 8,
+        "expected_terms": [
+            "Trushna",
+            "Polydipsia",
+            "Zincare",
+            "Kansya Rasayan",
+            "2-0-2",
+            "0-0-1",
+            "Warm water",
+            "Honey"
+        ]
+    },
+
+    {
+        "test_number": 4,
+        "name": "Respiratory - Missing SpO2 with HRCT 12",
+        "query": (
+            "A 42-year-old patient with respiratory viral infection has HRCT chest score of 12. "
+            "SpO2 pulse oximetry has not been recorded. According to the guideline, "
+            "what formulations are listed for moderate disease?"
+        ),
+        "disease": "respiratory_viral_infection",
+        "expected_page": 18,
+        "expected_terms": [
+            "9 to 15",
+            "Somtajvir",
+            "Pranvir",
+            "Rasaka Rasayana"
+        ]
+    },
+
+    {
+        "test_number": 5,
+        "name": "Respiratory - Missing HRCT with SpO2 93%",
+        "query": (
+            "An adult patient with respiratory viral infection has SpO2 of 93 percent on room air, "
+            "but HRCT scan was not performed. What formulations are indicated in the guideline?"
+        ),
+        "disease": "respiratory_viral_infection",
+        "expected_page": 18,
+        "expected_terms": [
+            "90 to 94",
+            "Somtajvir",
+            "Pranvir",
+            "Rasaka Rasayana"
+        ]
+    },
+
+    {
+        "test_number": 6,
+        "name": "Respiratory - Missing Both Severity Parameters",
+        "query": (
+            "A 30-year-old adult has acute respiratory viral infection. Neither HRCT chest score "
+            "nor SpO2 pulse oximetry is available. What basic medicines are recommended to reduce disease severity?"
+        ),
+        "disease": "respiratory_viral_infection",
+        "expected_page": 13,
+        "expected_terms": [
+            "Basic Guidelines",
+            "Somtajvir",
+            "Pranvir",
+            "Rasaka Rasayana"
+        ]
+    },
+
+    {
+        "test_number": 7,
+        "name": "Respiratory - Short Query (Patient Context Grounding)",
+        "query": "What formulations are listed for this patient?",
+        "disease": "respiratory_viral_infection",
+        "expected_page": 17,
+        "expected_terms": [
+            "Somtajvir",
+            "Pranvir",
+            "Rasaka Rasayana"
+        ]
+    },
+
+    {
+        "test_number": 8,
+        "name": "Diabetes - Expanded Query with Distractors",
+        "query": (
+            "Please provide clinical advice for a 54-year-old diabetic patient suffering from severe "
+            "excessive thirst (Trushna). By the way, the patient enjoys gardening on weekends, drinks chamomile tea, "
+            "prefers herbal soaps, has a dog named Bruno, and wonders about Ayurvedic diet while traveling to Europe. "
+            "What are the specific guideline medicines, Matra, Sahpaan, and Aushadh Kal?"
+        ),
+        "disease": "diabetes",
+        "expected_page": 8,
+        "expected_terms": [
+            "Trushna",
+            "Polydipsia",
+            "Zincare",
+            "Kansya Rasayan",
+            "2-0-2",
+            "Warm water"
+        ]
+    },
+
+    {
+        "test_number": 9,
+        "name": "Diabetes - Symptom-Specific Retrieval (Trushna and Aruchi)",
+        "query": (
+            "A patient with diabetes mellitus presents with Trushna (polydipsia) and Aruchi (impaired taste). "
+            "According to the guideline, what are the prescribed medicines, Matra, Sahpaan, and Aushadh Kal?"
+        ),
+        "disease": "diabetes",
+        "expected_page": 8,
+        "expected_terms": [
+            "Trushna",
+            "Aruchi",
+            "Zincare",
+            "Kansya Rasayan",
+            "Ruchir",
+            "Sannidha Rasayan"
+        ]
+    },
+
+    {
+        "test_number": 10,
+        "name": "Respiratory - Comorbidity Filtering (Diabetes Udakvah Srotas)",
+        "query": (
+            "For an adult patient with respiratory viral infection who has diabetes mellitus comorbidity "
+            "(Udakvah srotas vyadhi) and mild HRCT score 0 to 8 with SpO2 above 94, "
+            "what are the recommended medicines and doses?"
+        ),
+        "disease": "respiratory_viral_infection",
+        "expected_page": 14,
+        "expected_terms": [
+            "Udakvah srotas vyadhi",
+            "Diabetes Mellitus",
+            "MILD",
+            "Somtajvir",
+            "Pranvir",
+            "Rasaka Rasayana",
+            "Meha Rasayan"
+        ]
+    },
+
+    {
+        "test_number": 11,
+        "name": "Respiratory - Conflicting Patient Context Parameters",
+        "query": (
+            "Patient is a 65-year-old male with severe respiratory infection, "
+            "HRCT score 18, SpO2 85 percent, and cardiac comorbidity. What medicines should be given?"
+        ),
+        "disease": "respiratory_viral_infection",
+        "expected_page": 15,
+        "expected_terms": [
+            "Heart Diseases",
+            "Somtajvir",
+            "Pranvir"
+        ]
+    },
+
+    {
+        "test_number": 12,
+        "name": "Respiratory - Unsupported Formulations (Remdesivir / Azithromycin)",
+        "query": (
+            "Does the Ayurvedic guideline recommend Remdesivir, Azithromycin, or Favipiravir "
+            "for respiratory viral infection? What is the dosage and administration?"
+        ),
+        "disease": "respiratory_viral_infection",
+        "expected_page": 13,
+        "expected_terms": [
+            "Remdesivir",
+            "Azithromycin",
+            "Favipiravir"
+        ],
+        "expect_absence": True
+    },
+
+    {
+        "test_number": 13,
+        "name": "Respiratory - Citation Verification for Mild Formulations",
+        "query": (
+            "For a 32-year-old adult presenting with mild respiratory viral infection "
+            "(HRCT score 0 to 8, SpO2 above 94%) without severe dyspnea, "
+            "what are the recommended Rasayana formulations, dosages, and Sahpaan?"
+        ),
+        "disease": "respiratory_viral_infection",
+        "expected_page": 17,
+        "expected_terms": [
+            "Somtajvir",
+            "Pranvir",
+            "Rasaka Rasayana",
+            "Sindhurbhushan Rasayan"
+        ]
+    },
+
+    {
+        "test_number": 14,
+        "name": "Cross-Disease Isolation - Duplicate and Irrelevant Retrieval Check",
+        "query": (
+            "What formulations are prescribed for mild respiratory viral infection with HRCT 0-8 "
+            "and SpO2 >94% without any diabetic or renal complications?"
+        ),
+        "disease": "respiratory_viral_infection",
+        "expected_page": 17,
+        "expected_terms": [
+            "Somtajvir",
+            "Pranvir",
+            "Rasaka Rasayana"
+        ]
+    },
+
+    {
+        "test_number": 15,
+        "name": "Deterministic Repeat - Mild Respiratory Formulation Consistency",
+        "query": (
+            "For an adult patient with mild respiratory viral infection "
+            "(HRCT score 0 to 8, SpO2 above 94%) without severe dyspnea, "
+            "what are the recommended Rasayana formulations, dosages, and Sahpaan?"
+        ),
+        "disease": "respiratory_viral_infection",
+        "expected_page": 17,
+        "expected_terms": [
+            "Somtajvir",
+            "Pranvir",
+            "Rasaka Rasayana",
+            "Sindhurbhushan Rasayan"
+        ]
     }
 
 ]
+
 
 
 # ============================================================
@@ -345,7 +587,8 @@ for test in TEST_CASES:
     semantic_check = check_expected_content(
         semantic_results,
         test["expected_terms"],
-        f"{test['name']} - Semantic Only"
+        f"{test['name']} - Semantic Only",
+        expect_absence=test.get("expect_absence", False)
     )
 
     # --------------------------------------------------------
@@ -368,7 +611,8 @@ for test in TEST_CASES:
     filtered_check = check_expected_content(
         filtered_results,
         test["expected_terms"],
-        f"{test['name']} - Disease Filtered"
+        f"{test['name']} - Disease Filtered",
+        expect_absence=test.get("expect_absence", False)
     )
 
     # --------------------------------------------------------
@@ -429,6 +673,8 @@ for test in TEST_CASES:
         "expected_source_page": test["expected_page"],
 
         "expected_terms": test["expected_terms"],
+
+        "expect_absence": test.get("expect_absence", False),
 
         "semantic_only": {
 
@@ -521,15 +767,20 @@ for result in all_test_results:
         result["disease_filtered"]["content_check"]["missing_terms"]
     )
 
-    print(
-        f"Semantic Only     : "
-        f"{semantic_found}/{semantic_total} expected terms found"
-    )
-
-    print(
-        f"Disease Filtered  : "
-        f"{filtered_found}/{filtered_total} expected terms found"
-    )
+    if result.get("expect_absence", False):
+        sem_status = "PASS (0 unsupported terms found)" if semantic_found == 0 else f"FAIL ({semantic_found} unsupported terms found)"
+        filt_status = "PASS (0 unsupported terms found)" if filtered_found == 0 else f"FAIL ({filtered_found} unsupported terms found)"
+        print(f"Semantic Only     : {sem_status}")
+        print(f"Disease Filtered  : {filt_status}")
+    else:
+        print(
+            f"Semantic Only     : "
+            f"{semantic_found}/{semantic_total} expected terms found"
+        )
+        print(
+            f"Disease Filtered  : "
+            f"{filtered_found}/{filtered_total} expected terms found"
+        )
 
 print("\n")
 print("=" * 80)

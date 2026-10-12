@@ -1,0 +1,1050 @@
+{
+  "test_cases": [
+    {
+      "test_number": 3,
+      "name": "Test Case 3 — Paraphrased query",
+      "input_patient_context": {
+        "patient_id": "TEMP-003",
+        "name": "Test Patient 3",
+        "age": 54,
+        "gender": "Male",
+        "disease": "diabetes",
+        "presentation": "Type 2 Diabetes presenting with Trushna (Polydipsia)"
+      },
+      "query": "What are the recommended Ayurvedic medicines, dosages (Matra), adjuvants (Sahpaan), and administration timings (Aushadh Kal) for managing severe thirst (polydipsia / Trushna) in a diabetic patient?",
+      "actual_output": {
+        "status": "success",
+        "validation_status": "valid",
+        "medicines": [
+          {
+            "medicine": "Zincare",
+            "dose": "2-0-2",
+            "dosage_form": null,
+            "route": "Oral",
+            "frequency": "Twice a day",
+            "timing": "Vyanodaan kal (twice a day after food)",
+            "duration": null,
+            "anupana": "Warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-5FFD839CD910-0017-60F78AB81D60"
+            ]
+          },
+          {
+            "medicine": "Kansya Rasayan",
+            "dose": "0-0-1",
+            "dosage_form": null,
+            "route": "Oral",
+            "frequency": "At bedtime",
+            "timing": "Nisha kal (At bedtime)",
+            "duration": null,
+            "anupana": "Honey/ warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-5FFD839CD910-0017-60F78AB81D60"
+            ]
+          }
+        ],
+        "guidance_summary": "Based on the provided guidelines for Prameha (Diabetes Mellitus) management, specific medicines with their doses, vehicles, and timings are recommended for managing Trushna (Polydipsia).",
+        "limitations": [
+          "Duration of treatment is not specified in the provided guidelines.",
+          "Dosage form and route of administration are not explicitly stated in the provided guidelines."
+        ],
+        "evidence_sources": [
+          {
+            "chunk_id": "DOC-5FFD839CD910-0017-60F78AB81D60",
+            "document_name": "DM RR.md",
+            "disease": "diabetes",
+            "section": "All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.",
+            "page": 8,
+            "rank": 1,
+            "distance": 0.143,
+            "content": "Section: PRAMEH (DIABETES MELLITUS) MANAGEMENT\nSubsection: All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.\n\n| symptoms | Medicine | Matra | Sahpaan | Aushadh Kal |\n|---------------------------------------------------------------------------------------------------------|------------------|----------------|-------------------|----------------------------------------------|\n| Trushna (Polydipsia) | Zincare | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Trushna (Polydipsia) | *Kansya Rasayan | 0-0-1 | Honey/ warm water | Nisha kal (At bedtime) |\n| Aruchi (Impaired Taste) | Zincare | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Aruchi (Impaired Taste) | *Ruchir | 0-1-1 | Cow ghee | Pran kal |\n| Aruchi (Impaired Taste) | Zinzi chips | | For chewing | 3-4 times a day |\n| Aruchi (Impaired Taste) | Sannidha Rasayan | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Madhurasyata (Sweet taste) | Zincare | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Madhurasyata (Sweet taste) | *Ruchir | 0-1-1 | Cow ghee | Pran kal |\n| Madhurasyata (Sweet taste) | Zinzi chips | | For chewing | 3-4 times a day |\n| Madhurasyata (Sweet taste) | Sannidha Rasayan | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Malaadhikya Swed bahulya,taalu-gal- jivha-dant mala++ (E. g. Hyper hidrosis, Acanthosis nigricans etc.) | Zincare | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Malaadhikya Swed bahulya,taalu-gal- jivha-dant mala++ (E. g. Hyper hidrosis, Acanthosis nigricans etc.) | Sannidha Rasayan | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |"
+          },
+          {
+            "chunk_id": "DOC-5FFD839CD910-0046-FDEAEE382E98",
+            "document_name": "DM RR.md",
+            "disease": "diabetes",
+            "section": "TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)",
+            "page": 16,
+            "rank": 2,
+            "distance": 0.1665,
+            "content": "Section: TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)\n\n| STAGE | Medicine | Matra | Sahpaan | Aushadh Kal |\n|------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|----------------------|--------------------------|---------------------------------------------------------------------------|\n| Stage3 Agnimanydya, Shoth, Aavil mutrata, Ayaasen shwas, Hrullas, Daurbalya, (Mild to severe loss of function and a GFR of 30-59% creatinine 4 to 6) | Zincare | 2-2-2 | Warm water | Three times a day after food |\n| Stage3 Agnimanydya, Shoth, Aavil mutrata, Ayaasen shwas, Hrullas, Daurbalya, (Mild to severe loss of function and a GFR of 30-59% creatinine 4 to 6) | Sannidha Rasayan | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Stage3 Agnimanydya, Shoth, Aavil mutrata, Ayaasen shwas, Hrullas, Daurbalya, (Mild to severe loss of function and a GFR of 30-59% creatinine 4 to 6) | Rasaka Rasayana | 1-0-1 | Honey / warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| Stage3 Agnimanydya, Shoth, Aavil mutrata, Ayaasen shwas, Hrullas, Daurbalya, (Mild to severe loss of function and a GFR of 30-59% creatinine 4 to 6) | Urokine | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| | Meha Rasayan | 1 -0-0 | Honey/ warm water | Rasayan Kal (Early morning on empty stomach) |\n| | Lavan | | | Replace table salt with it. Use it as per the need while cooking |\n| | Ayukshar | 5gm per 1litre water | Use it in drinking water | When patient consume water, it is advisable to use this water only. |"
+          },
+          {
+            "chunk_id": "DOC-5FFD839CD910-0047-15A8280EFAC7",
+            "document_name": "DM RR.md",
+            "disease": "diabetes",
+            "section": "TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)",
+            "page": 16,
+            "rank": 3,
+            "distance": 0.1618,
+            "content": "Section: TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)\n\n| STAGE | Medicine | Matra | Sahpaan | Aushadh Kal |\n|------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|----------------------|--------------------------|---------------------------------------------------------------------------|\n| | If constipation Aarevat | 0-0-1 | Warm water | Nisha kal (At bedtime) |\n| Stage4 Agnimanydya, Shoth, Aavil mutrata, Ayaasen shwas, Hrullas, Chhardi, Daurbalya, (Severe loss of function and GFR of | Zincare | 2-2-2 | Warm water | Three times a day after food |\n| Stage4 Agnimanydya, Shoth, Aavil mutrata, Ayaasen shwas, Hrullas, Chhardi, Daurbalya, (Severe loss of function and GFR of | Sannidha Rasayan | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Stage4 Agnimanydya, Shoth, Aavil mutrata, Ayaasen shwas, Hrullas, Chhardi, Daurbalya, (Severe loss of function and GFR of | Urokine | 2-2-2 | Warm water | Three times a day after food |\n| Stage4 Agnimanydya, Shoth, Aavil mutrata, Ayaasen shwas, Hrullas, Chhardi, Daurbalya, (Severe loss of function and GFR of | Meha Rasayan | 0-0-1 | Honey/ warm water | Nisha kal (At bedtime) |\n| 15-29%. creatinine 6 to 8) | Heerak Rasayan | 1-0-0 | Honey/ warm water | Rasayan Kal (Early morning on empty stomach) |\n| 15-29%. creatinine 6 to 8) | Aarevat Kalpa (even if bowels are clear ) | 0-0-1 or 0- 0-2 | Warm water | Nisha kal (At bedtime) |\n| 15-29%. creatinine 6 to 8) | Lavan | | | Replace table salt with it. Use it as per the need while cooking |"
+          },
+          {
+            "chunk_id": "DOC-5FFD839CD910-0056-B0FA74FDB74F",
+            "document_name": "DM RR.md",
+            "disease": "diabetes",
+            "section": "TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)",
+            "page": 19,
+            "rank": 4,
+            "distance": 0.1734,
+            "content": "Section: TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)\n\n| 2. Pramehaj Moorcha (Ketones in urine routine) | 2. Pramehaj Moorcha (Ketones in urine routine) - Medicine | 2. Pramehaj Moorcha (Ketones in urine routine) - Matra | 2. Pramehaj Moorcha (Ketones in urine routine) - Sahpaan | 2. Pramehaj Moorcha (Ketones in urine routine) - Aushadh Kal |\n|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------|------------------------------------------------------------------|------------------------------------------------------------------|------------------------------------------------------------------|\n| Moorchha (Ketones in Urine routine) Basic guideline Symptoms like Trushna (exceesive thirst) Hrulaas (nausea and vomiting) Udarshool (abdmonial pain) Bhram (confusion) Shwas (Dyspnoea) Etc.. | Aarevat Kalpa | 0-0-2 | Warm water | Nisha kal (At bedtime) |\n| Moorchha (Ketones in Urine routine) Basic guideline Symptoms like Trushna (exceesive thirst) Hrulaas (nausea and vomiting) Udarshool (abdmonial pain) Bhram (confusion) Shwas (Dyspnoea) Etc.. | Asinorm | 2-2-2 | Warm water | Three times a day after food |"
+          },
+          {
+            "chunk_id": "DOC-5FFD839CD910-0051-8E7BEBE2F474",
+            "document_name": "DM RR.md",
+            "disease": "diabetes",
+            "section": "TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)",
+            "page": 17,
+            "rank": 5,
+            "distance": 0.1587,
+            "content": "Section: TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)\n\n| STAGE | Medicine | Matra | Sahpaan | Aushadh Kal |\n|---------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|\n| Symptoms | If patient is on Dialysis, then refer the symptoms related management additionally | If patient is on Dialysis, then refer the symptoms related management additionally | If patient is on Dialysis, then refer the symptoms related management additionally | If patient is on Dialysis, then refer the symptoms related management additionally |\n| Shoth (Swollen ankles, feet, lower legs, or hands) | Urokine | 2-0-2 or 2-2-2 | Warm water | Vyanodaan kal (twice or three times a day after food) |\n| Shoth (Swollen ankles, feet, lower legs, or hands) | Punarnavasav | 3-3-3 tsf | Water | Vyanodaan kal (three times a day after food) |\n| Peet /Rakt mutrata (Dark yellow urine or blood in the urine) | Urokine | 2-0-2 or 2-2-2 | Warm water | Vyanodaan kal (twice or three times a day after food) |\n| Peet /Rakt mutrata (Dark yellow urine or blood in the urine) | Ayukshar | 5gm per 1litre water | 5gm per 1litre water | Use it in drinking water |\n| Peet /Rakt mutrata (Dark yellow urine or blood in the urine) | Chandanasav | 2-2-2 tsf | Water | Vyanodaan kal (three times a day after food) |"
+          }
+        ]
+      },
+      "expected_behavior": "Grounded retrieval of Page 8 formulations: Zincare (2-0-2) and Kansya Rasayan (0-0-1) consistent with Test Case 1.",
+      "pass_status": "PASS",
+      "failure_category": null,
+      "failure_reason": null,
+      "supporting_source_page": 8
+    },
+    {
+      "test_number": 4,
+      "name": "Test Case 4 — Missing SpO2",
+      "input_patient_context": {
+        "patient_id": "TEMP-004",
+        "name": "Test Patient 4",
+        "age": 42,
+        "gender": "Male",
+        "disease": "respiratory_viral_infection",
+        "presentation": "Respiratory viral infection with HRCT chest score of 12. SpO2 has not been recorded."
+      },
+      "query": "A 42-year-old patient with respiratory viral infection has HRCT chest score of 12. SpO2 has not been recorded. What treatment is recommended?",
+      "actual_output": {
+        "status": "success",
+        "validation_status": "valid",
+        "severity": "MODERATE (9 to 15) SpO2 90 to 94",
+        "medicines": [
+          {
+            "medicine": "Somtajvir",
+            "dose": "1-0-1",
+            "dosage_form": null,
+            "route": null,
+            "frequency": "Twice daily",
+            "timing": "Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime)",
+            "duration": null,
+            "anupana": "with honey/ warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0035-77484627D9DE"
+            ]
+          },
+          {
+            "medicine": "Pranvir",
+            "dose": "2-2-2",
+            "dosage_form": null,
+            "route": null,
+            "frequency": "Three times a day",
+            "timing": "Three times a day after food",
+            "duration": null,
+            "anupana": "with warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0035-77484627D9DE"
+            ]
+          },
+          {
+            "medicine": "Rasaka Rasayana",
+            "dose": "1-0-1",
+            "dosage_form": null,
+            "route": null,
+            "frequency": "Twice daily",
+            "timing": "Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime)",
+            "duration": null,
+            "anupana": "with honey /warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0035-77484627D9DE"
+            ]
+          },
+          {
+            "medicine": "Sindhurbhushan Rasayan",
+            "dose": "1-0-0",
+            "dosage_form": null,
+            "route": null,
+            "frequency": "Once daily",
+            "timing": "Rasayan kal (Early morning on empty stomach)",
+            "duration": null,
+            "anupana": "with honey/ warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0035-77484627D9DE"
+            ]
+          },
+          {
+            "medicine": "Mahalakshmi Vilas",
+            "dose": "0-0-1",
+            "dosage_form": null,
+            "route": null,
+            "frequency": "Once daily",
+            "timing": "Nisha kal (at bedtime)",
+            "duration": null,
+            "anupana": "with honey/ warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0035-77484627D9DE"
+            ]
+          }
+        ],
+        "guidance_summary": "For an adult patient with respiratory viral infection and an HRCT score of 12 (corresponding to moderate severity 9 to 15), specific rasayana guidelines are recommended.",
+        "limitations": [
+          "SpO2 has not been recorded in the patient presentation, though the guideline table categories moderate severity as SpO2 90 to 94 alongside HRCT score 9 to 15.",
+          "Duration of treatment is not specified in the provided guideline.",
+          "Dosage form and route of administration are not specified in the provided guideline."
+        ]
+      },
+      "expected_behavior": "System does not invent an SpO2 value and explicitly notes the absence of SpO2 in limitations or clinical guidance.",
+      "pass_status": "PASS",
+      "failure_category": null,
+      "failure_reason": null,
+      "supporting_source_page": 18
+    },
+    {
+      "test_number": 5,
+      "name": "Test Case 5 — Missing HRCT",
+      "input_patient_context": {
+        "patient_id": "TEMP-005",
+        "name": "Test Patient 5",
+        "age": 35,
+        "gender": "Female",
+        "disease": "respiratory_viral_infection",
+        "presentation": "Adult presenting with respiratory viral infection, SpO2 of 93% on room air. HRCT imaging was not done."
+      },
+      "query": "An adult patient with respiratory viral infection has SpO2 of 93 percent on room air, but HRCT scan was not performed. What formulations are indicated?",
+      "actual_output": {
+        "status": "success",
+        "validation_status": "valid",
+        "medicines": [
+          {
+            "medicine": "Somtajvir",
+            "dose": "1-0-1",
+            "dosage_form": null,
+            "route": null,
+            "frequency": null,
+            "timing": "Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime)",
+            "duration": null,
+            "anupana": "with honey/ warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0035-77484627D9DE"
+            ]
+          },
+          {
+            "medicine": "Pranvir",
+            "dose": "2-2-2",
+            "dosage_form": null,
+            "route": null,
+            "frequency": "Three times a day",
+            "timing": "Three times a day after food",
+            "duration": null,
+            "anupana": "with warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0035-77484627D9DE"
+            ]
+          },
+          {
+            "medicine": "Rasaka Rasayana",
+            "dose": "1-0-1",
+            "dosage_form": null,
+            "route": null,
+            "frequency": null,
+            "timing": "Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime)",
+            "duration": null,
+            "anupana": "with honey /warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0035-77484627D9DE"
+            ]
+          },
+          {
+            "medicine": "Sindhurbhushan Rasayan",
+            "dose": "1-0-0",
+            "dosage_form": null,
+            "route": null,
+            "frequency": null,
+            "timing": "Rasayan kal (Early morning on empty stomach)",
+            "duration": null,
+            "anupana": "with honey/ warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0035-77484627D9DE"
+            ]
+          },
+          {
+            "medicine": "Mahalakshmi Vilas",
+            "dose": "0-0-1",
+            "dosage_form": null,
+            "route": null,
+            "frequency": null,
+            "timing": "Nisha kal (at bedtime)",
+            "duration": null,
+            "anupana": "with honey/ warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0035-77484627D9DE"
+            ]
+          }
+        ],
+        "guidance_summary": "For an adult patient with SpO2 of 93% on room air (falling into the SpO2 90 to 94 range), the guidelines categorize this under MODERATE severity. Although the HRCT scan was not performed, the SpO2 level of 93% determines the SpO2 criteria (90 to 94) for the moderate severity category.",
+        "limitations": [
+          "HRCT score was not performed, though SpO2 of 93% places the patient in the SpO2 90 to 94 range (Moderate severity).",
+          "Duration of treatment course is not specified in the provided guideline.",
+          "Route of administration is not specified in the provided guideline."
+        ]
+      },
+      "expected_behavior": "Missing HRCT is handled explicitly without inventing HRCT scores; limitations note absence of HRCT.",
+      "pass_status": "PASS",
+      "failure_category": null,
+      "failure_reason": null,
+      "supporting_source_page": 18
+    },
+    {
+      "test_number": 6,
+      "name": "Test Case 6 — Missing both severity parameters",
+      "input_patient_context": {
+        "patient_id": "TEMP-006",
+        "name": "Test Patient 6",
+        "age": 30,
+        "gender": "Male",
+        "disease": "respiratory_viral_infection",
+        "presentation": "Acute respiratory viral infection with neither HRCT score nor SpO2 available."
+      },
+      "query": "A 30-year-old adult has acute respiratory viral infection. Neither HRCT chest score nor SpO2 pulse oximetry is available. What medicines are recommended?",
+      "actual_output": {
+        "status": "success",
+        "medicines": [],
+        "limitations": [
+          "Neither HRCT chest score nor SpO2 pulse oximetry is available in the patient clinical query, and the retrieved guideline requires HRCT score and SpO2 levels to determine specific recommendations."
+        ],
+        "guidance_summary": "Not specified in the provided guideline."
+      },
+      "expected_behavior": "Does not prescribe unsupported severity-specific medications; explicitly documents missing severity parameters.",
+      "pass_status": "PASS",
+      "failure_category": null,
+      "failure_reason": null,
+      "supporting_source_page": 13
+    },
+    {
+      "test_number": 7,
+      "name": "Test Case 7 — Short query",
+      "input_patient_context": {
+        "patient_id": "PAT-RESP-001",
+        "name": "Priya Kulkarni",
+        "age": 32,
+        "gender": "Female",
+        "disease": "respiratory_viral_infection",
+        "presentation": "Mild respiratory viral infection with HRCT score 0 to 8 and SpO2 above 94% without dyspnea"
+      },
+      "query": "What formulations are listed for this patient?",
+      "actual_output": {
+        "status": "success",
+        "validation_status": "valid",
+        "medicines": [
+          {
+            "medicine": "Somtajvir",
+            "dose": "1-0-0",
+            "dosage_form": "Rasayana Formulation",
+            "route": "Oral",
+            "frequency": "Once daily",
+            "timing": "Rasayan kal (Early morning on empty stomach)",
+            "duration": null,
+            "anupana": "with honey/ warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0035-77484627D9DE"
+            ]
+          },
+          {
+            "medicine": "Pranvir",
+            "dose": "2-2-2",
+            "dosage_form": "Rasayana Formulation",
+            "route": "Oral",
+            "frequency": "Three times a day",
+            "timing": "Three times a day after food",
+            "duration": null,
+            "anupana": "with warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0035-77484627D9DE"
+            ]
+          },
+          {
+            "medicine": "Rasaka Rasayana",
+            "dose": "1-0-1",
+            "dosage_form": "Rasayana",
+            "route": "Oral",
+            "frequency": "Twice daily",
+            "timing": "Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime)",
+            "duration": null,
+            "anupana": "with honey /warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0035-77484627D9DE"
+            ]
+          },
+          {
+            "medicine": "Sindhurbhushan Rasayan",
+            "dose": "1-0-0",
+            "dosage_form": "Rasayana",
+            "route": "Oral",
+            "frequency": "Once daily",
+            "timing": "Rasayan kal (Early morning on empty stomach)",
+            "duration": null,
+            "anupana": "with honey/warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0035-77484627D9DE"
+            ]
+          }
+        ],
+        "guidance_summary": "Therapeutic guidelines for adult patients (above 15 years) with mild respiratory viral infection (HRCT 0-8, SpO2 above 94) and no comorbidity.",
+        "evidence_sources": [
+          {
+            "chunk_id": "DOC-FC76496810AB-0035-77484627D9DE",
+            "document_name": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+            "disease": "respiratory_viral_infection",
+            "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+            "page": 17,
+            "rank": 1,
+            "distance": null,
+            "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\nSub-subsection: Pranvah Srotas vyadhi (Above 15 Years)\n\n| HRCT Score | Medicine | Matra | Sahpaan Aushadh | Kal |\n|----------------------------------|------------------------|---------|------------------------|-------------------------------------------------------------------------------------------|\n| MILD (0 to 8) SpO2 above 94 | Somtajvir | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MILD (0 to 8) SpO2 above 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MILD (0 to 8) SpO2 above 94 | Rasaka Rasayana | 1-0-1 | with honey /warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MILD (0 to 8) SpO2 above 94 | Sindhurbhushan Rasayan | 1-0-0 | with honey/warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Somtajvir | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MODERATE (9 to 15) SpO2 90 to 94 | Rasaka Rasayana | 1-0-1 | with honey /warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Sindhurbhushan Rasayan | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Mahalakshmi Vilas | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |"
+          }
+        ]
+      },
+      "expected_behavior": "Short query uses patient profile context to retrieve and prescribe Mild Adult formulations from Page 17.",
+      "pass_status": "PASS",
+      "failure_category": null,
+      "failure_reason": null,
+      "supporting_source_page": 17
+    },
+    {
+      "test_number": 8,
+      "name": "Test Case 8 — Expanded query",
+      "input_patient_context": {
+        "patient_id": "TEMP-008",
+        "name": "Test Patient 8",
+        "age": 54,
+        "gender": "Male",
+        "disease": "diabetes",
+        "presentation": "Type 2 Diabetes presenting with Trushna"
+      },
+      "query": "Please provide clinical advice for a 54-year-old diabetic patient suffering from severe excessive thirst (Trushna). By the way, the patient enjoys gardening on weekends, drinks chamomile tea, prefers herbal soaps, has a dog named Bruno, and wonders about Ayurvedic diet while traveling to Europe. What are the specific guideline medicines, Matra, Sahpaan, and Aushadh Kal?",
+      "actual_output": {
+        "status": "success",
+        "medicines": [
+          {
+            "medicine": "Zincare",
+            "dose": "2-0-2",
+            "dosage_form": null,
+            "route": null,
+            "frequency": "twice a day after food",
+            "timing": "Vyanodaan kal (twice a day after food)",
+            "duration": null,
+            "anupana": "Warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-5FFD839CD910-0017-60F78AB81D60"
+            ]
+          },
+          {
+            "medicine": "Kansya Rasayan",
+            "dose": "0-0-1",
+            "dosage_form": null,
+            "route": null,
+            "frequency": null,
+            "timing": "Nisha kal (At bedtime)",
+            "duration": null,
+            "anupana": "Honey/ warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-5FFD839CD910-0017-60F78AB81D60"
+            ]
+          }
+        ],
+        "guidance_summary": "Guideline recommendations for managing Trushna (Polydipsia) in Prameha (Diabetes Mellitus) using specific medicines, Matra, Sahpaan, and Aushadh Kal."
+      },
+      "expected_behavior": "Retrieval ignores distractors (gardening, chamomile tea, dog Bruno) and grounds in Page 8 Trushna guidance.",
+      "pass_status": "PASS",
+      "failure_category": null,
+      "failure_reason": null,
+      "supporting_source_page": 8
+    },
+    {
+      "test_number": 9,
+      "name": "Test Case 9 — Symptom-specific retrieval",
+      "input_patient_context": {
+        "patient_id": "PAT-DM-001",
+        "name": "Rajesh Sharma",
+        "age": 54,
+        "gender": "Male",
+        "disease": "diabetes",
+        "presentation": "Type 2 Diabetes presenting with Trushna (Polydipsia) and Aruchi (Impaired Taste)"
+      },
+      "query": "A patient with diabetes mellitus presents with Trushna (polydipsia) and Aruchi (impaired taste). According to the guideline, what are the prescribed medicines, Matra, Sahpaan, and Aushadh Kal?",
+      "actual_output": {
+        "status": "success",
+        "medicines": [
+          {
+            "medicine": "Zincare",
+            "dose": "2-0-2",
+            "dosage_form": null,
+            "route": null,
+            "frequency": "twice a day after food",
+            "timing": "Vyanodaan kal (twice a day after food)",
+            "duration": null,
+            "anupana": "Warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-5FFD839CD910-0017-60F78AB81D60"
+            ]
+          },
+          {
+            "medicine": "Kansya Rasayan",
+            "dose": "0-0-1",
+            "dosage_form": null,
+            "route": null,
+            "frequency": "At bedtime",
+            "timing": "Nisha kal (At bedtime)",
+            "duration": null,
+            "anupana": "Honey/ warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-5FFD839CD910-0017-60F78AB81D60"
+            ]
+          },
+          {
+            "medicine": "Ruchir",
+            "dose": "0-1-1",
+            "dosage_form": null,
+            "route": null,
+            "frequency": null,
+            "timing": "Pran kal",
+            "duration": null,
+            "anupana": "Cow ghee",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-5FFD839CD910-0017-60F78AB81D60"
+            ]
+          },
+          {
+            "medicine": "Zinzi chips",
+            "dose": null,
+            "dosage_form": "chips",
+            "route": "For chewing",
+            "frequency": "3-4 times a day",
+            "timing": "3-4 times a day",
+            "duration": null,
+            "anupana": null,
+            "special_instructions": "For chewing",
+            "supporting_chunk_ids": [
+              "DOC-5FFD839CD910-0017-60F78AB81D60"
+            ]
+          },
+          {
+            "medicine": "Sannidha Rasayan",
+            "dose": "2-0-2",
+            "dosage_form": null,
+            "route": null,
+            "frequency": "twice a day after food",
+            "timing": "Vyanodaan kal (twice a day after food)",
+            "duration": null,
+            "anupana": "Warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-5FFD839CD910-0017-60F78AB81D60"
+            ]
+          }
+        ],
+        "guidance_summary": "Management guidelines for diabetes mellitus symptoms including Trushna (polydipsia) and Aruchi (impaired taste) based on the provided evidence."
+      },
+      "expected_behavior": "Only Page 8 rows for Trushna & Aruchi are returned with exact dose, Sahpaan, and Aushadh Kal.",
+      "pass_status": "PASS",
+      "failure_category": null,
+      "failure_reason": null,
+      "supporting_source_page": 8
+    },
+    {
+      "test_number": 10,
+      "name": "Test Case 10 — Comorbidity filtering",
+      "input_patient_context": {
+        "patient_id": "PAT-RESP-002",
+        "name": "Amit Deshmukh",
+        "age": 58,
+        "gender": "Male",
+        "disease": "respiratory_viral_infection",
+        "presentation": "Adult with respiratory viral infection presenting with Diabetes Mellitus comorbidity (Udakvah srotas vyadhi) and SpO2 > 94%"
+      },
+      "query": "For an adult patient with respiratory viral infection who has diabetes mellitus comorbidity (Udakvah srotas vyadhi) and mild HRCT score 0 to 8 with SpO2 above 94, what are the recommended medicines and doses?",
+      "actual_output": {
+        "status": "success",
+        "medicines": [
+          {
+            "medicine": "Somtajvir",
+            "dose": "1-0-0",
+            "dosage_form": "Rasayana Formulation",
+            "route": "Oral",
+            "frequency": "Once daily",
+            "timing": "Rasayan kal (Early morning on empty stomach)",
+            "duration": null,
+            "anupana": "Honey/Warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0028-4F2CFBD3E05E"
+            ]
+          },
+          {
+            "medicine": "Pranvir",
+            "dose": "2-2-2",
+            "dosage_form": "Rasayana Formulation",
+            "route": "Oral",
+            "frequency": "Three times a day",
+            "timing": "Three times a day after food",
+            "duration": null,
+            "anupana": "Warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0028-4F2CFBD3E05E"
+            ]
+          },
+          {
+            "medicine": "Rasaka Rasayana",
+            "dose": "1-0-1",
+            "dosage_form": "Rasayana Formulation",
+            "route": "Oral",
+            "frequency": "Twice daily",
+            "timing": "Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime)",
+            "duration": null,
+            "anupana": "Honey/Warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0028-4F2CFBD3E05E"
+            ]
+          },
+          {
+            "medicine": "Meha Rasayan",
+            "dose": "1-0-0",
+            "dosage_form": "Rasayana Formulation",
+            "route": "Oral",
+            "frequency": "Once daily",
+            "timing": "Rasayan kal (Early morning on empty stomach)",
+            "duration": null,
+            "anupana": "Honey/Warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0028-4F2CFBD3E05E"
+            ]
+          }
+        ],
+        "evidence_sources": [
+          {
+            "chunk_id": "DOC-FC76496810AB-0028-4F2CFBD3E05E",
+            "document_name": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+            "disease": "respiratory_viral_infection",
+            "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+            "page": 14,
+            "rank": 1,
+            "distance": 0.1078,
+            "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\n| HRCT Score | Medicine | Matra | Sahpaan | Aushadh Kal |\n|-------------------------------------------|-------------------------------------------|-------------------------------------------|-------------------------------------------|-------------------------------------------------------------------------------------------|\n| Udakvah srotas vyadhi (Diabetes Mellitus) | Udakvah srotas vyadhi (Diabetes Mellitus) | Udakvah srotas vyadhi (Diabetes Mellitus) | Udakvah srotas vyadhi (Diabetes Mellitus) | Udakvah srotas vyadhi (Diabetes Mellitus) |\n| MILD (0 to 8) SpO2 above 94 | Somtajvir | 1-0-0 | Honey/Warm water | Rasayan kal (Early morning on empty stomach) |\n| MILD (0 to 8) SpO2 above 94 | Pranvir | 2-2-2 | Warm water | Three times a day after food |\n| MILD (0 to 8) SpO2 above 94 | Rasaka Rasayana | 1-0-1 | Honey/Warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MILD (0 to 8) SpO2 above 94 | Meha Rasayan | 1-0-0 | Honey/Warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Somtajvir | 1-0-1 | Honey/Warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Pranvir | 2-2-2 | Warm water | Three times a day after food |\n| MODERATE (9 to 15) SpO2 90 to 94 | Rasaka Rasayana | 1-0-1 | Honey/Warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Meha Rasayan | 1-0-0 | Honey/Warm water | Rasayan kal (Early morning on empty stomach) |"
+          },
+          {
+            "chunk_id": "DOC-FC76496810AB-0035-77484627D9DE",
+            "document_name": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+            "disease": "respiratory_viral_infection",
+            "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+            "page": 17,
+            "rank": 2,
+            "distance": 0.1169,
+            "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\nSub-subsection: Pranvah Srotas vyadhi (Above 15 Years)\n\n| HRCT Score | Medicine | Matra | Sahpaan Aushadh | Kal |\n|----------------------------------|------------------------|---------|------------------------|-------------------------------------------------------------------------------------------|\n| MILD (0 to 8) SpO2 above 94 | Somtajvir | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MILD (0 to 8) SpO2 above 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MILD (0 to 8) SpO2 above 94 | Rasaka Rasayana | 1-0-1 | with honey /warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MILD (0 to 8) SpO2 above 94 | Sindhurbhushan Rasayan | 1-0-0 | with honey/warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Somtajvir | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MODERATE (9 to 15) SpO2 90 to 94 | Rasaka Rasayana | 1-0-1 | with honey /warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Sindhurbhushan Rasayan | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Mahalakshmi Vilas | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |"
+          },
+          {
+            "chunk_id": "DOC-FC76496810AB-0030-F98CE66700F2",
+            "document_name": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+            "disease": "respiratory_viral_infection",
+            "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+            "page": 15,
+            "rank": 3,
+            "distance": 0.1208,
+            "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\n| HRCT Score | Medicine | Matra | Sahpaan | Aushadh Kal |\n|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|-------------------------------------------------------------------------------------------|\n| Rasavah srotas vyadhi (Heart Diseases, HTN etc.) | Rasavah srotas vyadhi (Heart Diseases, HTN etc.) | Rasavah srotas vyadhi (Heart Diseases, HTN etc.) | Rasavah srotas vyadhi (Heart Diseases, HTN etc.) | Rasavah srotas vyadhi (Heart Diseases, HTN etc.) |\n| MILD (0 to 8) SpO2 above 94 | Somtajvir | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MILD (0 to 8) SpO2 above 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MILD (0 to 8) SpO2 above 94 | Rasaka Rasayana | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MILD (0 to 8) SpO2 above 94 | Sutendra Rasayan | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |\n| MILD (0 to 8) SpO2 above 94 | Sindhurbhushan Rasayan | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Somtajvir | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |"
+          },
+          {
+            "chunk_id": "DOC-FC76496810AB-0040-5EE61CBFB45B",
+            "document_name": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+            "disease": "respiratory_viral_infection",
+            "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+            "page": 19,
+            "rank": 4,
+            "distance": 0.1209,
+            "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\n| HRCT Score | Medicine | Matra | Sahpaan | Aushadh Kal |\n|----------------------------------|------------------------|---------|------------------------|-------------------------------------------------------------------------------------------|\n| MILD (0 to 8) SpO2 above 94 | Somtajvir | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MILD (0 to 8) SpO2 above 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MILD (0 to 8) SpO2 above 94 | Rasaka Rasayana | 1-0-1 | with honey /warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MILD (0 to 8) SpO2 above 94 | Sutendra | 1-0-0 | with honey/warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Somtajvir | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MODERATE (9 to 15) SpO2 90 to 94 | Rasaka Rasayana | 1-0-1 | with honey /warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Sutendra Rasayana | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Mahalakshmi Vilas | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Sindhurbhushan Rasayan | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |"
+          }
+        ],
+        "guidance_summary": "Therapeutic guidelines for adult patient with respiratory viral infection and diabetes mellitus comorbidity presenting with mild severity (HRCT score 0 to 8, SpO2 above 94)."
+      },
+      "expected_behavior": "Grounded strictly in Page 14 Udakvah comorbidity table (Meha Rasayan); does not mix unrelated cardiac recommendations.",
+      "pass_status": "PASS",
+      "failure_category": null,
+      "failure_reason": null,
+      "supporting_source_page": 14
+    },
+    {
+      "test_number": 11,
+      "name": "Test Case 11 — Conflicting patient context",
+      "input_patient_context": {
+        "patient_id": "PAT-RESP-001",
+        "name": "Priya Kulkarni",
+        "age": 32,
+        "gender": "Female",
+        "disease": "respiratory_viral_infection",
+        "presentation": "Mild respiratory viral infection with HRCT score 0 to 8 and SpO2 above 94% without dyspnea"
+      },
+      "query": "Patient is a 65-year-old male with severe respiratory infection, HRCT score 18, SpO2 85 percent, and cardiac comorbidity. What medicines should be given?",
+      "actual_output": {
+        "unconfirmed_status": "conflict_detected",
+        "requires_confirmation": true,
+        "conflicts_count": 3,
+        "conflicts": [
+          {
+            "parameter": "age",
+            "registered_value": 32,
+            "query_value": 65,
+            "conflict_type": "demographic_mismatch",
+            "message": "Demographic conflict: Verified patient profile indicates age 32, but query specifies age 65."
+          },
+          {
+            "parameter": "comorbidity",
+            "registered_value": "None documented",
+            "query_value": "cardiac",
+            "conflict_type": "comorbidity_discrepancy",
+            "message": "Comorbidity discrepancy: Query specifies 'cardiac' comorbidity, which is not documented in the verified patient record."
+          },
+          {
+            "parameter": "severity",
+            "registered_value": "mild",
+            "query_value": "severe",
+            "conflict_type": "severity_contradiction",
+            "message": "Severity contradiction: Patient record documents MILD severity, but query specifies SEVERE severity."
+          }
+        ],
+        "unconfirmed_medicines_count": 0,
+        "confirmed_status": "success",
+        "confirmed_medicines_count": 11,
+        "registered_patient_record_intact": true
+      },
+      "expected_behavior": "Conflicts surfaced and block generation until confirmed; registered patient records remain authoritative and untouched.",
+      "pass_status": "PASS",
+      "failure_category": null,
+      "failure_reason": null,
+      "supporting_source_page": 15
+    },
+    {
+      "test_number": 12,
+      "name": "Test Case 12 — Unsupported formulation",
+      "input_patient_context": {
+        "patient_id": "TEMP-012",
+        "name": "Test Patient 12",
+        "age": 40,
+        "gender": "Male",
+        "disease": "respiratory_viral_infection",
+        "presentation": "Respiratory viral infection inquiring about modern antivirals."
+      },
+      "query": "Does the Ayurvedic guideline recommend Remdesivir, Azithromycin, or Favipiravir for respiratory viral infection? If so, what is the exact dosage and administration?",
+      "actual_output": {
+        "status": "success",
+        "medicines": [],
+        "limitations": [
+          "Remdesivir, Azithromycin, and Favipiravir are not mentioned or recommended in the provided guideline.",
+          "Duration of treatment is not specified in the provided guideline.",
+          "Disease severity / HRCT score is not specified; guideline formulations vary strictly across mild, moderate, and severe stages."
+        ],
+        "guidance_summary": "Not specified in the provided guideline regarding Remdesivir, Azithromycin, or Favipiravir."
+      },
+      "expected_behavior": "Clearly reports insufficient supporting evidence rather than inventing Remdesivir or Azithromycin doses.",
+      "pass_status": "PASS",
+      "failure_category": null,
+      "failure_reason": null,
+      "supporting_source_page": 13
+    },
+    {
+      "test_number": 13,
+      "name": "Test Case 13 — Citation verification",
+      "input_patient_context": {
+        "patient_id": "PAT-RESP-001",
+        "name": "Priya Kulkarni",
+        "age": 32,
+        "gender": "Female",
+        "disease": "respiratory_viral_infection",
+        "presentation": "Mild respiratory viral infection with HRCT score 0 to 8 and SpO2 above 94% without dyspnea"
+      },
+      "query": "For a 32-year-old adult presenting with mild respiratory viral infection (HRCT score 0 to 8, SpO2 above 94%) without severe dyspnea, what are the recommended Rasayana formulations, dosages, and Sahpaan?",
+      "actual_output": {
+        "medicines_with_citations": [
+          {
+            "medicine": "Somtajvir",
+            "dose": "1-0-0",
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0035-77484627D9DE"
+            ],
+            "cited_pages": [
+              17
+            ]
+          },
+          {
+            "medicine": "Pranvir",
+            "dose": "2-2-2",
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0035-77484627D9DE"
+            ],
+            "cited_pages": [
+              17
+            ]
+          },
+          {
+            "medicine": "Rasaka Rasayana",
+            "dose": "1-0-1",
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0035-77484627D9DE"
+            ],
+            "cited_pages": [
+              17
+            ]
+          },
+          {
+            "medicine": "Sindhurbhushan Rasayan",
+            "dose": "1-0-0",
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0035-77484627D9DE"
+            ],
+            "cited_pages": [
+              17
+            ]
+          }
+        ]
+      },
+      "expected_behavior": "Each returned formulation is supported 1-to-1 by the cited source chunk and page 17.",
+      "pass_status": "PASS",
+      "failure_category": null,
+      "failure_reason": null,
+      "supporting_source_page": 17
+    },
+    {
+      "test_number": 14,
+      "name": "Test Case 14 — Duplicate or irrelevant retrieval",
+      "input_patient_context": {
+        "patient_id": "TEMP-014",
+        "name": "Test Patient 14",
+        "age": 32,
+        "gender": "Female",
+        "disease": "respiratory_viral_infection",
+        "presentation": "Mild respiratory viral infection (HRCT 0-8, SpO2 >94%) without diabetes or cardiac disease."
+      },
+      "query": "What formulations are prescribed for mild respiratory viral infection with HRCT 0-8 and SpO2 >94% without any diabetic or renal complications?",
+      "actual_output": {
+        "status": "success",
+        "medicines": [
+          {
+            "medicine": "Somtajvir",
+            "dose": "1-0-0",
+            "dosage_form": null,
+            "route": null,
+            "frequency": "Once daily (Morning)",
+            "timing": "Rasayan kal (Early morning on empty stomach)",
+            "duration": null,
+            "anupana": "with honey/ warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0030-F98CE66700F2"
+            ]
+          },
+          {
+            "medicine": "Pranvir",
+            "dose": "2-2-2",
+            "dosage_form": null,
+            "route": null,
+            "frequency": "Three times a day",
+            "timing": "Three times a day after food",
+            "duration": null,
+            "anupana": "with warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0030-F98CE66700F2"
+            ]
+          },
+          {
+            "medicine": "Rasaka Rasayana",
+            "dose": "1-0-1",
+            "dosage_form": null,
+            "route": null,
+            "frequency": "Twice daily (Morning and Night)",
+            "timing": "Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime)",
+            "duration": null,
+            "anupana": "with honey/ warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0030-F98CE66700F2"
+            ]
+          },
+          {
+            "medicine": "Sutendra Rasayan",
+            "dose": "0-0-1",
+            "dosage_form": null,
+            "route": null,
+            "frequency": "Once daily (Night)",
+            "timing": "Nisha kal (at bedtime)",
+            "duration": null,
+            "anupana": "with honey/ warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0030-F98CE66700F2"
+            ]
+          },
+          {
+            "medicine": "Sindhurbhushan Rasayan",
+            "dose": "0-0-1",
+            "dosage_form": null,
+            "route": null,
+            "frequency": "Once daily (Night)",
+            "timing": "Nisha kal (at bedtime)",
+            "duration": null,
+            "anupana": "with honey/ warm water",
+            "special_instructions": null,
+            "supporting_chunk_ids": [
+              "DOC-FC76496810AB-0030-F98CE66700F2"
+            ]
+          }
+        ],
+        "cross_disease_medicines_found": []
+      },
+      "expected_behavior": "Zero cross-disease contamination (no diabetes formulations in respiratory response).",
+      "pass_status": "PASS",
+      "failure_category": null,
+      "failure_reason": null,
+      "supporting_source_page": 17
+    },
+    {
+      "test_number": 15,
+      "name": "Test Case 15 — Repeated-query consistency",
+      "input_patient_context": {
+        "patient_id": "PAT-RESP-001",
+        "name": "Priya Kulkarni",
+        "age": 32,
+        "gender": "Female",
+        "disease": "respiratory_viral_infection",
+        "presentation": "Mild respiratory viral infection with HRCT score 0 to 8 and SpO2 above 94% without dyspnea"
+      },
+      "query": "For an adult patient with mild respiratory viral infection (HRCT score 0 to 8, SpO2 above 94%) without severe dyspnea, what are the recommended Rasayana formulations, dosages, and Sahpaan?",
+      "actual_output": {
+        "runs": [
+          {
+            "run": 1,
+            "medicines": [
+              "Somtajvir",
+              "Pranvir",
+              "Rasaka Rasayana",
+              "Sindhurbhushan Rasayan"
+            ],
+            "doses": {
+              "Somtajvir": "1-0-0",
+              "Pranvir": "2-2-2",
+              "Rasaka Rasayana": "1-0-1",
+              "Sindhurbhushan Rasayan": "1-0-0"
+            },
+            "citations": {
+              "Somtajvir": [
+                "DOC-FC76496810AB-0035-77484627D9DE"
+              ],
+              "Pranvir": [
+                "DOC-FC76496810AB-0035-77484627D9DE"
+              ],
+              "Rasaka Rasayana": [
+                "DOC-FC76496810AB-0035-77484627D9DE"
+              ],
+              "Sindhurbhushan Rasayan": [
+                "DOC-FC76496810AB-0035-77484627D9DE"
+              ]
+            }
+          },
+          {
+            "run": 2,
+            "medicines": [
+              "Somtajvir",
+              "Pranvir",
+              "Rasaka Rasayana",
+              "Sindhurbhushan Rasayan"
+            ],
+            "doses": {
+              "Somtajvir": "1-0-0",
+              "Pranvir": "2-2-2",
+              "Rasaka Rasayana": "1-0-1",
+              "Sindhurbhushan Rasayan": "1-0-0"
+            },
+            "citations": {
+              "Somtajvir": [
+                "DOC-FC76496810AB-0035-77484627D9DE"
+              ],
+              "Pranvir": [
+                "DOC-FC76496810AB-0035-77484627D9DE"
+              ],
+              "Rasaka Rasayana": [
+                "DOC-FC76496810AB-0035-77484627D9DE"
+              ],
+              "Sindhurbhushan Rasayan": [
+                "DOC-FC76496810AB-0035-77484627D9DE"
+              ]
+            }
+          },
+          {
+            "run": 3,
+            "medicines": [
+              "Somtajvir",
+              "Pranvir",
+              "Rasaka Rasayana",
+              "Sindhurbhushan Rasayan"
+            ],
+            "doses": {
+              "Somtajvir": "1-0-0",
+              "Pranvir": "2-2-2",
+              "Rasaka Rasayana": "1-0-1",
+              "Sindhurbhushan Rasayan": "1-0-0"
+            },
+            "citations": {
+              "Somtajvir": [
+                "DOC-FC76496810AB-0035-77484627D9DE"
+              ],
+              "Pranvir": [
+                "DOC-FC76496810AB-0035-77484627D9DE"
+              ],
+              "Rasaka Rasayana": [
+                "DOC-FC76496810AB-0035-77484627D9DE"
+              ],
+              "Sindhurbhushan Rasayan": [
+                "DOC-FC76496810AB-0035-77484627D9DE"
+              ]
+            }
+          }
+        ],
+        "consistent_medicines": [
+          "Rasaka Rasayana",
+          "Somtajvir",
+          "Sindhurbhushan Rasayan",
+          "Pranvir"
+        ]
+      },
+      "expected_behavior": "Identical formulations and citations across 3 consecutive runs.",
+      "pass_status": "PASS",
+      "failure_category": null,
+      "failure_reason": null,
+      "supporting_source_page": 17
+    }
+  ]
+}

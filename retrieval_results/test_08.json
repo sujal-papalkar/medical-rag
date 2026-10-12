@@ -1,0 +1,273 @@
+{
+  "test_number": 8,
+  "test_name": "Diabetes - Expanded Query with Distractors",
+  "query": "Please provide clinical advice for a 54-year-old diabetic patient suffering from severe excessive thirst (Trushna). By the way, the patient enjoys gardening on weekends, drinks chamomile tea, prefers herbal soaps, has a dog named Bruno, and wonders about Ayurvedic diet while traveling to Europe. What are the specific guideline medicines, Matra, Sahpaan, and Aushadh Kal?",
+  "expected_disease": "diabetes",
+  "expected_source_page": 8,
+  "expected_terms": [
+    "Trushna",
+    "Polydipsia",
+    "Zincare",
+    "Kansya Rasayan",
+    "2-0-2",
+    "Warm water"
+  ],
+  "expect_absence": false,
+  "semantic_only": {
+    "retrieval_mode": "semantic_only",
+    "top_k": 10,
+    "results": [
+      {
+        "rank": 1,
+        "chunk_id": "DOC-5FFD839CD910-0017-60F78AB81D60",
+        "distance": 0.17151644825935364,
+        "disease": "diabetes",
+        "document": "DM RR.md",
+        "section": "All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.",
+        "content_type": "table",
+        "page": 8,
+        "content": "Section: PRAMEH (DIABETES MELLITUS) MANAGEMENT\nSubsection: All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.\n\n| symptoms | Medicine | Matra | Sahpaan | Aushadh Kal |\n|---------------------------------------------------------------------------------------------------------|------------------|----------------|-------------------|----------------------------------------------|\n| Trushna (Polydipsia) | Zincare | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Trushna (Polydipsia) | *Kansya Rasayan | 0-0-1 | Honey/ warm water | Nisha kal (At bedtime) |\n| Aruchi (Impaired Taste) | Zincare | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Aruchi (Impaired Taste) | *Ruchir | 0-1-1 | Cow ghee | Pran kal |\n| Aruchi (Impaired Taste) | Zinzi chips | | For chewing | 3-4 times a day |\n| Aruchi (Impaired Taste) | Sannidha Rasayan | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Madhurasyata (Sweet taste) | Zincare | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Madhurasyata (Sweet taste) | *Ruchir | 0-1-1 | Cow ghee | Pran kal |\n| Madhurasyata (Sweet taste) | Zinzi chips | | For chewing | 3-4 times a day |\n| Madhurasyata (Sweet taste) | Sannidha Rasayan | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Malaadhikya Swed bahulya,taalu-gal- jivha-dant mala++ (E. g. Hyper hidrosis, Acanthosis nigricans etc.) | Zincare | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Malaadhikya Swed bahulya,taalu-gal- jivha-dant mala++ (E. g. Hyper hidrosis, Acanthosis nigricans etc.) | Sannidha Rasayan | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "DOC-5FFD839CD910-0023-92720DAA9A82",
+        "distance": 0.17966830730438232,
+        "disease": "diabetes",
+        "document": "DM RR.md",
+        "section": "All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.",
+        "content_type": "table",
+        "page": 10,
+        "content": "Section: PRAMEH (DIABETES MELLITUS) MANAGEMENT\nSubsection: All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.\n\n| Symptoms | Medicine | Matra | Sahpaan | Aushadh Kal |\n|---------------------------------------------------|-------------------------|----------------|------------------------|---------------------------------------------------------------------------|\n| Prabhoot Aavil Mutrata (Polyuria) | Rasaka Rasayana | 1-0-1 | Honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| Madhur-Shukla Mutrataa (Sweet smell-cloudy urine) | Zincare | 1-0-1 | Warm water | Vyanodaan kal (twice a day after food) |\n| Madhur-Shukla Mutrataa (Sweet smell-cloudy urine) | Meha Rasayan | 0-0-1 | Honey/ warm water | Nisha Kal (At bedtime) |\n| Madhur-Shukla Mutrataa (Sweet smell-cloudy urine) | Sannidha Rasayan | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Madhur-Shukla Mutrataa (Sweet smell-cloudy urine) | Rasaka Rasayana | 1-0-1 | Honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |"
+      },
+      {
+        "rank": 3,
+        "chunk_id": "DOC-5FFD839CD910-0051-8E7BEBE2F474",
+        "distance": 0.1876666098833084,
+        "disease": "diabetes",
+        "document": "DM RR.md",
+        "section": "TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)",
+        "content_type": "table",
+        "page": 17,
+        "content": "Section: TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)\n\n| STAGE | Medicine | Matra | Sahpaan | Aushadh Kal |\n|---------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|\n| Symptoms | If patient is on Dialysis, then refer the symptoms related management additionally | If patient is on Dialysis, then refer the symptoms related management additionally | If patient is on Dialysis, then refer the symptoms related management additionally | If patient is on Dialysis, then refer the symptoms related management additionally |\n| Shoth (Swollen ankles, feet, lower legs, or hands) | Urokine | 2-0-2 or 2-2-2 | Warm water | Vyanodaan kal (twice or three times a day after food) |\n| Shoth (Swollen ankles, feet, lower legs, or hands) | Punarnavasav | 3-3-3 tsf | Water | Vyanodaan kal (three times a day after food) |\n| Peet /Rakt mutrata (Dark yellow urine or blood in the urine) | Urokine | 2-0-2 or 2-2-2 | Warm water | Vyanodaan kal (twice or three times a day after food) |\n| Peet /Rakt mutrata (Dark yellow urine or blood in the urine) | Ayukshar | 5gm per 1litre water | 5gm per 1litre water | Use it in drinking water |\n| Peet /Rakt mutrata (Dark yellow urine or blood in the urine) | Chandanasav | 2-2-2 tsf | Water | Vyanodaan kal (three times a day after food) |"
+      },
+      {
+        "rank": 4,
+        "chunk_id": "DOC-5FFD839CD910-0018-126FF8FD46ED",
+        "distance": 0.18979427218437195,
+        "disease": "diabetes",
+        "document": "DM RR.md",
+        "section": "All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.",
+        "content_type": "table",
+        "page": 8,
+        "content": "Section: PRAMEH (DIABETES MELLITUS) MANAGEMENT\nSubsection: All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.\n\n| symptoms | Medicine | Matra | Sahpaan | Aushadh Kal |\n|---------------------------------------------------------------------------------------------------------|------------------|----------------|-------------------|----------------------------------------------|\n| Malaadhikya Swed bahulya,taalu-gal- jivha-dant mala++ (E. g. Hyper hidrosis, Acanthosis nigricans etc.) | Meha Rasayan | 1-0-0 | Honey/ warm water | Rasayan Kal (Early morning on empty stomach) |\n| Malaadhikya Swed bahulya,taalu-gal- jivha-dant mala++ (E. g. Hyper hidrosis, Acanthosis nigricans etc.) | Aarevat Kalpa | 0-0-1 or 0-0-2 | Warm water | Nisha Kal (At bedtime) |"
+      },
+      {
+        "rank": 5,
+        "chunk_id": "DOC-5FFD839CD910-0040-94E01C3FCCE9",
+        "distance": 0.18996191024780273,
+        "disease": "diabetes",
+        "document": "DM RR.md",
+        "section": "TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)",
+        "content_type": "table",
+        "page": 15,
+        "content": "Section: TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)\n\n| 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Known illness/ Stage | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Medicine | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Matra | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Sahpaan | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Aushadh Kal |\n|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|\n| Stage1 Agnimanydya, Shoth, Hrullas Aavil mutrata, Ayaasen shwas, (Kidney damage present but normal kidney function and a GFR of 90% or above. creatinine around 2) | Rasaka Rasayana | 1-0-1 | Honey / warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| Stage1 Agnimanydya, Shoth, Hrullas Aavil mutrata, Ayaasen shwas, (Kidney damage present but normal kidney function and a GFR of 90% or above. creatinine around 2) | Lavan | | | Replace table salt with it. Use it as per the need while cooking |"
+      },
+      {
+        "rank": 6,
+        "chunk_id": "DOC-5FFD839CD910-0020-3FDCE1F16A91",
+        "distance": 0.1925637274980545,
+        "disease": "diabetes",
+        "document": "DM RR.md",
+        "section": "All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.",
+        "content_type": "table",
+        "page": 9,
+        "content": "Section: PRAMEH (DIABETES MELLITUS) MANAGEMENT\nSubsection: All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.\n\n| Symptoms | Medicine | Matra | Sahpaan | Aushadh Kal |\n|----------------------------------------------------------------------------------------------|------------------------|---------|-------------------|---------------------------------------------------------------------------|\n| Laulya (Polyphagia) | Zincare | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Laulya (Polyphagia) | Livayog | 1-0-1 | Warm water | Vyanodaan kal (twice a day after food) |\n| Laulya (Polyphagia) | Meha Rasayan | 1-0-0 | Honey/ warm water | Rasayan Kal (Early morning on empty stomach) |\n| Laulya (Polyphagia) | *Kansya Rasayan | 0-0-1 | Honey/ warm water | Nisha Kal (At bedtime) |\n| Daurbalya-Alasya (Fatigue) | Zincare | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Daurbalya-Alasya (Fatigue) | Meha Rasayan | 1-0-0 | Honey/ warm water | Early morning on empty stomach |\n| Daurbalya-Alasya (Fatigue) | *Ruchir | 0-1-1 | Cow ghee | Pran kal |\n| Shosh Agnimandya, arochak, daurbalya etc. (loss of appetite, weakness, Unexplained Wt. Loss) | Zincare | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Shosh Agnimandya, arochak, daurbalya etc. (loss of appetite, weakness, Unexplained Wt. Loss) | Meha Rasayan | 1-0-0 | Honey/ warm water | Rasayan Kal (Early morning on empty stomach) |\n| Shosh Agnimandya, arochak, daurbalya etc. (loss of appetite, weakness, Unexplained Wt. Loss) | Rasaka Rasayana | 1-0-1 | Honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |"
+      },
+      {
+        "rank": 7,
+        "chunk_id": "DOC-5FFD839CD910-0042-47BBB592519D",
+        "distance": 0.19281983375549316,
+        "disease": "diabetes",
+        "document": "DM RR.md",
+        "section": "TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)",
+        "content_type": "table",
+        "page": 15,
+        "content": "Section: TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)\n\n| 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Known illness/ Stage | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Medicine | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Matra | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Sahpaan | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Aushadh Kal |\n|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|\n| Stage 2 Agnimanydya, Shoth, Aavil mutrata, Ayaasen shwas, Hrullas (Kidney damage with some loss of function and a GFR of 60-89%. creatinine 2 to 4) | Rasaka Rasayana | 1-0-1 | Honey / warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| Stage 2 Agnimanydya, Shoth, Aavil mutrata, Ayaasen shwas, Hrullas (Kidney damage with some loss of function and a GFR of 60-89%. creatinine 2 to 4) | Urokine | 1-0-1 | Warm water | Vyanodaan kal (twice a day after food) |"
+      },
+      {
+        "rank": 8,
+        "chunk_id": "DOC-5FFD839CD910-0025-4ACCD0BED844",
+        "distance": 0.1943211406469345,
+        "disease": "diabetes",
+        "document": "DM RR.md",
+        "section": "All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.",
+        "content_type": "table",
+        "page": 11,
+        "content": "Section: PRAMEH (DIABETES MELLITUS) MANAGEMENT\nSubsection: All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.\n\n| Symptoms | Medicine | Matra | Sahpaan | Aushadh Kal |\n|------------------------------------------------|-------------------------------------------------------|----------------------|----------------------|---------------------------------------------------------------------------|\n| Basti Shool (Cystitis) | Ayukshar | 5gm per 1litre water | 5gm per 1litre water | Use it in drinking water |\n| Basti Bheda (Urinary incontinence) | Zincare | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Basti Bheda (Urinary incontinence) | Chandraprabha+Gokshurad i guggul+jatamansi each 125mg | 1-0-1 | Warm water | Apaan kal (twice a day before food) |\n| Basti Bheda (Urinary incontinence) | Rasaka Rasayana | 1-0-1 | Honey/warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |"
+      },
+      {
+        "rank": 9,
+        "chunk_id": "DOC-5FFD839CD910-0039-0DA0BB089DFA",
+        "distance": 0.19447588920593262,
+        "disease": "diabetes",
+        "document": "DM RR.md",
+        "section": "TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)",
+        "content_type": "table",
+        "page": 15,
+        "content": "Section: TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)\n\n| 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Known illness/ Stage | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Medicine | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Matra | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Sahpaan | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Aushadh Kal |\n|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|\n| Stage1 Agnimanydya, Shoth, Hrullas Aavil mutrata, Ayaasen shwas, (Kidney damage present but normal kidney function and a GFR of 90% or above. creatinine around 2) | Zincare | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Stage1 Agnimanydya, Shoth, Hrullas Aavil mutrata, Ayaasen shwas, (Kidney damage present but normal kidney function and a GFR of 90% or above. creatinine around 2) | Sannidha Rasayan | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |"
+      },
+      {
+        "rank": 10,
+        "chunk_id": "DOC-5FFD839CD910-0050-BC2F6E2D7067",
+        "distance": 0.19488734006881714,
+        "disease": "diabetes",
+        "document": "DM RR.md",
+        "section": "TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)",
+        "content_type": "table",
+        "page": 17,
+        "content": "Section: TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)\n\n| STAGE | Medicine | Matra | Sahpaan | Aushadh Kal |\n|---------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|\n| Stage5 Agnimanydya, Shoth, Aavil mutrata, Ayaasen shwas, Hrullas, Chhardi, Daurbalya, (Kidney failure and a GFR of under 15%. creatinine above 8) | Aarevat Kalpa | 0-0-1 or 2 | Warm water | Nisha kal (At bedtime) |\n| Stage5 Agnimanydya, Shoth, Aavil mutrata, Ayaasen shwas, Hrullas, Chhardi, Daurbalya, (Kidney failure and a GFR of under 15%. creatinine above 8) | Lavan | Replace table salt with it.Use it as per the need while cooking. | Replace table salt with it.Use it as per the need while cooking. | Replace table salt with it.Use it as per the need while cooking. |\n| Stage5 Agnimanydya, Shoth, Aavil mutrata, Ayaasen shwas, Hrullas, Chhardi, Daurbalya, (Kidney failure and a GFR of under 15%. creatinine above 8) | Ayukshar | 5gm per 1litre water | 5gm per 1litre water | Use it in drinking water |"
+      }
+    ],
+    "content_check": {
+      "found_terms": [
+        "Trushna",
+        "Polydipsia",
+        "Zincare",
+        "Kansya Rasayan",
+        "2-0-2",
+        "Warm water"
+      ],
+      "missing_terms": []
+    }
+  },
+  "disease_filtered": {
+    "retrieval_mode": "disease_filtered",
+    "filter": {
+      "disease": "diabetes"
+    },
+    "top_k": 10,
+    "results": [
+      {
+        "rank": 1,
+        "chunk_id": "DOC-5FFD839CD910-0017-60F78AB81D60",
+        "distance": 0.17151644825935364,
+        "disease": "diabetes",
+        "document": "DM RR.md",
+        "section": "All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.",
+        "content_type": "table",
+        "page": 8,
+        "content": "Section: PRAMEH (DIABETES MELLITUS) MANAGEMENT\nSubsection: All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.\n\n| symptoms | Medicine | Matra | Sahpaan | Aushadh Kal |\n|---------------------------------------------------------------------------------------------------------|------------------|----------------|-------------------|----------------------------------------------|\n| Trushna (Polydipsia) | Zincare | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Trushna (Polydipsia) | *Kansya Rasayan | 0-0-1 | Honey/ warm water | Nisha kal (At bedtime) |\n| Aruchi (Impaired Taste) | Zincare | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Aruchi (Impaired Taste) | *Ruchir | 0-1-1 | Cow ghee | Pran kal |\n| Aruchi (Impaired Taste) | Zinzi chips | | For chewing | 3-4 times a day |\n| Aruchi (Impaired Taste) | Sannidha Rasayan | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Madhurasyata (Sweet taste) | Zincare | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Madhurasyata (Sweet taste) | *Ruchir | 0-1-1 | Cow ghee | Pran kal |\n| Madhurasyata (Sweet taste) | Zinzi chips | | For chewing | 3-4 times a day |\n| Madhurasyata (Sweet taste) | Sannidha Rasayan | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Malaadhikya Swed bahulya,taalu-gal- jivha-dant mala++ (E. g. Hyper hidrosis, Acanthosis nigricans etc.) | Zincare | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Malaadhikya Swed bahulya,taalu-gal- jivha-dant mala++ (E. g. Hyper hidrosis, Acanthosis nigricans etc.) | Sannidha Rasayan | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "DOC-5FFD839CD910-0023-92720DAA9A82",
+        "distance": 0.17966830730438232,
+        "disease": "diabetes",
+        "document": "DM RR.md",
+        "section": "All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.",
+        "content_type": "table",
+        "page": 10,
+        "content": "Section: PRAMEH (DIABETES MELLITUS) MANAGEMENT\nSubsection: All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.\n\n| Symptoms | Medicine | Matra | Sahpaan | Aushadh Kal |\n|---------------------------------------------------|-------------------------|----------------|------------------------|---------------------------------------------------------------------------|\n| Prabhoot Aavil Mutrata (Polyuria) | Rasaka Rasayana | 1-0-1 | Honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| Madhur-Shukla Mutrataa (Sweet smell-cloudy urine) | Zincare | 1-0-1 | Warm water | Vyanodaan kal (twice a day after food) |\n| Madhur-Shukla Mutrataa (Sweet smell-cloudy urine) | Meha Rasayan | 0-0-1 | Honey/ warm water | Nisha Kal (At bedtime) |\n| Madhur-Shukla Mutrataa (Sweet smell-cloudy urine) | Sannidha Rasayan | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Madhur-Shukla Mutrataa (Sweet smell-cloudy urine) | Rasaka Rasayana | 1-0-1 | Honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |"
+      },
+      {
+        "rank": 3,
+        "chunk_id": "DOC-5FFD839CD910-0051-8E7BEBE2F474",
+        "distance": 0.1876666098833084,
+        "disease": "diabetes",
+        "document": "DM RR.md",
+        "section": "TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)",
+        "content_type": "table",
+        "page": 17,
+        "content": "Section: TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)\n\n| STAGE | Medicine | Matra | Sahpaan | Aushadh Kal |\n|---------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|\n| Symptoms | If patient is on Dialysis, then refer the symptoms related management additionally | If patient is on Dialysis, then refer the symptoms related management additionally | If patient is on Dialysis, then refer the symptoms related management additionally | If patient is on Dialysis, then refer the symptoms related management additionally |\n| Shoth (Swollen ankles, feet, lower legs, or hands) | Urokine | 2-0-2 or 2-2-2 | Warm water | Vyanodaan kal (twice or three times a day after food) |\n| Shoth (Swollen ankles, feet, lower legs, or hands) | Punarnavasav | 3-3-3 tsf | Water | Vyanodaan kal (three times a day after food) |\n| Peet /Rakt mutrata (Dark yellow urine or blood in the urine) | Urokine | 2-0-2 or 2-2-2 | Warm water | Vyanodaan kal (twice or three times a day after food) |\n| Peet /Rakt mutrata (Dark yellow urine or blood in the urine) | Ayukshar | 5gm per 1litre water | 5gm per 1litre water | Use it in drinking water |\n| Peet /Rakt mutrata (Dark yellow urine or blood in the urine) | Chandanasav | 2-2-2 tsf | Water | Vyanodaan kal (three times a day after food) |"
+      },
+      {
+        "rank": 4,
+        "chunk_id": "DOC-5FFD839CD910-0018-126FF8FD46ED",
+        "distance": 0.18979427218437195,
+        "disease": "diabetes",
+        "document": "DM RR.md",
+        "section": "All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.",
+        "content_type": "table",
+        "page": 8,
+        "content": "Section: PRAMEH (DIABETES MELLITUS) MANAGEMENT\nSubsection: All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.\n\n| symptoms | Medicine | Matra | Sahpaan | Aushadh Kal |\n|---------------------------------------------------------------------------------------------------------|------------------|----------------|-------------------|----------------------------------------------|\n| Malaadhikya Swed bahulya,taalu-gal- jivha-dant mala++ (E. g. Hyper hidrosis, Acanthosis nigricans etc.) | Meha Rasayan | 1-0-0 | Honey/ warm water | Rasayan Kal (Early morning on empty stomach) |\n| Malaadhikya Swed bahulya,taalu-gal- jivha-dant mala++ (E. g. Hyper hidrosis, Acanthosis nigricans etc.) | Aarevat Kalpa | 0-0-1 or 0-0-2 | Warm water | Nisha Kal (At bedtime) |"
+      },
+      {
+        "rank": 5,
+        "chunk_id": "DOC-5FFD839CD910-0040-94E01C3FCCE9",
+        "distance": 0.18996191024780273,
+        "disease": "diabetes",
+        "document": "DM RR.md",
+        "section": "TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)",
+        "content_type": "table",
+        "page": 15,
+        "content": "Section: TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)\n\n| 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Known illness/ Stage | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Medicine | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Matra | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Sahpaan | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Aushadh Kal |\n|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|\n| Stage1 Agnimanydya, Shoth, Hrullas Aavil mutrata, Ayaasen shwas, (Kidney damage present but normal kidney function and a GFR of 90% or above. creatinine around 2) | Rasaka Rasayana | 1-0-1 | Honey / warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| Stage1 Agnimanydya, Shoth, Hrullas Aavil mutrata, Ayaasen shwas, (Kidney damage present but normal kidney function and a GFR of 90% or above. creatinine around 2) | Lavan | | | Replace table salt with it. Use it as per the need while cooking |"
+      },
+      {
+        "rank": 6,
+        "chunk_id": "DOC-5FFD839CD910-0020-3FDCE1F16A91",
+        "distance": 0.1925637274980545,
+        "disease": "diabetes",
+        "document": "DM RR.md",
+        "section": "All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.",
+        "content_type": "table",
+        "page": 9,
+        "content": "Section: PRAMEH (DIABETES MELLITUS) MANAGEMENT\nSubsection: All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.\n\n| Symptoms | Medicine | Matra | Sahpaan | Aushadh Kal |\n|----------------------------------------------------------------------------------------------|------------------------|---------|-------------------|---------------------------------------------------------------------------|\n| Laulya (Polyphagia) | Zincare | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Laulya (Polyphagia) | Livayog | 1-0-1 | Warm water | Vyanodaan kal (twice a day after food) |\n| Laulya (Polyphagia) | Meha Rasayan | 1-0-0 | Honey/ warm water | Rasayan Kal (Early morning on empty stomach) |\n| Laulya (Polyphagia) | *Kansya Rasayan | 0-0-1 | Honey/ warm water | Nisha Kal (At bedtime) |\n| Daurbalya-Alasya (Fatigue) | Zincare | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Daurbalya-Alasya (Fatigue) | Meha Rasayan | 1-0-0 | Honey/ warm water | Early morning on empty stomach |\n| Daurbalya-Alasya (Fatigue) | *Ruchir | 0-1-1 | Cow ghee | Pran kal |\n| Shosh Agnimandya, arochak, daurbalya etc. (loss of appetite, weakness, Unexplained Wt. Loss) | Zincare | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Shosh Agnimandya, arochak, daurbalya etc. (loss of appetite, weakness, Unexplained Wt. Loss) | Meha Rasayan | 1-0-0 | Honey/ warm water | Rasayan Kal (Early morning on empty stomach) |\n| Shosh Agnimandya, arochak, daurbalya etc. (loss of appetite, weakness, Unexplained Wt. Loss) | Rasaka Rasayana | 1-0-1 | Honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |"
+      },
+      {
+        "rank": 7,
+        "chunk_id": "DOC-5FFD839CD910-0042-47BBB592519D",
+        "distance": 0.19281983375549316,
+        "disease": "diabetes",
+        "document": "DM RR.md",
+        "section": "TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)",
+        "content_type": "table",
+        "page": 15,
+        "content": "Section: TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)\n\n| 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Known illness/ Stage | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Medicine | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Matra | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Sahpaan | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Aushadh Kal |\n|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|\n| Stage 2 Agnimanydya, Shoth, Aavil mutrata, Ayaasen shwas, Hrullas (Kidney damage with some loss of function and a GFR of 60-89%. creatinine 2 to 4) | Rasaka Rasayana | 1-0-1 | Honey / warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| Stage 2 Agnimanydya, Shoth, Aavil mutrata, Ayaasen shwas, Hrullas (Kidney damage with some loss of function and a GFR of 60-89%. creatinine 2 to 4) | Urokine | 1-0-1 | Warm water | Vyanodaan kal (twice a day after food) |"
+      },
+      {
+        "rank": 8,
+        "chunk_id": "DOC-5FFD839CD910-0025-4ACCD0BED844",
+        "distance": 0.1943211406469345,
+        "disease": "diabetes",
+        "document": "DM RR.md",
+        "section": "All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.",
+        "content_type": "table",
+        "page": 11,
+        "content": "Section: PRAMEH (DIABETES MELLITUS) MANAGEMENT\nSubsection: All mentioned guidelines below maybe considered based on onset or chronicity and severity of symptoms.\n\n| Symptoms | Medicine | Matra | Sahpaan | Aushadh Kal |\n|------------------------------------------------|-------------------------------------------------------|----------------------|----------------------|---------------------------------------------------------------------------|\n| Basti Shool (Cystitis) | Ayukshar | 5gm per 1litre water | 5gm per 1litre water | Use it in drinking water |\n| Basti Bheda (Urinary incontinence) | Zincare | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Basti Bheda (Urinary incontinence) | Chandraprabha+Gokshurad i guggul+jatamansi each 125mg | 1-0-1 | Warm water | Apaan kal (twice a day before food) |\n| Basti Bheda (Urinary incontinence) | Rasaka Rasayana | 1-0-1 | Honey/warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |"
+      },
+      {
+        "rank": 9,
+        "chunk_id": "DOC-5FFD839CD910-0039-0DA0BB089DFA",
+        "distance": 0.19447588920593262,
+        "disease": "diabetes",
+        "document": "DM RR.md",
+        "section": "TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)",
+        "content_type": "table",
+        "page": 15,
+        "content": "Section: TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)\n\n| 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Known illness/ Stage | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Medicine | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Matra | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Sahpaan | 1. MUTRAGHAAT/MUTRAVAH SROTAS VYADHI-UPADRAV (DIABETIC NEPHROPATHY) - Aushadh Kal |\n|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|\n| Stage1 Agnimanydya, Shoth, Hrullas Aavil mutrata, Ayaasen shwas, (Kidney damage present but normal kidney function and a GFR of 90% or above. creatinine around 2) | Zincare | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |\n| Stage1 Agnimanydya, Shoth, Hrullas Aavil mutrata, Ayaasen shwas, (Kidney damage present but normal kidney function and a GFR of 90% or above. creatinine around 2) | Sannidha Rasayan | 2-0-2 | Warm water | Vyanodaan kal (twice a day after food) |"
+      },
+      {
+        "rank": 10,
+        "chunk_id": "DOC-5FFD839CD910-0050-BC2F6E2D7067",
+        "distance": 0.19488734006881714,
+        "disease": "diabetes",
+        "document": "DM RR.md",
+        "section": "TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)",
+        "content_type": "table",
+        "page": 17,
+        "content": "Section: TREATMENT GUIDELINES FOR THE MANAGEMENT OF PRAMEH UPADRAV (COMPLICATIONS OF DIABETES MELLITUS)\n\n| STAGE | Medicine | Matra | Sahpaan | Aushadh Kal |\n|---------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|------------------------------------------------------------------------------------|\n| Stage5 Agnimanydya, Shoth, Aavil mutrata, Ayaasen shwas, Hrullas, Chhardi, Daurbalya, (Kidney failure and a GFR of under 15%. creatinine above 8) | Aarevat Kalpa | 0-0-1 or 2 | Warm water | Nisha kal (At bedtime) |\n| Stage5 Agnimanydya, Shoth, Aavil mutrata, Ayaasen shwas, Hrullas, Chhardi, Daurbalya, (Kidney failure and a GFR of under 15%. creatinine above 8) | Lavan | Replace table salt with it.Use it as per the need while cooking. | Replace table salt with it.Use it as per the need while cooking. | Replace table salt with it.Use it as per the need while cooking. |\n| Stage5 Agnimanydya, Shoth, Aavil mutrata, Ayaasen shwas, Hrullas, Chhardi, Daurbalya, (Kidney failure and a GFR of under 15%. creatinine above 8) | Ayukshar | 5gm per 1litre water | 5gm per 1litre water | Use it in drinking water |"
+      }
+    ],
+    "content_check": {
+      "found_terms": [
+        "Trushna",
+        "Polydipsia",
+        "Zincare",
+        "Kansya Rasayan",
+        "2-0-2",
+        "Warm water"
+      ],
+      "missing_terms": []
+    }
+  }
+}

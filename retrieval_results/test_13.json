@@ -1,0 +1,267 @@
+{
+  "test_number": 13,
+  "test_name": "Respiratory - Citation Verification for Mild Formulations",
+  "query": "For a 32-year-old adult presenting with mild respiratory viral infection (HRCT score 0 to 8, SpO2 above 94%) without severe dyspnea, what are the recommended Rasayana formulations, dosages, and Sahpaan?",
+  "expected_disease": "respiratory_viral_infection",
+  "expected_source_page": 17,
+  "expected_terms": [
+    "Somtajvir",
+    "Pranvir",
+    "Rasaka Rasayana",
+    "Sindhurbhushan Rasayan"
+  ],
+  "expect_absence": false,
+  "semantic_only": {
+    "retrieval_mode": "semantic_only",
+    "top_k": 10,
+    "results": [
+      {
+        "rank": 1,
+        "chunk_id": "DOC-FC76496810AB-0043-40B6B7FCDD58",
+        "distance": 0.10259474813938141,
+        "disease": "respiratory_viral_infection",
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+        "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+        "content_type": "table",
+        "page": 20,
+        "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\n| HRCT Score | Medicine | Matra | Sahpaan | Aushadh Kal |\n|----------------------------------|----------------------|---------|------------------------|-------------------------------------------------------------------------------------------|\n| MILD (0 to 8) SpO2 above 94 | Somtajvir | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MILD (0 to 8) SpO2 above 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MILD (0 to 8) SpO2 above 94 | Rasaka Rasayana | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| | Heeraka Rasayana | 1-0-0 | with honey/warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Somtajvir | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MODERATE (9 to 15) SpO2 90 to 94 | Rasaka Rasayana | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Heeraka Rasayana | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Somkalpa | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Mahalakshmi Vilas | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "DOC-FC76496810AB-0047-BDDAAAEDE022",
+        "distance": 0.10379236936569214,
+        "disease": "respiratory_viral_infection",
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+        "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+        "content_type": "table",
+        "page": 21,
+        "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\n| HRCT Score | Medicine | Matra | Sahpaan | Aushadh Kal |\n|----------------------------------|----------------------|---------|------------------------|-------------------------------------------------------------------------------------------|\n| MODERATE (9 to 15) SpO2 90 to 94 | Pranvallabha Rasayan | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| SEVERE (>15) SpO2 below 90 | Somtajvir | 1-1-1 | with honey/ warm water | Rasayan kal and Vyanodaan kal (Early morning on empty stomach and after lunch and dinner) |\n| SEVERE (>15) SpO2 below 90 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| SEVERE (>15) SpO2 below 90 | Rasaka Rasayana | 1-0-1 | with honey /warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| SEVERE (>15) SpO2 below 90 | Mahalakshmi Vilas | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |\n| SEVERE (>15) SpO2 below 90 | Pravi Rasayana | 1-1-1 | with honey/ warm water | Rasayan kal and Vyanodaan kal (Early morning on empty stomach and after lunch and dinner) |\n| SEVERE (>15) SpO2 below 90 | Pranvallabha Rasayan | 1-0-0 | with honey/ warm water | Early morning on empty stomach |"
+      },
+      {
+        "rank": 3,
+        "chunk_id": "DOC-FC76496810AB-0031-D7F6627AC304",
+        "distance": 0.10441030561923981,
+        "disease": "respiratory_viral_infection",
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+        "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+        "content_type": "table",
+        "page": 15,
+        "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\n| HRCT Score | Medicine | Matra | Sahpaan | Aushadh Kal |\n|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|-------------------------------------------------------------------------------------------|\n| MODERATE (9 to 15) SpO2 90 to 94 | Rasaka Rasayana | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Sutendra Rasayana | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Arpisa Rasayan | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Heeraka Rasayana | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| SEVERE (>15) SpO2 below 90 | Somtajvir | 1-1-1 | with honey/ warm water | Rasayan kal and Vyanodaan kal (Early morning on empty stomach and after lunch and dinner) |\n| SEVERE (>15) SpO2 below 90 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| SEVERE (>15) SpO2 below 90 | Rasaka Rasayana | 1-0-1 | with honey /warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| SEVERE (>15) SpO2 below 90 | Sutendra Rasayan | 0-0-1 | with honey/warm water | Nisha kal (at bedtime) |\n| SEVERE (>15) SpO2 below 90 | Arpisa Rasayan | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |"
+      },
+      {
+        "rank": 4,
+        "chunk_id": "DOC-FC76496810AB-0040-5EE61CBFB45B",
+        "distance": 0.1054304987192154,
+        "disease": "respiratory_viral_infection",
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+        "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+        "content_type": "table",
+        "page": 19,
+        "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\n| HRCT Score | Medicine | Matra | Sahpaan | Aushadh Kal |\n|----------------------------------|------------------------|---------|------------------------|-------------------------------------------------------------------------------------------|\n| MILD (0 to 8) SpO2 above 94 | Somtajvir | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MILD (0 to 8) SpO2 above 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MILD (0 to 8) SpO2 above 94 | Rasaka Rasayana | 1-0-1 | with honey /warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MILD (0 to 8) SpO2 above 94 | Sutendra | 1-0-0 | with honey/warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Somtajvir | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MODERATE (9 to 15) SpO2 90 to 94 | Rasaka Rasayana | 1-0-1 | with honey /warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Sutendra Rasayana | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Mahalakshmi Vilas | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Sindhurbhushan Rasayan | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |"
+      },
+      {
+        "rank": 5,
+        "chunk_id": "DOC-FC76496810AB-0030-F98CE66700F2",
+        "distance": 0.10557673871517181,
+        "disease": "respiratory_viral_infection",
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+        "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+        "content_type": "table",
+        "page": 15,
+        "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\n| HRCT Score | Medicine | Matra | Sahpaan | Aushadh Kal |\n|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|-------------------------------------------------------------------------------------------|\n| Rasavah srotas vyadhi (Heart Diseases, HTN etc.) | Rasavah srotas vyadhi (Heart Diseases, HTN etc.) | Rasavah srotas vyadhi (Heart Diseases, HTN etc.) | Rasavah srotas vyadhi (Heart Diseases, HTN etc.) | Rasavah srotas vyadhi (Heart Diseases, HTN etc.) |\n| MILD (0 to 8) SpO2 above 94 | Somtajvir | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MILD (0 to 8) SpO2 above 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MILD (0 to 8) SpO2 above 94 | Rasaka Rasayana | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MILD (0 to 8) SpO2 above 94 | Sutendra Rasayan | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |\n| MILD (0 to 8) SpO2 above 94 | Sindhurbhushan Rasayan | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Somtajvir | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |"
+      },
+      {
+        "rank": 6,
+        "chunk_id": "DOC-FC76496810AB-0046-9EBE00AB4656",
+        "distance": 0.10624136030673981,
+        "disease": "respiratory_viral_infection",
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+        "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+        "content_type": "table",
+        "page": 21,
+        "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\n| HRCT Score | Medicine | Matra | Sahpaan | Aushadh Kal |\n|----------------------------------|----------------------|---------|------------------------|-------------------------------------------------------------------------------------------|\n| MILD (0 to 8) SpO2 above 94 | Somtajvir | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MILD (0 to 8) SpO2 above 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MILD (0 to 8) SpO2 above 94 | Rasaka Rasayana | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MILD (0 to 8) SpO2 above 94 | Mahalakshmi Vilas | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |\n| MILD (0 to 8) SpO2 above 94 | Pravi Rasayana | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Somtajvir | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MODERATE (9 to 15) SpO2 90 to 94 | Rasaka Rasayana | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Mahalakshmi Vilas | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Pravi Rasayana | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |"
+      },
+      {
+        "rank": 7,
+        "chunk_id": "DOC-FC76496810AB-0041-96A597421EA6",
+        "distance": 0.10635950416326523,
+        "disease": "respiratory_viral_infection",
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+        "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+        "content_type": "table",
+        "page": 19,
+        "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\n| HRCT Score | Medicine | Matra | Sahpaan | Aushadh Kal |\n|----------------------------------|------------------------|---------|------------------------|-------------------------------------------------------------------------------------------|\n| SEVERE (>15) SpO2 below 90 | Somtajvir | 1-1-1 | with honey/ warm water | Rasayan kal and Vyanodaan kal (Early morning on empty stomach and after lunch and dinner) |\n| SEVERE (>15) SpO2 below 90 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| SEVERE (>15) SpO2 below 90 | Rasaka Rasayana | 1-0-1 | with honey /warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| SEVERE (>15) SpO2 below 90 | Sutendra Rasayana | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| SEVERE (>15) SpO2 below 90 | Mahalakshmi Vilas | 0-0-1 | with honey/warm water | Nisha kal (at bedtime) |\n| SEVERE (>15) SpO2 below 90 | Pranvallabha Rasayan | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |"
+      },
+      {
+        "rank": 8,
+        "chunk_id": "DOC-FC76496810AB-0044-628CA978E70D",
+        "distance": 0.10669335722923279,
+        "disease": "respiratory_viral_infection",
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+        "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+        "content_type": "table",
+        "page": 20,
+        "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\n| HRCT Score | Medicine | Matra | Sahpaan | Aushadh Kal |\n|----------------------------------|----------------------|---------|------------------------|-------------------------------------------------------------------------------------------|\n| SEVERE (>15) SpO2 below 90 | Somtajvir | 1-1-1 | with honey/ warm water | Rasayan kal and Vyanodaan kal (Early morning on empty stomach and after lunch and dinner) |\n| SEVERE (>15) SpO2 below 90 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| SEVERE (>15) SpO2 below 90 | Rasaka Rasayana | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| SEVERE (>15) SpO2 below 90 | Heeraka Rasayana | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| SEVERE (>15) SpO2 below 90 | Somkalpa | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| SEVERE (>15) SpO2 below 90 | Mahalakshmi Vilas | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |\n| SEVERE (>15) SpO2 below 90 | Pranvallabha Rasayan | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |"
+      },
+      {
+        "rank": 9,
+        "chunk_id": "DOC-FC76496810AB-0029-7C936491AE87",
+        "distance": 0.10744777321815491,
+        "disease": "respiratory_viral_infection",
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+        "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+        "content_type": "table",
+        "page": 14,
+        "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\n| HRCT Score | Medicine | Matra | Sahpaan | Aushadh Kal |\n|-------------------------------------------|-------------------------------------------|-------------------------------------------|-------------------------------------------|-------------------------------------------------------------------------------------------|\n| SEVERE (>15) SpO2 below 90 | Somtajvir | 1-1-1 | Honey/Warm water | Rasayan kal and Vyanodaan kal (Early morning on empty stomach and after lunch and dinner) |\n| SEVERE (>15) SpO2 below 90 | Pranvir | 2-2-2 | Warm water | Three times a day after food |\n| SEVERE (>15) SpO2 below 90 | Rasaka Rasayana | 1-0-1 | Honey/Warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| SEVERE (>15) SpO2 below 90 | Meha Rasayan | 1-0-0 | Honey/Warm water | Rasayan kal (Early morning on empty stomach) |\n| SEVERE (>15) SpO2 below 90 | Pranvallabha Rasayan | 1-0-0 | Honey/Warm water | Rasayan kal (Early morning on empty stomach) |"
+      },
+      {
+        "rank": 10,
+        "chunk_id": "DOC-FC76496810AB-0035-77484627D9DE",
+        "distance": 0.10750868916511536,
+        "disease": "respiratory_viral_infection",
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+        "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+        "content_type": "table",
+        "page": 17,
+        "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\nSub-subsection: Pranvah Srotas vyadhi (Above 15 Years)\n\n| HRCT Score | Medicine | Matra | Sahpaan Aushadh | Kal |\n|----------------------------------|------------------------|---------|------------------------|-------------------------------------------------------------------------------------------|\n| MILD (0 to 8) SpO2 above 94 | Somtajvir | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MILD (0 to 8) SpO2 above 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MILD (0 to 8) SpO2 above 94 | Rasaka Rasayana | 1-0-1 | with honey /warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MILD (0 to 8) SpO2 above 94 | Sindhurbhushan Rasayan | 1-0-0 | with honey/warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Somtajvir | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MODERATE (9 to 15) SpO2 90 to 94 | Rasaka Rasayana | 1-0-1 | with honey /warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Sindhurbhushan Rasayan | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Mahalakshmi Vilas | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |"
+      }
+    ],
+    "content_check": {
+      "found_terms": [
+        "Somtajvir",
+        "Pranvir",
+        "Rasaka Rasayana",
+        "Sindhurbhushan Rasayan"
+      ],
+      "missing_terms": []
+    }
+  },
+  "disease_filtered": {
+    "retrieval_mode": "disease_filtered",
+    "filter": {
+      "disease": "respiratory_viral_infection"
+    },
+    "top_k": 10,
+    "results": [
+      {
+        "rank": 1,
+        "chunk_id": "DOC-FC76496810AB-0043-40B6B7FCDD58",
+        "distance": 0.10259474813938141,
+        "disease": "respiratory_viral_infection",
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+        "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+        "content_type": "table",
+        "page": 20,
+        "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\n| HRCT Score | Medicine | Matra | Sahpaan | Aushadh Kal |\n|----------------------------------|----------------------|---------|------------------------|-------------------------------------------------------------------------------------------|\n| MILD (0 to 8) SpO2 above 94 | Somtajvir | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MILD (0 to 8) SpO2 above 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MILD (0 to 8) SpO2 above 94 | Rasaka Rasayana | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| | Heeraka Rasayana | 1-0-0 | with honey/warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Somtajvir | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MODERATE (9 to 15) SpO2 90 to 94 | Rasaka Rasayana | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Heeraka Rasayana | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Somkalpa | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Mahalakshmi Vilas | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |"
+      },
+      {
+        "rank": 2,
+        "chunk_id": "DOC-FC76496810AB-0047-BDDAAAEDE022",
+        "distance": 0.10379236936569214,
+        "disease": "respiratory_viral_infection",
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+        "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+        "content_type": "table",
+        "page": 21,
+        "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\n| HRCT Score | Medicine | Matra | Sahpaan | Aushadh Kal |\n|----------------------------------|----------------------|---------|------------------------|-------------------------------------------------------------------------------------------|\n| MODERATE (9 to 15) SpO2 90 to 94 | Pranvallabha Rasayan | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| SEVERE (>15) SpO2 below 90 | Somtajvir | 1-1-1 | with honey/ warm water | Rasayan kal and Vyanodaan kal (Early morning on empty stomach and after lunch and dinner) |\n| SEVERE (>15) SpO2 below 90 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| SEVERE (>15) SpO2 below 90 | Rasaka Rasayana | 1-0-1 | with honey /warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| SEVERE (>15) SpO2 below 90 | Mahalakshmi Vilas | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |\n| SEVERE (>15) SpO2 below 90 | Pravi Rasayana | 1-1-1 | with honey/ warm water | Rasayan kal and Vyanodaan kal (Early morning on empty stomach and after lunch and dinner) |\n| SEVERE (>15) SpO2 below 90 | Pranvallabha Rasayan | 1-0-0 | with honey/ warm water | Early morning on empty stomach |"
+      },
+      {
+        "rank": 3,
+        "chunk_id": "DOC-FC76496810AB-0031-D7F6627AC304",
+        "distance": 0.10441030561923981,
+        "disease": "respiratory_viral_infection",
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+        "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+        "content_type": "table",
+        "page": 15,
+        "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\n| HRCT Score | Medicine | Matra | Sahpaan | Aushadh Kal |\n|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|-------------------------------------------------------------------------------------------|\n| MODERATE (9 to 15) SpO2 90 to 94 | Rasaka Rasayana | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Sutendra Rasayana | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Arpisa Rasayan | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Heeraka Rasayana | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| SEVERE (>15) SpO2 below 90 | Somtajvir | 1-1-1 | with honey/ warm water | Rasayan kal and Vyanodaan kal (Early morning on empty stomach and after lunch and dinner) |\n| SEVERE (>15) SpO2 below 90 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| SEVERE (>15) SpO2 below 90 | Rasaka Rasayana | 1-0-1 | with honey /warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| SEVERE (>15) SpO2 below 90 | Sutendra Rasayan | 0-0-1 | with honey/warm water | Nisha kal (at bedtime) |\n| SEVERE (>15) SpO2 below 90 | Arpisa Rasayan | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |"
+      },
+      {
+        "rank": 4,
+        "chunk_id": "DOC-FC76496810AB-0040-5EE61CBFB45B",
+        "distance": 0.1054304987192154,
+        "disease": "respiratory_viral_infection",
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+        "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+        "content_type": "table",
+        "page": 19,
+        "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\n| HRCT Score | Medicine | Matra | Sahpaan | Aushadh Kal |\n|----------------------------------|------------------------|---------|------------------------|-------------------------------------------------------------------------------------------|\n| MILD (0 to 8) SpO2 above 94 | Somtajvir | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MILD (0 to 8) SpO2 above 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MILD (0 to 8) SpO2 above 94 | Rasaka Rasayana | 1-0-1 | with honey /warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MILD (0 to 8) SpO2 above 94 | Sutendra | 1-0-0 | with honey/warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Somtajvir | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MODERATE (9 to 15) SpO2 90 to 94 | Rasaka Rasayana | 1-0-1 | with honey /warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Sutendra Rasayana | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Mahalakshmi Vilas | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Sindhurbhushan Rasayan | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |"
+      },
+      {
+        "rank": 5,
+        "chunk_id": "DOC-FC76496810AB-0030-F98CE66700F2",
+        "distance": 0.10557673871517181,
+        "disease": "respiratory_viral_infection",
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+        "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+        "content_type": "table",
+        "page": 15,
+        "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\n| HRCT Score | Medicine | Matra | Sahpaan | Aushadh Kal |\n|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|--------------------------------------------------|-------------------------------------------------------------------------------------------|\n| Rasavah srotas vyadhi (Heart Diseases, HTN etc.) | Rasavah srotas vyadhi (Heart Diseases, HTN etc.) | Rasavah srotas vyadhi (Heart Diseases, HTN etc.) | Rasavah srotas vyadhi (Heart Diseases, HTN etc.) | Rasavah srotas vyadhi (Heart Diseases, HTN etc.) |\n| MILD (0 to 8) SpO2 above 94 | Somtajvir | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MILD (0 to 8) SpO2 above 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MILD (0 to 8) SpO2 above 94 | Rasaka Rasayana | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MILD (0 to 8) SpO2 above 94 | Sutendra Rasayan | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |\n| MILD (0 to 8) SpO2 above 94 | Sindhurbhushan Rasayan | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Somtajvir | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |"
+      },
+      {
+        "rank": 6,
+        "chunk_id": "DOC-FC76496810AB-0046-9EBE00AB4656",
+        "distance": 0.10624136030673981,
+        "disease": "respiratory_viral_infection",
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+        "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+        "content_type": "table",
+        "page": 21,
+        "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\n| HRCT Score | Medicine | Matra | Sahpaan | Aushadh Kal |\n|----------------------------------|----------------------|---------|------------------------|-------------------------------------------------------------------------------------------|\n| MILD (0 to 8) SpO2 above 94 | Somtajvir | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MILD (0 to 8) SpO2 above 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MILD (0 to 8) SpO2 above 94 | Rasaka Rasayana | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MILD (0 to 8) SpO2 above 94 | Mahalakshmi Vilas | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |\n| MILD (0 to 8) SpO2 above 94 | Pravi Rasayana | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Somtajvir | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MODERATE (9 to 15) SpO2 90 to 94 | Rasaka Rasayana | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Mahalakshmi Vilas | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Pravi Rasayana | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |"
+      },
+      {
+        "rank": 7,
+        "chunk_id": "DOC-FC76496810AB-0041-96A597421EA6",
+        "distance": 0.10635950416326523,
+        "disease": "respiratory_viral_infection",
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+        "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+        "content_type": "table",
+        "page": 19,
+        "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\n| HRCT Score | Medicine | Matra | Sahpaan | Aushadh Kal |\n|----------------------------------|------------------------|---------|------------------------|-------------------------------------------------------------------------------------------|\n| SEVERE (>15) SpO2 below 90 | Somtajvir | 1-1-1 | with honey/ warm water | Rasayan kal and Vyanodaan kal (Early morning on empty stomach and after lunch and dinner) |\n| SEVERE (>15) SpO2 below 90 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| SEVERE (>15) SpO2 below 90 | Rasaka Rasayana | 1-0-1 | with honey /warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| SEVERE (>15) SpO2 below 90 | Sutendra Rasayana | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| SEVERE (>15) SpO2 below 90 | Mahalakshmi Vilas | 0-0-1 | with honey/warm water | Nisha kal (at bedtime) |\n| SEVERE (>15) SpO2 below 90 | Pranvallabha Rasayan | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |"
+      },
+      {
+        "rank": 8,
+        "chunk_id": "DOC-FC76496810AB-0044-628CA978E70D",
+        "distance": 0.10669335722923279,
+        "disease": "respiratory_viral_infection",
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+        "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+        "content_type": "table",
+        "page": 20,
+        "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\n| HRCT Score | Medicine | Matra | Sahpaan | Aushadh Kal |\n|----------------------------------|----------------------|---------|------------------------|-------------------------------------------------------------------------------------------|\n| SEVERE (>15) SpO2 below 90 | Somtajvir | 1-1-1 | with honey/ warm water | Rasayan kal and Vyanodaan kal (Early morning on empty stomach and after lunch and dinner) |\n| SEVERE (>15) SpO2 below 90 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| SEVERE (>15) SpO2 below 90 | Rasaka Rasayana | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| SEVERE (>15) SpO2 below 90 | Heeraka Rasayana | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| SEVERE (>15) SpO2 below 90 | Somkalpa | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| SEVERE (>15) SpO2 below 90 | Mahalakshmi Vilas | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |\n| SEVERE (>15) SpO2 below 90 | Pranvallabha Rasayan | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |"
+      },
+      {
+        "rank": 9,
+        "chunk_id": "DOC-FC76496810AB-0029-7C936491AE87",
+        "distance": 0.10744777321815491,
+        "disease": "respiratory_viral_infection",
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+        "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+        "content_type": "table",
+        "page": 14,
+        "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\n\n| HRCT Score | Medicine | Matra | Sahpaan | Aushadh Kal |\n|-------------------------------------------|-------------------------------------------|-------------------------------------------|-------------------------------------------|-------------------------------------------------------------------------------------------|\n| SEVERE (>15) SpO2 below 90 | Somtajvir | 1-1-1 | Honey/Warm water | Rasayan kal and Vyanodaan kal (Early morning on empty stomach and after lunch and dinner) |\n| SEVERE (>15) SpO2 below 90 | Pranvir | 2-2-2 | Warm water | Three times a day after food |\n| SEVERE (>15) SpO2 below 90 | Rasaka Rasayana | 1-0-1 | Honey/Warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| SEVERE (>15) SpO2 below 90 | Meha Rasayan | 1-0-0 | Honey/Warm water | Rasayan kal (Early morning on empty stomach) |\n| SEVERE (>15) SpO2 below 90 | Pranvallabha Rasayan | 1-0-0 | Honey/Warm water | Rasayan kal (Early morning on empty stomach) |"
+      },
+      {
+        "rank": 10,
+        "chunk_id": "DOC-FC76496810AB-0035-77484627D9DE",
+        "distance": 0.10750868916511536,
+        "disease": "respiratory_viral_infection",
+        "document": "Respiratory Viral Infection Management prorocol_FINAL version-converted-1-25 (1).md",
+        "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
+        "content_type": "table",
+        "page": 17,
+        "content": "Section: THERAPEUTIC GUIDELINES\nSubsection: RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES\nSub-subsection: Pranvah Srotas vyadhi (Above 15 Years)\n\n| HRCT Score | Medicine | Matra | Sahpaan Aushadh | Kal |\n|----------------------------------|------------------------|---------|------------------------|-------------------------------------------------------------------------------------------|\n| MILD (0 to 8) SpO2 above 94 | Somtajvir | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MILD (0 to 8) SpO2 above 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MILD (0 to 8) SpO2 above 94 | Rasaka Rasayana | 1-0-1 | with honey /warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MILD (0 to 8) SpO2 above 94 | Sindhurbhushan Rasayan | 1-0-0 | with honey/warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Somtajvir | 1-0-1 | with honey/ warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Pranvir | 2-2-2 | with warm water | Three times a day after food |\n| MODERATE (9 to 15) SpO2 90 to 94 | Rasaka Rasayana | 1-0-1 | with honey /warm water | Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Sindhurbhushan Rasayan | 1-0-0 | with honey/ warm water | Rasayan kal (Early morning on empty stomach) |\n| MODERATE (9 to 15) SpO2 90 to 94 | Mahalakshmi Vilas | 0-0-1 | with honey/ warm water | Nisha kal (at bedtime) |"
+      }
+    ],
+    "content_check": {
+      "found_terms": [
+        "Somtajvir",
+        "Pranvir",
+        "Rasaka Rasayana",
+        "Sindhurbhushan Rasayan"
+      ],
+      "missing_terms": []
+    }
+  }
+}
