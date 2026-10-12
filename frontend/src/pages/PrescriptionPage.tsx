@@ -19,6 +19,8 @@ export const PrescriptionPage: React.FC = () => {
     clinicalQuery,
     setClinicalQuery,
     handleSelectPatient,
+    handleAddTestPatient,
+    handleRemoveTestPatient,
   } = usePatients();
   const { prescription, isLoading, error, generate, reset } = usePrescription();
   const [viewingDocument, setViewingDocument] = useState<GuidelineDocument | null>(null);
@@ -67,7 +69,7 @@ export const PrescriptionPage: React.FC = () => {
               <span>2. Patient Context</span>
             </h2>
             <p className="clinical-card-subtitle">
-              Select verified clinical profile to evaluate against guideline protocols
+              Select verified clinical profile or create temporary test patients for query variation testing
             </p>
           </div>
         </div>
@@ -79,6 +81,8 @@ export const PrescriptionPage: React.FC = () => {
             reset();
             handleSelectPatient(id);
           }}
+          onAddTestPatient={handleAddTestPatient}
+          onRemoveTestPatient={handleRemoveTestPatient}
           isLoading={isLoading}
         />
       </section>
@@ -94,15 +98,30 @@ export const PrescriptionPage: React.FC = () => {
               <span>3. Clinical Query</span>
             </h2>
             <p className="clinical-card-subtitle">
-              Physician clinical query specifying symptoms, stage, and parameters
+              Physician clinical query specifying symptoms, stage, and parameters (editable independently of patient profile)
             </p>
           </div>
         </div>
 
         <div className="clinical-form-group">
-          <label htmlFor="clinical-query-textarea" className="clinical-label">
-            Clinical Query / Guideline Parameters:
-          </label>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
+            <label htmlFor="clinical-query-textarea" className="clinical-label">
+              Clinical Query / Guideline Parameters:
+            </label>
+            {selectedPatient && clinicalQuery !== (selectedPatient.clinical_query || (selectedPatient as any).clinicalQuery || '') && (
+              <button
+                type="button"
+                onClick={() => setClinicalQuery(selectedPatient.clinical_query || (selectedPatient as any).clinicalQuery || '')}
+                className="clinical-btn-ghost"
+                style={{ fontSize: '12px', padding: '2px 8px', color: '#0284c7' }}
+                title="Reset query back to active patient profile default"
+                id="reset-query-to-patient-btn"
+              >
+                <RefreshCw size={12} />
+                <span>Reset Query to Patient Profile</span>
+              </button>
+            )}
+          </div>
           <textarea
             id="clinical-query-textarea"
             value={clinicalQuery}
@@ -111,9 +130,16 @@ export const PrescriptionPage: React.FC = () => {
             className="clinical-textarea"
             placeholder="Select a patient profile above or type a clinical question (e.g. In diabetic nephropathy Stage 3 complications with GFR 30-59%, what are the prescribed medicines, Matra, Sahpaan, and Aushadh Kal?)..."
           />
-          <span style={{ fontSize: '13px', color: '#64748b' }}>
-            Pre-populated from the active patient profile; you can edit parameters or query specific symptoms.
-          </span>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px', fontSize: '13px', color: '#64748b' }}>
+            <span>
+              Pre-populated from the active patient profile; you can edit clinical parameters or test query variations independently.
+            </span>
+            {selectedPatient?.is_test && (
+              <span style={{ color: '#b45309', fontWeight: 600 }}>
+                [Testing Query on Temporary Test Profile]
+              </span>
+            )}
+          </div>
         </div>
       </section>
 

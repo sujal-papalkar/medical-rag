@@ -29,6 +29,16 @@ export function usePrescription() {
     try {
       const response = await apiGeneratePrescription({
         patient_id: patient?.id,
+        patient_info: patient
+          ? {
+              patient_id: patient.id,
+              name: patient.name,
+              age: patient.age,
+              gender: patient.gender,
+              disease: patient.disease,
+              presentation: patient.presentation,
+            }
+          : undefined,
         query: queryToUse,
         disease: patient?.disease,
         top_k: 5,

@@ -15,6 +15,8 @@ export const PatientsPage: React.FC<PatientsPageProps> = ({ onProceedToPrescript
     clinicalQuery,
     setClinicalQuery,
     handleSelectPatient,
+    handleAddTestPatient,
+    handleRemoveTestPatient,
   } = usePatients();
 
   return (
@@ -36,6 +38,8 @@ export const PatientsPage: React.FC<PatientsPageProps> = ({ onProceedToPrescript
           onSelectPatient={handleSelectPatient}
           clinicalQuery={clinicalQuery}
           onQueryChange={setClinicalQuery}
+          onAddTestPatient={handleAddTestPatient}
+          onRemoveTestPatient={handleRemoveTestPatient}
           isLoading={false}
         />
       </section>

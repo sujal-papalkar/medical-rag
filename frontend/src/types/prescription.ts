@@ -69,6 +69,7 @@ export interface StructuredPrescriptionResponse {
 
 export interface PrescriptionGenerateRequest {
   patient_id?: string | null;
+  patient_info?: PatientInfo | null;
   query: string;
   disease?: string | null;
   top_k?: number;

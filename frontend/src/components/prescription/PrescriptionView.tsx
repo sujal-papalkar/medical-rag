@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShieldCheck, CheckCircle2, AlertTriangle, ShieldAlert, ArrowRight, Loader2 } from 'lucide-react';
+import { ShieldCheck, CheckCircle2, AlertTriangle, ShieldAlert, ArrowRight, Loader2, FlaskConical } from 'lucide-react';
 import type { StructuredPrescriptionResponse, GuidelineDocument, ResolvedMedicineCitation } from '../../types';
 import { MedicineTable } from './MedicineTable';
 import { EvidencePanel } from './EvidencePanel';
@@ -17,7 +17,9 @@ export const PrescriptionView: React.FC<PrescriptionViewProps> = ({
   onConfirmOverride,
   isOverriding = false,
 }) => {
-  const { medicines, evidence_sources, validation_status, requires_confirmation, conflicts } = prescription;
+  const { medicines, evidence_sources, validation_status, requires_confirmation, conflicts, patient } = prescription;
+  const isBenchmarkCase = Boolean(patient?.patient_id?.startsWith('TC-'));
+  const isTestPatient = Boolean(patient?.patient_id?.startsWith('TEST-')) || isBenchmarkCase;
 
   // Evidence modal state for on-demand verification
   const [evidencePanelOpen, setEvidencePanelOpen] = useState(false);
@@ -50,6 +52,42 @@ export const PrescriptionView: React.FC<PrescriptionViewProps> = ({
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          {isBenchmarkCase ? (
+            <span
+              className="status-badge"
+              style={{
+                backgroundColor: '#ede9fe',
+                color: '#6d28d9',
+                border: '1px solid #ddd6fe',
+                fontSize: '12px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px',
+              }}
+              id="prescription-benchmark-badge"
+            >
+              <FlaskConical size={13} />
+              <span>RAG EVALUATION RUN</span>
+            </span>
+          ) : isTestPatient ? (
+            <span
+              className="status-badge"
+              style={{
+                backgroundColor: '#fef3c7',
+                color: '#b45309',
+                border: '1px solid #fde68a',
+                fontSize: '12px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '4px',
+              }}
+              id="prescription-test-badge"
+            >
+              <FlaskConical size={13} />
+              <span>UNVERIFIED TEST DATA</span>
+            </span>
+          ) : null}
+
           {requires_confirmation ? (
             <span className="status-badge" style={{ backgroundColor: '#fef3c7', color: '#b45309', border: '1px solid #fde68a' }} id="prescription-status-badge">
               <AlertTriangle size={14} />
@@ -201,6 +239,50 @@ export const PrescriptionView: React.FC<PrescriptionViewProps> = ({
       {/* 4. Display the Medicines Table if not pending confirmation */}
       {!requires_confirmation && (
         <div style={{ marginTop: '12px' }}>
+          {isBenchmarkCase ? (
+            <div
+              id="prescription-benchmark-case-notice"
+              style={{
+                marginBottom: '14px',
+                padding: '12px 16px',
+                backgroundColor: '#f5f3ff',
+                border: '1px solid #ddd6fe',
+                borderRadius: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                fontSize: '13px',
+                color: '#5b21b6',
+              }}
+            >
+              <FlaskConical size={16} className="text-purple-600 shrink-0" />
+              <span>
+                <strong>Benchmark Test Execution:</strong> Prescriptions and citations generated for evaluation case <code style={{ fontFamily: 'var(--font-mono)' }}>{patient?.patient_id}</code> ({patient?.name || 'Evaluation Scenario'}). Inspect actual prescribed formulations, dosages, and source citations below to compare against benchmark expected behavior.
+              </span>
+            </div>
+          ) : isTestPatient ? (
+            <div
+              id="prescription-test-profile-notice"
+              style={{
+                marginBottom: '14px',
+                padding: '10px 14px',
+                backgroundColor: '#fffbeb',
+                border: '1px solid #fde68a',
+                borderRadius: '8px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                fontSize: '13px',
+                color: '#92400e',
+              }}
+            >
+              <FlaskConical size={16} className="text-amber-600 shrink-0" />
+              <span>
+                <strong>Evaluation Notice:</strong> Prescribed formulations and clinical guidance were generated for temporary test profile <code style={{ fontFamily: 'var(--font-mono)' }}>{patient?.patient_id}</code> ({patient?.name || 'Test Patient'}). Results are strictly for testing query variations; verified clinical records are unaltered.
+              </span>
+            </div>
+          ) : null}
+
           <MedicineTable
             medicines={medicines}
             evidenceSources={evidence_sources}
