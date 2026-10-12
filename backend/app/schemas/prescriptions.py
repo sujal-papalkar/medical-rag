@@ -94,6 +94,7 @@ class StructuredPrescriptionResponse(BaseModel):
 
 class PrescriptionGenerateRequest(BaseModel):
     patient_id: Optional[str] = Field(None, description="Selected patient ID")
+    patient_info: Optional[PatientInfo] = Field(None, description="Custom or temporary test patient information")
     query: str = Field(..., description="Clinical query / physician request")
     disease: Optional[str] = Field(None, description="'diabetes' or 'respiratory_viral_infection'")
     top_k: int = Field(5, ge=1, le=10, description="Top-K evidence chunks to retrieve (default: 5)")

@@ -8,6 +8,7 @@ Verifies:
 """
 
 import sys
+import json
 import unittest
 from unittest.mock import patch, MagicMock
 from pathlib import Path
@@ -290,6 +291,85 @@ class TestPatientPrescriptionRegression(unittest.TestCase):
                 self.assertGreater(len(res.medicines), 0)
                 self.assertGreater(len(res.conflicts), 0)  # Audited in response
                 self.assertTrue(any("override confirmed" in str(lim).lower() for lim in res.limitations))
+
+    def test_registered_profiles_remain_isolated_and_immutable(self):
+        """Ensures the 7 authoritative registered patient records are never mutated by test profiles."""
+        patients = PatientRepository.list_patients()
+        self.assertEqual(len(patients), 7)
+        registered_ids = [p["id"] for p in patients]
+        self.assertEqual(
+            registered_ids,
+            ["PAT-DM-001", "PAT-DM-002", "PAT-DM-003", "PAT-RESP-001", "PAT-RESP-002", "PAT-RESP-003", "PAT-RESP-004"]
+        )
+
+    @patch("app.rag.generation.call_gemini_with_fallback")
+    @patch("app.rag.generation.get_retrieval_service")
+    def test_temporary_test_patient_workflow(self, mock_get_retrieval, mock_gemini):
+        """Validates that a temporary test patient profile generates prescriptions cleanly without database insertion."""
+        test_patient = PatientInfo(
+            patient_id="TEST-TMP-001",
+            name="Test Patient (Mild Respiratory)",
+            age=34,
+            gender="Female",
+            disease="respiratory_viral_infection",
+            presentation="Mild respiratory viral infection with dry cough, SpO2 96%, HRCT score 3"
+        )
+
+        mock_retrieval = MagicMock()
+        mock_retrieval.retrieve.return_value = [
+            {
+                "chunk_id": "test_chunk_resp_p17",
+                "document_name": "guidelines_respiratory_viral_infection.pdf",
+                "page": 17,
+                "content": "Rasayana therapy for mild respiratory infection in adults: Chyawanprash 10g once daily with milk.",
+                "combined_score": 0.85
+            }
+        ]
+        mock_get_retrieval.return_value = mock_retrieval
+
+        mock_gemini.return_value = {
+            "text": json.dumps({
+                "clinical_guidance": {
+                    "condition": "Mild respiratory viral infection",
+                    "severity_or_stage": "mild",
+                    "guidance_summary": "Administer Rasayana therapy.",
+                    "key_recommendations": ["Chyawanprash"]
+                },
+                "medicines": [
+                    {
+                        "medicine": "Chyawanprash",
+                        "dose": "10 g",
+                        "dosage_form": "Rasayana",
+                        "route": "Oral",
+                        "frequency": "Once daily",
+                        "timing": "Morning",
+                        "duration": "15 days",
+                        "anupana": "Warm milk",
+                        "special_instructions": None,
+                        "supporting_chunk_ids": ["test_chunk_resp_p17"]
+                    }
+                ],
+                "limitations": []
+            }),
+            "model": "gemini-2.5-flash",
+            "attempts": 1
+        }
+
+        from app.rag.generation import generate_structured_prescription
+        res = generate_structured_prescription(
+            query="Prescribe Ayurvedic rasayana for mild respiratory infection in a 34-year-old female with SpO2 96%.",
+            disease="respiratory_viral_infection",
+            patient_info=test_patient,
+            num_candidates=1
+        )
+
+        self.assertEqual(res.status, "success")
+        self.assertEqual(res.patient.patient_id, "TEST-TMP-001")
+        self.assertEqual(res.patient.age, 34)
+        self.assertGreaterEqual(len(res.medicines), 1)
+        self.assertTrue(any("Somtajvir" in m.medicine or "Pranvir" in m.medicine for m in res.medicines))
+        # Ensure repository remains untouched
+        self.assertEqual(len(PatientRepository.list_patients()), 7)
 
 
 if __name__ == "__main__":

@@ -33,7 +33,9 @@ def generate_prescription(payload: PrescriptionGenerateRequest):
     logger.info(f"Generating prescription for query='{payload.query[:60]}...', disease={payload.disease}")
 
     patient_info = None
-    if payload.patient_id:
+    if payload.patient_info:
+        patient_info = payload.patient_info
+    elif payload.patient_id:
         p = PatientRepository.get_by_id(payload.patient_id)
         if p:
             patient_info = PatientInfo(
