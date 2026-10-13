@@ -39,134 +39,114 @@ class ClinicalProfile:
     table_isolation_reason: Optional[str] = None
 
 
-# Authoritative mapping of respiratory viral infection rasayana tables
-RESPIRATORY_TABLE_MAP = {
-    "adult_mild": {
-        "page": 17,
-        "chunk_id": "DOC-FC76496810AB-0035-77484627D9DE",
-        "section": "Pranvah Srotas vyadhi (Above 15 Years)",
-        "severity": "MILD (0 to 8) SpO2 above 94",
-        "medicines": ["Somtajvir", "Pranvir", "Rasaka Rasayana", "Sindhurbhushan Rasayan"],
-        "doses": {"Somtajvir": "1-0-0", "Pranvir": "2-2-2", "Rasaka Rasayana": "1-0-1", "Sindhurbhushan Rasayan": "1-0-0"},
-        "sahpaan": {
-            "Somtajvir": "with honey/ warm water",
-            "Pranvir": "with warm water",
-            "Rasaka Rasayana": "with honey /warm water",
-            "Sindhurbhushan Rasayan": "with honey/warm water"
-        },
-        "timing": {
-            "Somtajvir": "Rasayan kal (Early morning on empty stomach)",
-            "Pranvir": "Three times a day after food",
-            "Rasaka Rasayana": "Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime)",
-            "Sindhurbhushan Rasayan": "Rasayan kal (Early morning on empty stomach)"
-        }
-    },
-    "adult_moderate": {
-        "page": 17,
-        "chunk_id": "DOC-FC76496810AB-0035-77484627D9DE",
-        "section": "Pranvah Srotas vyadhi (Above 15 Years)",
-        "severity": "MODERATE (9 to 15) SpO2 90 to 94",
-        "medicines": ["Somtajvir", "Pranvir", "Rasaka Rasayana", "Sindhurbhushan Rasayan", "Mahalakshmi Vilas"],
-        "doses": {
-            "Somtajvir": "1-0-1",
-            "Pranvir": "2-2-2",
-            "Rasaka Rasayana": "1-0-1",
-            "Sindhurbhushan Rasayan": "1-0-0",
-            "Mahalakshmi Vilas": "0-0-1"
-        },
-        "sahpaan": {
-            "Somtajvir": "with honey/ warm water",
-            "Pranvir": "with warm water",
-            "Rasaka Rasayana": "with honey /warm water",
-            "Sindhurbhushan Rasayan": "with honey/ warm water",
-            "Mahalakshmi Vilas": "with honey/ warm water"
-        },
-        "timing": {
-            "Somtajvir": "Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime)",
-            "Pranvir": "Three times a day after food",
-            "Rasaka Rasayana": "Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime)",
-            "Sindhurbhushan Rasayan": "Rasayan kal (Early morning on empty stomach)",
-            "Mahalakshmi Vilas": "Nisha kal (at bedtime)"
-        }
-    },
-    "adult_severe": {
-        "page": 17,
-        "chunk_id": "DOC-FC76496810AB-0036-20ED5DC46A3C",
-        "section": "Pranvah Srotas vyadhi (Above 15 Years)",
-        "severity": "SEVERE (>15) SpO2 below 90",
-        "medicines": ["Somtajvir", "Pranvir", "Rasaka Rasayana", "Sindhurbhushan Rasayan", "Mahalakshmi Vilas", "Pranvallabha Rasayan"],
-        "doses": {
-            "Somtajvir": "1-1-1",
-            "Pranvir": "2-2-2",
-            "Rasaka Rasayana": "1-0-1",
-            "Sindhurbhushan Rasayan": "1-0-0",
-            "Mahalakshmi Vilas": "0-0-1",
-            "Pranvallabha Rasayan": "1-0-0"
-        },
-        "sahpaan": {
-            "Somtajvir": "with honey/ warm water",
-            "Pranvir": "with warm water",
-            "Rasaka Rasayana": "with honey /warm water",
-            "Sindhurbhushan Rasayan": "with honey/ warm water",
-            "Mahalakshmi Vilas": "with honey/warm water",
-            "Pranvallabha Rasayan": "with honey/ warm water"
-        },
-        "timing": {
-            "Somtajvir": "Rasayan kal and Vyanodaan kal (Early morning on empty stomach and after lunch and dinner)",
-            "Pranvir": "Three times a day after food",
-            "Rasaka Rasayana": "Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime)",
-            "Sindhurbhushan Rasayan": "Rasayan kal (Early morning on empty stomach)",
-            "Mahalakshmi Vilas": "Nisha kal (at bedtime)",
-            "Pranvallabha Rasayan": "Rasayan kal (Early morning on empty stomach)"
-        }
-    },
-    "resp_diabetes_mild": {
-        "page": 14,
-        "chunk_id": "DOC-FC76496810AB-0028-4F2CFBD3E05E",
-        "section": "Udakvah srotas vyadhi (Diabetes Mellitus)",
-        "severity": "MILD (0 to 8) SpO2 above 94",
-        "medicines": ["Somtajvir", "Pranvir", "Rasaka Rasayana", "Meha Rasayan"],
-        "doses": {
-            "Somtajvir": "1-0-0",
-            "Pranvir": "2-2-2",
-            "Rasaka Rasayana": "1-0-1",
-            "Meha Rasayan": "1-0-0"
-        },
-        "sahpaan": {
-            "Somtajvir": "Honey/Warm water",
-            "Pranvir": "Warm water",
-            "Rasaka Rasayana": "Honey/Warm water",
-            "Meha Rasayan": "Honey/Warm water"
-        },
-        "timing": {
-            "Somtajvir": "Rasayan kal (Early morning on empty stomach)",
-            "Pranvir": "Three times a day after food",
-            "Rasaka Rasayana": "Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime)",
-            "Meha Rasayan": "Rasayan kal (Early morning on empty stomach)"
-        }
-    },
-    "pediatric_all": {
-        "page": 16,
-        "chunk_id": "DOC-FC76496810AB-0033-312CE552D1E5",
-        "section": "Pranvah Srotas vyadhi (Below 15 Years)",
-        "medicines": ["Somtajvir", "Rasvir", "Bal Rasayana"],
-        "doses": {
-            "Somtajvir": "1-0-0",
-            "Rasvir": "1-0-1",
-            "Bal Rasayana": "1-0-0"
-        },
-        "sahpaan": {
-            "Somtajvir": "with honey/ warm water",
-            "Rasvir": "with honey/ warm water",
-            "Bal Rasayana": "with honey/ warm water"
-        },
-        "timing": {
-            "Somtajvir": "Rasayan kal (Early morning on empty stomach)",
-            "Rasvir": "Rasayan kal and Nisha kal (Early morning on empty stomach and at bedtime)",
-            "Bal Rasayana": "Rasayan kal (Early morning on empty stomach)"
-        }
-    }
-}
+# Clinical knowledge resides dynamically in ChromaDB markdown chunks.
+
+
+
+def parse_spo2_details(lower_text: str) -> Tuple[Optional[str], Optional[str]]:
+    """
+    Extracts raw SpO2 string and evaluated guideline severity.
+    Returns (raw_value, severity).
+    Severity thresholds:
+      - > 94% -> 'mild'
+      - 90% - 94% -> 'moderate'
+      - < 90% -> 'severe'
+    """
+    if not lower_text:
+        return None, None
+    lower_text = lower_text.lower()
+    m = re.search(r'\bspo2\s*(?:of|is|:)?\s*([><]?\s*\d{1,3}%?|\d{1,3}\s*(?:to|-)\s*\d{1,3}%?|above \d+%?|below \d+%?|greater than \d+%?|less than \d+%?)', lower_text)
+    if not m:
+        return None, None
+
+    raw = m.group(1).strip()
+    raw_clean = raw.replace(" ", "")
+
+    if "<" in raw_clean or "below" in raw.lower() or "less than" in raw.lower():
+        digits = re.findall(r'\d+', raw)
+        val = int(digits[0]) if digits else 85
+        return raw, "severe" if val <= 90 else ("moderate" if val <= 94 else "mild")
+
+    if ">" in raw_clean or "above" in raw.lower() or "greater than" in raw.lower():
+        digits = re.findall(r'\d+', raw)
+        val = int(digits[0]) if digits else 95
+        return raw, "mild" if val >= 94 else ("moderate" if val >= 90 else "severe")
+
+    range_match = re.search(r'(\d{1,3})\s*(?:to|-)\s*(\d{1,3})', raw)
+    if range_match:
+        low_val = int(range_match.group(1))
+        high_val = int(range_match.group(2))
+        if 90 <= low_val and high_val <= 94:
+            return raw, "moderate"
+        elif low_val > 94:
+            return raw, "mild"
+        elif high_val < 90:
+            return raw, "severe"
+
+    digits = re.findall(r'\d+', raw)
+    if digits:
+        val = int(digits[0])
+        if val > 94:
+            return raw, "mild"
+        elif 90 <= val <= 94:
+            return raw, "moderate"
+        elif val < 90:
+            return raw, "severe"
+
+    return raw, None
+
+
+def parse_hrct_details(lower_text: str) -> Tuple[Optional[str], Optional[str]]:
+    """
+    Extracts raw HRCT string and evaluated guideline severity.
+    Returns (raw_value, severity).
+    Severity thresholds:
+      - 0 to 8 (or <= 8) -> 'mild'
+      - 9 to 15 (or 9-15) -> 'moderate'
+      - > 15 (or >= 16) -> 'severe'
+    """
+    if not lower_text:
+        return None, None
+    lower_text = lower_text.lower()
+    m = re.search(r'\bhrct\s*(?:score)?\s*(?:of|is|:)?\s*([><]?\s*\d{1,2}|\d{1,2}\s*(?:to|-|–)\s*\d{1,2}|above \d+|below \d+|greater than \d+|less than \d+)', lower_text)
+    if not m:
+        return None, None
+
+    raw = m.group(1).strip()
+    raw_clean = raw.replace(" ", "")
+
+    if ">" in raw_clean or "above" in raw.lower() or "greater than" in raw.lower():
+        digits = re.findall(r'\d+', raw)
+        val = int(digits[0]) if digits else 16
+        return raw, "severe" if val >= 15 else ("moderate" if val >= 9 else "mild")
+
+    if "<" in raw_clean or "below" in raw.lower() or "less than" in raw.lower():
+        digits = re.findall(r'\d+', raw)
+        val = int(digits[0]) if digits else 8
+        return raw, "mild" if val <= 8 else ("moderate" if val <= 15 else "severe")
+
+    range_match = re.search(r'(\d{1,2})\s*(?:to|-|–)\s*(\d{1,2})', raw)
+    if range_match:
+        low_val = int(range_match.group(1))
+        high_val = int(range_match.group(2))
+        if high_val <= 8:
+            return raw, "mild"
+        elif 9 <= low_val and high_val <= 15:
+            return raw, "moderate"
+        elif low_val >= 15:
+            return raw, "severe"
+
+    digits = re.findall(r'\d+', raw)
+    if digits:
+        val = int(digits[0])
+        if 0 <= val <= 8:
+            return raw, "mild"
+        elif 9 <= val <= 15:
+            return raw, "moderate"
+        elif val > 15:
+            return raw, "severe"
+
+    return raw, None
 
 
 def extract_clinical_profile(
@@ -203,28 +183,38 @@ def extract_clinical_profile(
         elif any(w in lower for w in ["child", "children", "pediatric", "below 15", "under 15", "bal"]):
             profile.is_adult = False
 
-    # 2. Extract HRCT Score and SpO2
-    hrct_match = re.search(r'hrct\s*(?:score)?\s*(?:of)?\s*([0-9\-\>\<\s]+|greater than \d+|less than \d+)', lower)
-    if hrct_match:
-        profile.hrct_score_raw = hrct_match.group(1).strip()
+    # 2. Extract HRCT Score and SpO2 with dynamic biomarker evaluation
+    hrct_raw, hrct_sev = parse_hrct_details(lower)
+    spo2_raw, spo2_sev = parse_spo2_details(lower)
 
-    spo2_match = re.search(r'spo2\s*(?:of)?\s*([><]?\s*\d{1,3}%?|\d{1,3}\s*(?:to|-)\s*\d{1,3}%?|above \d+|below \d+)', lower)
-    if spo2_match:
-        profile.spo2_raw = spo2_match.group(1).strip()
+    profile.hrct_score_raw = hrct_raw
+    profile.spo2_raw = spo2_raw
+    if spo2_raw:
+        digits = re.findall(r'\d+', spo2_raw)
+        if digits:
+            profile.spo2 = int(digits[0])
+    if hrct_raw:
+        digits = re.findall(r'\d+', hrct_raw)
+        if digits:
+            profile.hrct_score = int(digits[0])
 
     # 3. Determine Severity: prioritize objective clinical biomarkers (HRCT, SpO2) first, then qualified terms
-    if any(w in lower for w in ["hrct >15", "hrct > 15", "greater than 15", "spo2 <90", "spo2 below 90", "below 90"]):
-        profile.severity = "severe"
-    elif any(w in lower for w in ["hrct 9-15", "hrct 9–15", "hrct 9 to 15", "9 to 15", "spo2 90-94", "spo2 90 to 94", "90 to 94"]):
-        profile.severity = "moderate"
-    elif any(w in lower for w in ["hrct 0-8", "hrct 0–8", "hrct 0 to 8", "0 to 8", "spo2 >94", "spo2 above 94", "above 94"]):
-        profile.severity = "mild"
-    elif "moderate" in lower and not re.search(r'\b(?:without|no)\s+moderate\b', lower):
-        profile.severity = "moderate"
-    elif "severe" in lower and not re.search(r'\b(?:without|no)\s+severe\b', lower):
-        profile.severity = "severe"
-    elif "mild" in lower and not re.search(r'\b(?:without|no)\s+mild\b', lower):
-        profile.severity = "mild"
+    if hrct_sev and spo2_sev:
+        if hrct_sev != spo2_sev:
+            profile.severity = None  # Intra-query contradiction
+        else:
+            profile.severity = hrct_sev
+    elif hrct_sev:
+        profile.severity = hrct_sev
+    elif spo2_sev:
+        profile.severity = spo2_sev
+    else:
+        if "severe" in lower and not re.search(r'\b(?:without|no)\s+severe\b', lower):
+            profile.severity = "severe"
+        elif "moderate" in lower and not re.search(r'\b(?:without|no)\s+moderate\b', lower):
+            profile.severity = "moderate"
+        elif "mild" in lower and not re.search(r'\b(?:without|no)\s+mild\b', lower):
+            profile.severity = "mild"
 
     # 4. Extract Explicit Comorbidities
     comorbidities = []
@@ -261,66 +251,7 @@ def extract_clinical_profile(
         if sym in lower:
             profile.symptoms.append(sym)
 
-    # 6. Authoritative Table Resolution for Respiratory Viral Infection
-    if profile.disease == "respiratory_viral_infection":
-        if not profile.has_comorbidities:
-            if profile.is_adult is not False:  # Adult or default
-                if profile.severity == "mild":
-                    profile.matched_table_name = "Pranvah Srotas vyadhi (Above 15 Years) - MILD (0 to 8) SpO2 above 94"
-                    profile.matched_page = 17
-                    profile.target_chunk_id = "DOC-FC76496810AB-0035-77484627D9DE"
-                    profile.table_isolation_reason = (
-                        "Patient is an adult (>=15 years) with mild respiratory viral infection (HRCT 0-8, SpO2 >94%) "
-                        "and no comorbidities. Guidelines strictly specify the adult mild table on page 17."
-                    )
-                elif profile.severity == "moderate":
-                    profile.matched_table_name = "Pranvah Srotas vyadhi (Above 15 Years) - MODERATE (9 to 15) SpO2 90 to 94"
-                    profile.matched_page = 17
-                    profile.target_chunk_id = "DOC-FC76496810AB-0035-77484627D9DE"
-                    profile.table_isolation_reason = (
-                        "Patient is an adult (>=15 years) with moderate respiratory viral infection (HRCT 9-15, SpO2 90-94%) "
-                        "and no comorbidities. Guidelines strictly specify the adult moderate table on page 17."
-                    )
-                elif profile.severity == "severe":
-                    profile.matched_table_name = "Pranvah Srotas vyadhi (Above 15 Years) - SEVERE (>15) SpO2 below 90"
-                    profile.matched_page = 17
-                    profile.target_chunk_id = "DOC-FC76496810AB-0036-20ED5DC46A3C"
-                    profile.table_isolation_reason = (
-                        "Patient is an adult (>=15 years) with severe respiratory viral infection (HRCT >15, SpO2 <90%) "
-                        "and no comorbidities. Guidelines strictly specify the adult severe table on page 17."
-                    )
-            else:
-                profile.matched_table_name = "Pranvah Srotas vyadhi (Below 15 Years)"
-                profile.matched_page = 16
-                profile.target_chunk_id = "DOC-FC76496810AB-0033-312CE552D1E5"
-                profile.table_isolation_reason = "Patient is pediatric (<15 years). Guidelines specify page 16."
-        elif "diabetes" in profile.comorbidities and len(profile.comorbidities) == 1:
-            if profile.severity in ("mild", None):
-                profile.matched_table_name = "Udakvah srotas vyadhi (Diabetes Mellitus) - MILD (0 to 8) SpO2 above 94"
-                profile.matched_page = 14
-                profile.target_chunk_id = "DOC-FC76496810AB-0028-4F2CFBD3E05E"
-                profile.table_isolation_reason = (
-                    "Patient has respiratory viral infection with Diabetes Mellitus comorbidity (Udakvah srotas). "
-                    "Guidelines strictly specify the diabetes comorbidity table on page 14."
-                )
-            elif profile.severity == "severe":
-                profile.matched_table_name = "Udakvah srotas vyadhi (Diabetes Mellitus) - SEVERE (>15) SpO2 below 90"
-                profile.matched_page = 14
-                profile.target_chunk_id = "DOC-FC76496810AB-0029-7C936491AE87"
-                profile.table_isolation_reason = (
-                    "Patient has severe respiratory viral infection with Diabetes Mellitus comorbidity. "
-                    "Guidelines strictly specify the severe diabetes comorbidity table on page 14."
-                )
-
     return profile
-
-
-COMORBIDITY_SIGNATURE_MEDICINES = {
-    "diabetes": ["sutendra", "sutendra rasayana", "meha rasayan", "meha rasayana"],
-    "renal": ["heeraka", "heeraka rasayana", "heerak rasayan", "somkalpa"],
-    "cardiac_psychiatric": ["pravi rasayana", "pravi rasayan"],
-    "pediatric": ["bal rasayana", "bal rasayan", "rasvir"]
-}
 
 
 def is_chunk_applicable_for_profile(chunk: Dict[str, Any], profile: ClinicalProfile) -> Tuple[bool, str]:
@@ -330,7 +261,6 @@ def is_chunk_applicable_for_profile(chunk: Dict[str, Any], profile: ClinicalProf
     """
     content = chunk.get("content", "")
     section = chunk.get("section", "")
-    page = chunk.get("page")
     full_text = f"{section} {content}".lower()
 
     if profile.disease == "respiratory_viral_infection":
@@ -338,8 +268,6 @@ def is_chunk_applicable_for_profile(chunk: Dict[str, Any], profile: ClinicalProf
         if profile.is_adult is True:
             if "below 15 years" in full_text and "above 15 years" not in full_text:
                 return False, "Chunk is for pediatric patients (<15 years), but patient is an adult."
-            if any(med in full_text for med in COMORBIDITY_SIGNATURE_MEDICINES["pediatric"]) and "above 15 years" not in full_text:
-                return False, "Chunk contains pediatric formulations, but patient is an adult."
 
         if profile.is_adult is False:
             if "above 15 years" in full_text and "below 15 years" not in full_text:
@@ -364,19 +292,6 @@ def is_chunk_applicable_for_profile(chunk: Dict[str, Any], profile: ClinicalProf
             if "raktavah srotas (liver" in full_text:
                 return False, "Chunk is specific to Liver/Spleen comorbidity, but patient has no hepatic comorbidity."
 
-            # Exclude comorbidity-specific tables that lack the heading in their chunk
-            # Chunk 40: contains Sutendra in mild row (Page 19 - Diabetes table)
-            if any(med in full_text for med in COMORBIDITY_SIGNATURE_MEDICINES["diabetes"]) and "pranvah srotas vyadhi (above 15 years)" not in full_text:
-                return False, "Chunk contains formulations for Diabetes comorbidity (Sutendra), but patient has no diabetes."
-
-            # Chunk 43: contains Heeraka Rasayana in mild row (Page 20 - Renal table)
-            if any(med in full_text for med in COMORBIDITY_SIGNATURE_MEDICINES["renal"]):
-                return False, "Chunk contains formulations for Renal comorbidity (Heeraka Rasayana), but patient has no kidney disease."
-
-            # Chunk 46: contains Pravi Rasayana in mild row (Page 21 - Cardiac/Anxiety table)
-            if any(med in full_text for med in COMORBIDITY_SIGNATURE_MEDICINES["cardiac_psychiatric"]):
-                return False, "Chunk contains formulations for Cardiac/Anxiety comorbidity (Pravi Rasayana), but patient has no cardiac or anxiety disorder."
-
     return True, "Applicable"
 
 
@@ -385,60 +300,23 @@ def prioritize_and_isolate_chunks(
     profile: ClinicalProfile
 ) -> List[Dict[str, Any]]:
     """
-    Filters and re-prioritizes retrieved chunks so that:
-    1. If a specific target chunk (e.g. Page 17 Adult Mild table) is identified, it is ranked #1.
-    2. Chunks from unapplicable comorbidity or age-incompatible tables are filtered out
-       from the evidence context sent to generation.
-    3. If filtering removes all chunks, loads the authoritative target chunk if available,
-       or safely preserves the original chunks.
+    Filters retrieved chunks to eliminate age-mismatched or unapplicable comorbidity chunks.
+    Preserves natural similarity and reranker ordering without forced chunk injection.
     """
     if not retrieved_chunks:
         return []
 
-    # If no specific isolation rule is active, return chunks as-is
-    if not profile.matched_table_name and not profile.table_isolation_reason and not profile.target_chunk_id:
-        return retrieved_chunks
-
     applicable_chunks: List[Dict[str, Any]] = []
-    excluded_chunks: List[Tuple[Dict[str, Any], str]] = []
-
     for c in retrieved_chunks:
-        is_app, reason = is_chunk_applicable_for_profile(c, profile)
+        is_app, _ = is_chunk_applicable_for_profile(c, profile)
         if is_app:
             applicable_chunks.append(c)
-        else:
-            excluded_chunks.append((c, reason))
-
-    # If a specific target chunk is identified for this profile, ensure it is included
-    if profile.target_chunk_id:
-        target_in_app = any(c.get("chunk_id") == profile.target_chunk_id for c in applicable_chunks)
-        if not target_in_app:
-            # Check if target chunk was in retrieved_chunks before filtering
-            tc = next((c for c in retrieved_chunks if c.get("chunk_id") == profile.target_chunk_id), None)
-            if not tc:
-                # Fetch target chunk directly from storage
-                try:
-                    from app.rag.retrieval import get_retrieval_service
-                    tc = get_retrieval_service().get_chunk_by_id(profile.target_chunk_id)
-                except Exception as exc:
-                    logger.error(f"Error fetching target chunk {profile.target_chunk_id}: {exc}")
-            if tc:
-                applicable_chunks.insert(0, dict(tc))
 
     if applicable_chunks:
-        # Re-sort to place exact target chunk at rank 1 if specified
-        if profile.target_chunk_id:
-            target_chunks = [c for c in applicable_chunks if c.get("chunk_id") == profile.target_chunk_id]
-            other_chunks = [c for c in applicable_chunks if c.get("chunk_id") != profile.target_chunk_id]
-            applicable_chunks = target_chunks + other_chunks
-
-        # Reassign 1-based ranks
         for idx, c in enumerate(applicable_chunks, 1):
             c["rank"] = idx
-
         return applicable_chunks
 
-    # Fallback: preserve original if all were filtered
     return retrieved_chunks
 
 
@@ -448,151 +326,46 @@ def sanitize_prescribed_medicines(
     evidence_chunks: List[Dict[str, Any]]
 ) -> List[MedicineItem]:
     """
-    Ensures prescribed medicines:
-    1. Strictly match the patient's severity and guideline table.
-    2. Do NOT mix medicines from diabetes, cardiac, or other comorbidity tables when not applicable.
-    3. Attach each medicine to ONLY its verified source document and page number.
-    4. Strip internal chunk IDs and avoid multi-page bleeding.
+    Dynamic grounding & verbatim containment validator:
+    Verifies that every generated medicine literally exists in the retrieved evidence chunks.
+    Preserves strict 1-to-1 chunk citations. Ungrounded or fabricated medicines are rejected.
     """
-    if not medicines:
+    if not medicines or not evidence_chunks:
         return []
 
-    # Map chunk IDs to their metadata (page, doc_name)
-    chunk_map = {c.get("chunk_id"): c for c in evidence_chunks if c.get("chunk_id")}
+    chunk_map = {c.get("chunk_id") or f"chk-{i}": c for i, c in enumerate(evidence_chunks)}
+    valid_medicines: List[MedicineItem] = []
+    seen_names = set()
 
-    # Determine matched table key for respiratory viral infection
-    matched_table_key = None
-    if profile.disease == "respiratory_viral_infection":
-        if not profile.has_comorbidities:
-            if profile.is_adult is not False:
-                if profile.severity == "mild":
-                    matched_table_key = "adult_mild"
-                elif profile.severity == "moderate":
-                    matched_table_key = "adult_moderate"
-                elif profile.severity == "severe":
-                    matched_table_key = "adult_severe"
-            else:
-                matched_table_key = "pediatric_all"
-        elif "diabetes" in profile.comorbidities and len(profile.comorbidities) == 1:
-            if profile.severity in ("mild", None):
-                matched_table_key = "resp_diabetes_mild"
+    for m in medicines:
+        raw_name = m.medicine or ""
+        clean_name = re.sub(r'^[\*\-\•\u2022\d\.\s]+', '', raw_name).strip()
+        med_lower = clean_name.lower()
+        if not med_lower or med_lower in seen_names:
+            continue
 
-    if matched_table_key and matched_table_key in RESPIRATORY_TABLE_MAP:
-        target_info = RESPIRATORY_TABLE_MAP[matched_table_key]
-        valid_formulation_names = set(target_info["medicines"])
-        target_chunk_id = target_info["chunk_id"]
+        # Check which chunks contain the clean medicine name literally
+        matching_cids = [
+            cid for cid, c in chunk_map.items()
+            if med_lower in c.get("content", "").lower()
+        ]
 
-        sanitized: List[MedicineItem] = []
-        for m in medicines:
-            med_clean = re.sub(r'^[\*\-\•\d\.\s]+', '', m.medicine).strip()
-            # Find closest canonical name in target table
-            matched_canonical = None
-            for vf in valid_formulation_names:
-                if vf.lower() in med_clean.lower() or med_clean.lower() in vf.lower():
-                    matched_canonical = vf
+        if not matching_cids:
+            logger.warning(f"Containment rejection: '{raw_name}' does not appear in retrieved evidence.")
+            continue
+
+        # If dose is specified, prefer chunk that also contains the dose string
+        best_cid = matching_cids[0]
+        if m.dose:
+            dose_clean = m.dose.strip().lower()
+            for cid in matching_cids:
+                if dose_clean in chunk_map[cid].get("content", "").lower():
+                    best_cid = cid
                     break
 
-            if not matched_canonical:
-                logger.info(f"Filtering out non-table formulation '{m.medicine}' for {matched_table_key}.")
-                continue
-
-            # Ensure exact canonical formulation name, Matra, Sahpaan, and Aushadh Kal from table
-            exact_dose = target_info.get("doses", {}).get(matched_canonical, m.dose)
-            exact_sahpaan = target_info.get("sahpaan", {}).get(matched_canonical, m.anupana)
-            exact_timing = target_info.get("timing", {}).get(matched_canonical, m.timing)
-
-            # Frequency based strictly on dose / Kal
-            exact_frequency = m.frequency
-            if exact_dose == "2-2-2":
-                exact_frequency = "Three times a day"
-            elif exact_dose in ("1-0-1", "0-1-1"):
-                exact_frequency = "Twice daily"
-            elif exact_dose in ("1-0-0", "0-0-1"):
-                exact_frequency = "Once daily"
-            elif exact_dose == "1-1-1":
-                exact_frequency = "Three times a day"
-
-            single_chunk_id = target_chunk_id if target_chunk_id in chunk_map else (
-                m.supporting_chunk_ids[0] if m.supporting_chunk_ids else target_chunk_id
-            )
-
-            sanitized_item = MedicineItem(
-                medicine=matched_canonical,
-                dose=exact_dose,
-                dosage_form=m.dosage_form or "Rasayana Formulation",
-                route=m.route or "Oral",
-                frequency=exact_frequency,
-                timing=exact_timing,
-                duration=m.duration,
-                anupana=exact_sahpaan,
-                special_instructions=m.special_instructions,
-                supporting_chunk_ids=[single_chunk_id]
-            )
-            sanitized.append(sanitized_item)
-
-        # Deduplicate while preserving order
-        seen_names = set()
-        deduped: List[MedicineItem] = []
-        for s in sanitized:
-            if s.medicine not in seen_names:
-                seen_names.add(s.medicine)
-                deduped.append(s)
-        sanitized = deduped
-
-        # If any required table medicines were missed by LLM, ensure full guideline protocol
-        existing_names = {s.medicine for s in sanitized}
-        for expected_med in target_info["medicines"]:
-            if expected_med not in existing_names and target_chunk_id in chunk_map:
-                dose = target_info.get("doses", {}).get(expected_med, "1-0-0")
-                if dose == "2-2-2":
-                    freq = "Three times a day"
-                elif dose in ("1-0-1", "0-1-1"):
-                    freq = "Twice daily"
-                elif dose == "1-1-1":
-                    freq = "Three times a day"
-                else:
-                    freq = "Once daily"
-
-                sanitized.append(
-                    MedicineItem(
-                        medicine=expected_med,
-                        dose=dose,
-                        dosage_form="Rasayana Formulation",
-                        route="Oral",
-                        frequency=freq,
-                        timing=target_info.get("timing", {}).get(expected_med),
-                        duration=None,
-                        anupana=target_info.get("sahpaan", {}).get(expected_med),
-                        special_instructions=None,
-                        supporting_chunk_ids=[target_chunk_id]
-                    )
-                )
-
-        return sanitized
-
-    # General case: ensure supporting_chunk_ids contains ONLY chunk(s) that actually mention this medicine
-    pruned_medicines: List[MedicineItem] = []
-    seen_names = set()
-    for m in medicines:
-        m.medicine = re.sub(r'^[\*\-\•\d\.\s]+', '', m.medicine).strip()
-        med_lower = m.medicine.lower().strip()
-        if med_lower in seen_names:
-            continue
         seen_names.add(med_lower)
+        m.medicine = clean_name
+        m.supporting_chunk_ids = [best_cid]
+        valid_medicines.append(m)
 
-        matched_chunk_ids = []
-        for cid in m.supporting_chunk_ids:
-            chunk = chunk_map.get(cid)
-            if chunk and med_lower in chunk.get("content", "").lower():
-                matched_chunk_ids.append(cid)
-
-        # If no chunk matched by string or all were pruned, keep only the first valid chunk
-        if not matched_chunk_ids and m.supporting_chunk_ids:
-            matched_chunk_ids = [m.supporting_chunk_ids[0]]
-        elif not matched_chunk_ids and evidence_chunks:
-            matched_chunk_ids = [evidence_chunks[0]["chunk_id"]]
-
-        m.supporting_chunk_ids = matched_chunk_ids[:1]  # Strict 1-to-1 chunk citation
-        pruned_medicines.append(m)
-
-    return pruned_medicines
+    return valid_medicines

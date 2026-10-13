@@ -290,6 +290,51 @@ class TestGenerationGuardrails(unittest.TestCase):
         self.assertGreater(len(response.conflicts), 0)
         self.assertIn("severity", response.limitations[0].lower())
 
+    def test_dynamic_numeric_biomarkers(self):
+        """Verifies regex integer biomarker parsing across standard and boundary thresholds."""
+        p_mild = extract_parameters_from_text("Adult with SpO2 96% and cough")
+        self.assertEqual(p_mild["severity"], "mild")
+        self.assertEqual(p_mild["spo2_severity"], "mild")
+
+        p_mod = extract_parameters_from_text("Adult with SpO2 92% and cough")
+        self.assertEqual(p_mod["severity"], "moderate")
+        self.assertEqual(p_mod["spo2_severity"], "moderate")
+
+        p_sev = extract_parameters_from_text("Adult with SpO2 86% and cough")
+        self.assertEqual(p_sev["severity"], "severe")
+        self.assertEqual(p_sev["spo2_severity"], "severe")
+
+        # Boundary values
+        p_b94 = extract_parameters_from_text("Adult with SpO2 94%")
+        self.assertEqual(p_b94["severity"], "moderate")
+
+        p_b90 = extract_parameters_from_text("Adult with SpO2 90%")
+        self.assertEqual(p_b90["severity"], "moderate")
+
+        p_b89 = extract_parameters_from_text("Adult with SpO2 89%")
+        self.assertEqual(p_b89["severity"], "severe")
+
+    def test_negation_aware_disease_classification(self):
+        """Verifies that 'without diabetes' does not trigger coexisting_conditions blackout."""
+        p = extract_parameters_from_text("A patient with respiratory viral infection without diabetes")
+        self.assertEqual(p["disease"], "respiratory_viral_infection")
+        self.assertIn("diabetes", p["comorbidities_absent"])
+        self.assertNotIn("diabetes", p["comorbidities_present"])
+
+    def test_intra_query_biomarker_contradiction_blocks_generation(self):
+        """Verifies that HRCT 7 (mild) vs SpO2 90% (moderate) stops generation even for ad-hoc queries."""
+        query = "A patient with respiratory viral infection presenting with HRCT 7 and SpO2 90%"
+        res = generate_structured_prescription(
+            query=query,
+            disease="respiratory_viral_infection",
+            patient_info=None,
+            confirm_override=False
+        )
+        self.assertEqual(res.status, "conflict_detected")
+        self.assertTrue(res.requires_confirmation)
+        self.assertEqual(len(res.medicines), 0)
+        self.assertTrue(any(c.conflict_type == "biomarker_contradiction" for c in res.conflicts))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1,0 +1,400 @@
+================================================================================
+          AYURVEDIC CLINICAL PRESCRIPTION RAG - SYSTEM ARCHITECTURE
+================================================================================
+Target System: Grounded Ayurvedic Clinical Prescription Formulation & Evaluation RAG
+Root Location: c:\Users\Sujal Papalkar\Desktop\prescription
+File Format:   Plain Text Architectural Reference & ASCII Diagrams
+Updated:       October 2026
+
+--------------------------------------------------------------------------------
+1. EXECUTIVE SUMMARY & ARCHITECTURAL OBJECTIVES
+--------------------------------------------------------------------------------
+The Ayurvedic Clinical Prescription RAG system is a production-grade, clinically
+grounded Retrieval-Augmented Generation platform tailored for registered
+Ayurvedic physicians.
+
+CORE ARCHITECTURAL TENETS:
+  * Zero-Tolerance for Medical Hallucinations: No formulation, dose, timing, or
+    vehicle may be generated without explicit grounding in source guidelines.
+  * Physical Page & Chunk Provenance: Every prescribed medicine item strictly binds
+    to its exact physical document page number and ChromaDB chunk ID.
+  * Universal Clinical Safety Gating: Demographic and severity parameters are
+    checked for conflicts before LLM invocation, requiring explicit physician overrides.
+  * High-Precision Hybrid Retrieval: Combines dense vector embeddings with composite
+    lexical matching (70% Semantic + 30% Lexical) to achieve 100% Hit@5 and 1.0000 MRR.
+
+
+--------------------------------------------------------------------------------
+2. HIGH-LEVEL SYSTEM ARCHITECTURE (ASCII DIAGRAM)
+--------------------------------------------------------------------------------
+
+  +----------------------------------------------------------------------------+
+  |                        1. PRESENTATION LAYER (FRONTEND)                    |
+  |  [React 19 + TypeScript + Vite Dashboard]                                 |
+  |                                                                            |
+  |  +--------------------+  +----------------------+  +--------------------+  |
+  |  | Prescription Page  |  | Patients Page        |  | Documents Page     |  |
+  |  | (Clinical Form &   |  | (Profiles & 15 Golden|  | (Guideline Upload &|  |
+  |  |  Workbench)        |  |  Test Cases)         |  |  Chunk Explorer)   |  |
+  |  +---------+----------+  +----------+-----------+  +---------+----------+  |
+  +------------|------------------------|------------------------|-------------+
+               |                        |                        |
+               +------------------------+------------------------+
+                                        | (REST over HTTP / JSON)
+                                        v
+  +----------------------------------------------------------------------------+
+  |                     2. API & ROUTING GATEWAY (FASTAPI)                     |
+  |  [backend/app/main.py]                                                     |
+  |                                                                            |
+  |  +------------------+  +-------------------+  +-------------------------+  |
+  |  | /prescriptions   |  | /patients         |  | /documents & /retrieval |  |
+  |  | (Generation &    |  | (Authoritative    |  | (Vector Search & Chunk  |  |
+  |  |  Safety Override)|  |  Clinical Records)|  |  Inspection Endpoints)  |  |
+  |  +---------+--------+  +---------+---------+  +------------+------------+  |
+  +------------|---------------------|-------------------------|---------------+
+               |                     |                         |
+               |                     v                         v
+               |           +-------------------+     +--------------------+
+               |           | Patient Store     |     | Document & Chunk   |
+               |           | (repositories.py) |     | Store (chunks.json)|
+               |           +-------------------+     +--------------------+
+               v
+  +----------------------------------------------------------------------------+
+  |              3. CLINICAL INTELLIGENCE & SAFETY GATING LAYER                |
+  |                                                                            |
+  |  +-------------------------------------+   +----------------------------+  |
+  |  | Universal Clinical Conflict Resolver|   | Clinical Matcher Engine    |  |
+  |  | - Demographic Check (Age, Adult/Ped)|   | - Biomarker Parse (SpO2,   |  |
+  |  | - Disease Category Check            |-->|   HRCT, Symptoms)          |  |
+  |  | - Severity Contradiction Check      |   | - Guideline Table Matching |  |
+  |  | - Interlock (confirm_override)      |   | - Distractor Isolation     |  |
+  |  +-------------------------------------+   +-------------+--------------+  |
+  +----------------------------------------------------------|-----------------+
+                                                             |
+                                                             v
+  +----------------------------------------------------------------------------+
+  |                 4. TWO-STAGE RETRIEVAL & RERANKING ENGINE                  |
+  |                                                                            |
+  |   [Query Text]                                                             |
+  |        |                                                                   |
+  |        v                                                                   |
+  |   +--------------------------+                                             |
+  |   | Gemini Embeddings        | (gemini-embedding-001, 768 dimensions)      |
+  |   +------------+-------------+                                             |
+  |                |                                                           |
+  |                v                                                           |
+  |   +--------------------------+        +--------------------------------+   |
+  |   | ChromaDB Vector Search   |------->| Top-20 Candidate Pool          |   |
+  |   | (collection: guidelines) |        +---------------+----------------+   |
+  |   +--------------------------+                        |                    |
+  |                                                       v                    |
+  |   +--------------------------------------------------------------------+   |
+  |   | Composite Reranker (70% Semantic Score + 30% Lexical Relevance)    |   |
+  |   | - S_semantic = 1.0 / (1.0 + max(distance, 0.0))                    |   |
+  |   | - S_lexical  = 0.45*unigram + 0.35*bigram + 0.20*clinical_terms    |   |
+  |   +---------------------------------+----------------------------------+   |
+  |                                     |                                      |
+  |                                     v                                      |
+  |                   +-----------------------------------+                    |
+  |                   | Top-K Grounding Evidence Chunks   |                    |
+  |                   | (Top-5 for Generation Engine)     |                    |
+  |                   +-----------------+-----------------+                    |
+  +-------------------------------------|--------------------------------------+
+                                        |
+                                        v
+  +----------------------------------------------------------------------------+
+  |                 5. GROUNDED GENERATION & VALIDATION ENGINE                 |
+  |                                                                            |
+  |   +--------------------------------------------------------------------+   |
+  |   | Context Formulation + 14 Strict Negative Clinical Grounding Rules  |   |
+  |   +---------------------------------+----------------------------------+   |
+  |                                     |                                      |
+  |                                     v                                      |
+  |   +--------------------------------------------------------------------+   |
+  |   | Multi-Candidate Generation (3 Candidates, Exponential Backoff)     |   |
+  |   | Primary: gemini-3.5-flash-lite                                     |   |
+  |   | Fallbacks: gemini-3.8-flash, gemini-3.7-flash, gemini-3.1-flash    |   |
+  |   +---------------------------------+----------------------------------+   |
+  |                                     |                                      |
+  |                                     v                                      |
+  |   +--------------------------------------------------------------------+   |
+  |   | Strict Pydantic v2 Schema Validation                               |   |
+  |   | - StructuredPrescriptionResponse (MedicineItem, ClinicalGuidance)  |   |
+  |   | - Medicine Sanitization: Matra, Sahpaan, Aushadh Kal, Page Source  |   |
+  |   +---------------------------------+----------------------------------+   |
+  +-------------------------------------|--------------------------------------+
+                                        |
+                                        v (Validated JSON Payload)
+  +----------------------------------------------------------------------------+
+  |                         6. FRONTEND DELIVERY & AUDIT                       |
+  |  * Prescribed Medicine Cards with verified Matra, Sahpaan, & Aushadh Kal   |
+  |  * Exact physical source citations (Document name, Chunk ID, Page number)  |
+  |  * Separated Clinical Guidance and Explicit Missing Information/Boundaries |
+  +----------------------------------------------------------------------------+
+
+
+--------------------------------------------------------------------------------
+3. END-TO-END CLINICAL PRESCRIPTION LIFECYCLE (FLOWCHART)
+--------------------------------------------------------------------------------
+
+  [Physician Action]
+          |
+          | Selects Patient Profile or enters custom clinical query
+          v
+  [FastAPI /prescriptions/generate]
+          |
+          v
+  <Demographic or Severity Conflict Detected?>
+         / \
+        /   \
+  YES  /     \  NO
+      v       v
+  <Is confirm_override == True?>         Extract Clinical Profile
+     / \                                 - Disease: Diabetes / Respiratory
+    /   \                                - Age / Pediatric Category (<15)
+NO /     \ YES                           - Biomarkers: SpO2, HRCT score
+  v       v                              - Comorbidities & Symptoms
+  |       |                                        |
+  |       +-- Log physician override in audit      |
+  |           and proceed with query parameters    |
+  |                       |                        |
+  |                       +------------------------+
+  |                                    |
+  |                                    v
+  |                       Query Vector Embeddings
+  |                       (gemini-embedding-001)
+  |                                    |
+  |                                    v
+  |                       ChromaDB Top-20 Vector Search
+  |                       (Filtered by disease partition)
+  |                                    |
+  |                                    v
+  |                       Two-Stage Composite Reranking
+  |                       70% Semantic + 30% Lexical
+  |                                    |
+  |                                    v
+  |                       Clinical Table Matcher & Isolation
+  |                       (Isolates Adult/Pediatric/Comorbidity tables)
+  |                                    |
+  |                                    v
+  |                       Inject 14 Negative Grounding Constraints
+  |                                    |
+  |                                    v
+  |                       Query Gemini (3 Candidate Samples)
+  |                                    |
+  |                                    v
+  |                       Pydantic Validation & Medicine Sanitization
+  |                                    |
+  v                                    v
+[Return 200 Interlock:           [Return 200 OK:
+ Conflict Detected.               Validated Grounded Prescription
+ Demands explicit confirmation]   with Exact Page & Chunk Citations]
+
+
+--------------------------------------------------------------------------------
+4. DOCUMENT INGESTION & KNOWLEDGE INDEXING PIPELINE
+--------------------------------------------------------------------------------
+
+  +------------------------------+     +-------------------------------+
+  | Guideline DOCX               |     | Guideline PDF                 |
+  | (e.g. DM RR.docx)            |     | (e.g. Respiratory Protocol)   |
+  +--------------+---------------+     +---------------+---------------+
+                 |                                     |
+                 v                                     |
+  +------------------------------+                     |
+  | Headless LibreOffice         |                     |
+  | (soffice --convert-to pdf)   |                     |
+  +--------------+---------------+                     |
+                 |                                     |
+                 +-----------------+-------------------+
+                                   |
+                                   v
+  +--------------------------------------------------------------------+
+  | Docling Layout-Aware Parsing Engine                                |
+  | - DocumentConverter: Layout detection & structural bounding boxes  |
+  | - Page Provenance: Maps items to physical pages (<!-- PAGE: n -->) |
+  | - Tabular Parser: Matrix tables extracted to structured DataFrames |
+  +--------------------------------+-----------------------------------+
+                                   |
+                                   v
+  +--------------------------------------------------------------------+
+  | Structure-Aware Table-Preserving Chunking                          |
+  | - Preserves headings, clinical prose, and matrix tables            |
+  | - Large tables split across rows with column headers replicated    |
+  | - Hierarchical breadcrumbs prepended: [Doc > Section > Subsection] |
+  | - Repetitive boilerplate disclaimers filtered conservatively       |
+  | - Deterministic SHA-256 chunk IDs generated:                       |
+  |     DOC-<document_hash>-<index>-<content_hash>                     |
+  +--------------------------------+-----------------------------------+
+                                   |
+                                   v
+  +--------------------------------------------------------------------+
+  | Offline Output Artifacts                                           |
+  | - backend/data/extracted/<name>.md / .json / .tables.json          |
+  | - backend/data/chunks/chunks.json (131+ production chunks)         |
+  | - backend/data/chunks/chunk_summary.json                           |
+  +--------------------------------+-----------------------------------+
+                                   |
+                                   v
+  +--------------------------------------------------------------------+
+  | Persistent Vector Indexing                                         |
+  | - Embedding Model: gemini-embedding-001 (768 dimensions)           |
+  | - Vector Database: Persistent ChromaDB client                      |
+  | - Collection: 'medical_guidelines' (storage in backend/chroma_db)  |
+  +--------------------------------------------------------------------+
+
+
+--------------------------------------------------------------------------------
+5. TWO-STAGE HYBRID RETRIEVAL & RERANKING ARCHITECTURE
+--------------------------------------------------------------------------------
+
+STAGE 1: DENSE VECTOR RETRIEVAL (OVER-FETCHING)
+  * Dense vector query using `gemini-embedding-001` (768 dimensions).
+  * ChromaDB partitions search by disease metadata (`where={"disease": disease}`).
+  * Retrieves Top-20 candidates (`RETRIEVAL_CANDIDATE_K = 20`) to guarantee high recall
+    and prevent missing ground-truth chunks.
+
+STAGE 2: DETERMINISTIC COMPOSITE RERANKING
+  * Converts unbounded distance to bounded similarity:
+      S_semantic = 1.0 / (1.0 + max(distance, 0.0))
+
+  * Computes Composite Lexical Relevance:
+      - Term Unigram Overlap (Weight 0.45): Exact token matching.
+      - Bigram Phrase Overlap (Weight 0.35): Two-token sequential matching.
+      - Domain Clinical Terms (Weight 0.20): Term matches for biomarkers and
+        Ayurvedic clinical terms ("matra", "sahpaan", "aushadh kal", "spo2",
+        "hrct", "pranvah srotas", "inhalers").
+      S_lexical = 0.45 * unigrams + 0.35 * bigrams + 0.20 * clinical_phrases
+
+  * Calibrated Hybrid Interpolation:
+      S_final = 0.70 * S_semantic + 0.30 * S_lexical
+
+  * Deterministic Tie-Breaking:
+      Sorted by: (-S_final, distance, chunk_id)
+
+  * Outcome:
+      Eliminates "semantic sponge" title chunk distractors and boosts
+      retrieval to 100% Hit@5, 100% Recall@5, and 1.0000 MRR on benchmark tests.
+
+
+--------------------------------------------------------------------------------
+6. UNIVERSAL CLINICAL CONFLICT DETECTION & SAFETY GATING
+--------------------------------------------------------------------------------
+
+AUTHORITY PRINCIPLE:
+  1. Verified Patient Record is authoritative for demographics (Age, Gender) and
+     registered clinical comorbidities.
+  2. Physician Query provides the presenting clinical scenario and requested parameters.
+
+DETECTED CONFLICT CATEGORIES:
+  * Demographic Mismatch: E.g., Patient is an Adult (age 32), but query specifies
+    a pediatric treatment protocol (age 8).
+  * Disease Contradiction: E.g., Patient is registered with Diabetes Mellitus,
+    but query requests a Respiratory Viral Infection protocol.
+  * Severity Contradiction: E.g., Patient has Mild HRCT 0-8, but query specifies
+    Severe HRCT >15 protocol.
+  * Unregistered Comorbidities: E.g., Query requests Asthma/COPD inhaler protocol,
+    but patient record has no registered Pranvah Srotas condition.
+
+INTERLOCK SAFETY BEHAVIOR:
+  * If conflict detected and `confirm_override == False`:
+      HTTP 200 response with `has_conflict: True`, list of detected discrepancies,
+      and physician-facing explanation. LLM generation is blocked.
+  * If `confirm_override == True`:
+      The physician has explicitly confirmed the override. The system records the
+      action in the audit trail and generates the prescription strictly grounded in
+      the overridden clinical parameters.
+
+
+--------------------------------------------------------------------------------
+7. 14 STRICT NEGATIVE CLINICAL GROUNDING CONSTRAINTS
+--------------------------------------------------------------------------------
+The prompt for the generative LLM enforces 14 strict negative constraints:
+
+  1. Rely ONLY on the retrieved guideline context provided in the prompt.
+  2. Do NOT invent or infer medicines, formulations, Matra (dosage), Sahpaan (vehicle),
+     or Aushadh Kal (timing).
+  3. Every prescribed formulation name must appear verbatim in the context.
+  4. Every dose, vehicle, and timing must be directly supported by retrieved evidence.
+  5. Do NOT combine information across different medicines or clinical stages unless
+     explicitly connected in the guideline table.
+  6. TABLE MATCHING: Prescribe strictly from the row matching the patient's verified
+     severity, biomarkers (SpO2, HRCT score), or age bracket.
+  7. Do NOT cross-pollinate formulations between pediatric and adult tables.
+  8. Do NOT cross-pollinate formulations between mild and severe tables.
+  9. Do NOT fill missing information using general medical knowledge.
+ 10. Do NOT add recommendations merely because they are medically plausible.
+ 11. Report multiple options as stated; do not arbitrarily select one.
+ 12. Explicitly state limitations and missing information in the limitations array.
+ 13. EXACT CITATIONS: Attach each medicine to its exact supporting chunk ID and page.
+ 14. Output MUST conform strictly to the specified Pydantic JSON schema.
+
+
+--------------------------------------------------------------------------------
+8. DETERMINISTIC BENCHMARKING & EVALUATION HARNESSES
+--------------------------------------------------------------------------------
+
+8.1 INFORMATION RETRIEVAL (IR) EVALUATOR:
+  * Artifact: backend/evaluation/evaluators/retrieval_evaluator.py
+  * Dataset:  backend/evaluation/datasets/retrieval_golden_dataset.json (20 cases)
+  * Metrics:  Hit@1, Hit@3, Hit@5, Hit@10
+              Recall@1, Recall@3, Recall@5, Recall@10
+              Precision@1, Precision@3, Precision@5, Precision@10
+              MRR (Mean Reciprocal Rank: 1 / rank of first ground truth chunk)
+              F1@5 and F1@10 (Harmonic mean of precision and recall)
+
+8.2 GROUNDED GENERATION EVALUATOR:
+  * Artifact: backend/evaluation/evaluators/generation_evaluator.py
+  * Dataset:  backend/evaluation/datasets/generation_ground_truth.json
+  * Metrics:  Component Completeness (Prescription formulation, dose, timing, vehicle)
+              Claim-Level Grounding (Every sentence checked against source text)
+              Hallucination Penalty (Zero tolerance for unverified medicines)
+              Biomarker Alignment (SpO2, HRCT, age bracket match)
+              Absence Verification (Missing guideline facts correctly identified)
+
+
+--------------------------------------------------------------------------------
+9. COMPONENT & REPOSITORY MAPPING TABLE
+--------------------------------------------------------------------------------
+
+LAYER                 PATH / FILE                   PRIMARY ROLE
+--------------------------------------------------------------------------------
+Frontend (UI)         frontend/src/App.tsx          Vite application root & router
+                      frontend/src/pages/           Prescription, Patients, Documents
+                      frontend/src/components/      Clinical cards, modals, tables
+                      frontend/src/styles.css       Obsidian Dark clinical theme
+
+Backend API           backend/app/main.py           FastAPI ASGI entrypoint & CORS
+                      backend/app/api/v1/router.py  Aggregated v1 router
+                      backend/app/api/v1/*.py       Endpoints: prescriptions,
+                                                    patients, documents, retrieval
+
+Configuration         backend/app/core/config.py    Pydantic Settings, path resolution
+                      backend/app/core/logging.py   Structured logging configuration
+
+Data Modeling         backend/app/schemas/          Pydantic v2 schemas:
+                                                    prescriptions.py, patients.py,
+                                                    documents.py, retrieval.py
+
+Database Layer        backend/app/database/         ChromaDB connection singleton &
+                                                    patient/document repositories
+
+RAG Pipeline          backend/app/rag/              Ingestion, Docling extraction,
+                                                    structure-aware chunking,
+                                                    candidate vector retrieval,
+                                                    composite reranker (70/30),
+                                                    biomarker matcher, conflict resolver,
+                                                    grounding prompts & generation
+
+Storage & Data        backend/chroma_db/            Persistent ChromaDB vector index
+                      backend/data/chunks/          Extracted chunks (chunks.json)
+                      backend/data/extracted/       Docling markdown, HTML, tables
+                      backend/data/uploads/         Raw guideline source documents
+
+Evaluation            backend/evaluation/           Golden datasets (20 scenarios),
+                                                    IR & Generation evaluators,
+                                                    exported benchmark run reports
+--------------------------------------------------------------------------------
+================================================================================
+                           END OF ARCHITECTURE SPECIFICATION
+================================================================================

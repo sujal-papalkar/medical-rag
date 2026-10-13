@@ -1,4 +1,5 @@
 import chromadb
+from pathlib import Path
 from dotenv import load_dotenv
 from google import genai
 import os
@@ -19,7 +20,8 @@ QUERY = (
 # -----------------------------
 # CLIENTS
 # -----------------------------
-chroma = chromadb.PersistentClient(path="chroma_db")
+db_path = "backend/chroma_db" if Path("backend/chroma_db").exists() else "chroma_db"
+chroma = chromadb.PersistentClient(path=db_path)
 collection = chroma.get_collection("medical_guidelines")
 
 gemini = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))

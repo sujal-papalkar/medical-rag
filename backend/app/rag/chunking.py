@@ -102,6 +102,8 @@ SUB_SUBSECTION_PATTERNS = [
     re.compile(r"^\s*Raktavah Srotas\b", re.I),
     re.compile(r"^\s*Basic Guidelines to reduce disease severity\b", re.I),
     re.compile(r"^\s*i\.e\., HELPS TO PREVENT THE ONSET\b", re.I),
+    re.compile(r"^\s*(?:Annavah|Mootravah|Manovah|Udakvah|Rasavah|Rasvah|Pranvah)\s+Srotas\b", re.I),
+    re.compile(r"^\s*Patients with\s+(?:Pranvah|Rasavah|Udakvah|Mootravah|Annavah|Manovah|Raktavah|Hrudrog|Prameh)\b", re.I),
 ]
 
 DOC_TITLE_PATTERNS = [
@@ -152,7 +154,12 @@ def clean_heading(text: str) -> str:
     s = re.sub(r"\s*<!--.*?-->\s*", "", s).strip()
     return normalize_text(s)
 
-def format_section_context(section: Optional[str], subsection: Optional[str], sub_subsection: Optional[str] = None) -> str:
+def format_section_context(
+    section: Optional[str],
+    subsection: Optional[str],
+    sub_subsection: Optional[str] = None,
+    comorbidity: Optional[str] = None
+) -> str:
     lines = []
     if section:
         lines.append(f"Section: {section}")
@@ -160,6 +167,8 @@ def format_section_context(section: Optional[str], subsection: Optional[str], su
         lines.append(f"Subsection: {subsection}")
     if sub_subsection and sub_subsection not in (section, subsection):
         lines.append(f"Sub-subsection: {sub_subsection}")
+    if comorbidity and comorbidity not in (section, subsection, sub_subsection):
+        lines.append(f"Comorbidity: {comorbidity}")
     if lines:
         return "\n".join(lines) + "\n\n"
     return ""
@@ -304,7 +313,8 @@ def split_blocks(source: str) -> List[Dict[str, Any]]:
             })
             continue
 
-        if re.match(r"^\s*#{1,6}\s+", line):
+        is_srotas_title = bool(re.match(r"^\s*(?:(?:Pranvah|Rasavah|Rasvah|Udakvah|Mootravah|Annavah|Manovah|Raktavah)\s+Srotas\b|Patients with\s+(?:Pranvah|Rasavah|Udakvah|Mootravah|Annavah|Manovah|Raktavah|Hrudrog|Prameh)\b)", line, re.I))
+        if re.match(r"^\s*#{1,6}\s+", line) or is_srotas_title:
             blocks.append({
                 "type": "title",
                 "text": clean_page_markers(line),
@@ -342,7 +352,7 @@ def split_blocks(source: str) -> List[Dict[str, Any]]:
                 break
             if extract_page(nxt) is not None and clean_page_markers(nxt) == "":
                 break
-            if re.match(r"^\s*#{1,6}\s+", nxt):
+            if re.match(r"^\s*#{1,6}\s+", nxt) or re.match(r"^\s*(?:(?:Pranvah|Rasavah|Rasvah|Udakvah|Mootravah|Annavah|Manovah|Raktavah)\s+Srotas\b|Patients with\s+(?:Pranvah|Rasavah|Udakvah|Mootravah|Annavah|Manovah|Raktavah|Hrudrog|Prameh)\b)", nxt, re.I):
                 break
             if (
                 i + 1 < len(lines)
@@ -506,96 +516,118 @@ def parse_table_row(row: str) -> List[str]:
 def render_table_row(cells: List[str]) -> str:
     return "| " + " | ".join(cells) + " |"
 
-def split_table_block(table_text: str, target: int = TARGET_CHARS) -> List[str]:
-    """
-    Split Markdown tables by rows. If an individual row is too large to fit
-    with the repeated header, split the row into bounded continuation chunks
-    while retaining column labels/context.
+def is_group_header_row(row: str) -> Tuple[bool, Optional[str]]:
+    cells = [c.strip() for c in parse_table_row(row) if c.strip()]
+    if not cells:
+        return False, None
+    first = cells[0]
+    if len(cells) >= 2 and all(c.lower() == first.lower() for c in cells):
+        return True, first
+    if re.search(r'(?:srotas\s+vyadhi|raktavah\s+srotas|heart diseases|diabetes|renal failure|ibs|liver|psychiatric|people with|patients with)', first, re.I):
+        if len(cells) == 1 or all(c.lower() == first.lower() for c in cells) or (len(cells) > 1 and not any(re.search(r'\d+-\d+-\d+', c) for c in cells)):
+            return True, first
+    return False, None
 
-    Every returned string is guaranteed to be <= target.
+
+def get_row_severity(row: str, prev_severity: Optional[str] = None) -> Optional[str]:
+    cells = parse_table_row(row)
+    c0 = cells[0].lower() if cells else ""
+    if "mild" in c0:
+        return "mild"
+    elif "moderate" in c0:
+        return "moderate"
+    elif "severe" in c0:
+        return "severe"
+    elif not c0 and prev_severity:
+        return prev_severity
+    return None
+
+
+def split_table_block(table_text: str, target: int = TARGET_CHARS, comorbidity: Optional[str] = None) -> Tuple[List[str], Optional[str]]:
+    """
+    Split Markdown tables by rows, preserving severity blocks as atomic units.
+    Splits at row boundaries only, never dividing an individual table row in half.
+    Returns (chunks, detected_comorbidity).
     """
     lines = [x.strip() for x in table_text.splitlines() if x.strip()]
     if len(lines) < 2:
-        return hard_split(normalize_text(table_text), target)
+        return hard_split(normalize_text(table_text), target), comorbidity
 
-    header = lines[0]
-    separator = lines[1]
-    rows = lines[2:]
+    header_cells = parse_table_row(lines[0])
+    header = render_table_row(header_cells)
+    separator = "| " + " | ".join(["---"] * len(header_cells)) + " |"
+    raw_rows = lines[2:]
 
-    # If no actual rows, keep the table header.
-    if not rows:
-        return hard_split("\n".join(lines), target)
+    if not raw_rows:
+        return hard_split("\n".join(lines), target), comorbidity
 
-    header_len = len(header) + len(separator) + 2
+    detected_comorbidity = comorbidity
+    data_rows = []
+    for r in raw_rows:
+        is_hdr, comorb = is_group_header_row(r)
+        if is_hdr and not detected_comorbidity:
+            detected_comorbidity = comorb
+            continue
+        data_rows.append(render_table_row(parse_table_row(r)))
+
+    # Group into severity blocks
+    blocks: List[Tuple[Optional[str], List[str]]] = []
+    current_sev = None
+    current_block_rows = []
+
+    for r in data_rows:
+        sev = get_row_severity(r, current_sev)
+        if sev != current_sev and current_block_rows:
+            blocks.append((current_sev, current_block_rows))
+            current_block_rows = [r]
+            current_sev = sev
+        else:
+            current_block_rows.append(r)
+            if sev:
+                current_sev = sev
+    if current_block_rows:
+        blocks.append((current_sev, current_block_rows))
+
+    header_block = header + "\n" + separator
+    header_len = len(header_block)
+
     chunks: List[str] = []
-    current = [header, separator]
-    current_len = header_len
+    curr_rows: List[str] = []
+    curr_len = header_len
 
     def flush() -> None:
-        nonlocal current, current_len
-        if len(current) > 2:
-            content = "\n".join(current)
-            if len(content) <= target:
-                chunks.append(content)
-            else:
-                # Safety fallback; should only happen for pathological headers.
-                chunks.extend(hard_split(content, target))
-        current = [header, separator]
-        current_len = header_len
+        nonlocal curr_rows, curr_len
+        if curr_rows:
+            content = header_block + "\n" + "\n".join(curr_rows)
+            chunks.append(content)
+        curr_rows = []
+        curr_len = header_len
 
-    for row in rows:
-        row = normalize_text(row)
-        row_len = len(row) + 1
+    for sev, rows in blocks:
+        block_text = "\n".join(rows)
+        block_len = len(block_text) + 1
 
-        if row_len + header_len <= target:
-            if current_len + row_len <= target:
-                current.append(row)
-                current_len += row_len
-            else:
-                flush()
-                current.append(row)
-                current_len += row_len
-            continue
+        if curr_rows and (curr_len + block_len > target):
+            flush()
 
-        # A single row is too large to fit beside the repeated header.
-        # Convert it to bounded row-continuation chunks. Each chunk retains
-        # the header so retrieval still sees the table's column semantics.
-        flush()
-
-        cells = parse_table_row(row)
-        prefix = header + "\n" + separator + "\n"
-        available = target - len(prefix) - 1
-
-        if available < 80:
-            # Pathological huge header: fall back to hard bounded text.
-            chunks.extend(hard_split(row, target))
-            continue
-
-        # Split the row's textual representation without ever exceeding the
-        # available space. Keep cell labels in the continuation when possible.
-        rendered = render_table_row(cells)
-        parts = hard_split(rendered, available)
-
-        for part_no, part in enumerate(parts, start=1):
-            continuation = (
-                prefix
-                + part
-                + (f"\n<!-- table-row-continuation:{part_no}/{len(parts)} -->"
-                   if len(parts) > 1 else "")
-            )
-            # The continuation marker itself can exceed the budget, so if it
-            # does, omit the marker. The content limit is the hard invariant.
-            if len(continuation) > target:
-                continuation = prefix + part
-            if len(continuation) > target:
-                # Final absolute safety guard.
-                continuation = hard_split(continuation, target)[0]
-            chunks.append(continuation)
+        if header_len + block_len <= target:
+            curr_rows.extend(rows)
+            curr_len += block_len
+        else:
+            flush()
+            for r in rows:
+                r_len = len(r) + 1
+                if curr_len + r_len > target and curr_rows:
+                    flush()
+                curr_rows.append(r)
+                curr_len += r_len
+            flush()
 
     flush()
-    return [c for c in chunks if normalize_text(c)]
+    return [c for c in chunks if normalize_text(c)], detected_comorbidity
 
-def make_chunks_from_blocks(blocks: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+
+def make_chunks_from_blocks(blocks: List[Dict[str, Any]], doc_id: str = "DOC") -> List[Dict[str, Any]]:
     """
     Track full heading hierarchy, associate headings with following tables/content,
     filter disclaimer boilerplate, coalesce adjacent prose, and split tables/prose
@@ -665,8 +697,6 @@ def make_chunks_from_blocks(blocks: List[Dict[str, Any]]) -> List[Dict[str, Any]
                     current_subsection = h_clean
                     current_sub_sub = None
 
-            # Preserved as contextual hierarchy for following content/table chunk;
-            # do not create a standalone title chunk.
             i += 1
             continue
 
@@ -712,6 +742,8 @@ def make_chunks_from_blocks(blocks: List[Dict[str, Any]]) -> List[Dict[str, Any]
 
     # Split tables and prose to ensure <= TARGET_CHARS with prepended hierarchical context.
     prepared_chunks: List[Dict[str, Any]] = []
+    table_counter = 0
+
     for item in coalesced:
         sec = item["section"]
         subsec = item["subsection"]
@@ -720,51 +752,70 @@ def make_chunks_from_blocks(blocks: List[Dict[str, Any]]) -> List[Dict[str, Any]
         raw_text = item["text"]
         page = item["page"]
 
-        context_header = format_section_context(sec, subsec, subsub)
-        header_len = len(context_header)
-        available_budget = max(400, TARGET_CHARS - header_len - 2)
-
         if ctype == "table":
-            pieces = split_table_block(raw_text, target=available_budget)
-        else:
-            pieces = split_long_text(raw_text, limit=available_budget)
+            table_counter += 1
+            table_id = f"{doc_id}-p{page or 1}-t{table_counter:02d}"
+            # Budget accommodates table content alongside complete breadcrumb header
+            pieces, detected_comorb = split_table_block(raw_text, target=TARGET_CHARS - 350, comorbidity=subsub)
+            effective_comorbidity = detected_comorb or subsub
+            context_header = format_section_context(sec, subsec, subsub, effective_comorbidity)
 
-        for piece in pieces:
-            piece = piece.strip()
-            if not piece:
-                continue
-
-            full_content = (context_header + piece).strip()
-            if len(full_content) > TARGET_CHARS:
-                sub_pieces = hard_split(full_content, TARGET_CHARS)
-            else:
-                sub_pieces = [full_content]
-
-            for sp in sub_pieces:
-                sp = sp.strip()
-                if not sp:
+            for part_idx, piece in enumerate(pieces, start=1):
+                piece = piece.strip()
+                if not piece:
                     continue
+
+                full_content = (context_header + piece).strip()
                 prepared_chunks.append({
                     "type": ctype,
-                    "text": sp,
+                    "text": full_content,
                     "page": page,
-                    "section": subsec or sec or "",
-                    "section_path": [p for p in (sec, subsec, subsub) if p],
+                    "section": effective_comorbidity or subsec or sec or "",
+                    "section_path": [p for p in (sec, subsec, subsub, effective_comorbidity) if p],
+                    "table_id": table_id,
+                    "table_part": part_idx,
+                    "table_total_parts": len(pieces),
+                    "is_continuation": part_idx > 1,
+                    "comorbidity": effective_comorbidity,
                 })
+        else:
+            context_header = format_section_context(sec, subsec, subsub)
+            header_len = len(context_header)
+            available_budget = max(400, TARGET_CHARS - header_len - 2)
+            pieces = split_long_text(raw_text, limit=available_budget)
+
+            for piece in pieces:
+                piece = piece.strip()
+                if not piece:
+                    continue
+
+                full_content = (context_header + piece).strip()
+                if len(full_content) > TARGET_CHARS:
+                    sub_pieces = hard_split(full_content, TARGET_CHARS)
+                else:
+                    sub_pieces = [full_content]
+
+                for sp in sub_pieces:
+                    sp = sp.strip()
+                    if not sp:
+                        continue
+                    prepared_chunks.append({
+                        "type": ctype,
+                        "text": sp,
+                        "page": page,
+                        "section": subsec or sec or "",
+                        "section_path": [p for p in (sec, subsec, subsub) if p],
+                    })
 
     return prepared_chunks
+
 
 def remove_conservative_duplicates(
     chunks: List[Dict[str, Any]]
 ) -> Tuple[List[Dict[str, Any]], int]:
     """
     Remove exact repeated extraction artifacts conservatively.
-
-    Rules:
-    - Never deduplicate tables.
-    - Deduplicate repeated short titles/text/list items.
-    - Always deduplicate known boilerplate.
-    - Do not deduplicate long clinical prose merely because it repeats.
+    Never deduplicates tables.
     """
     seen: Dict[str, int] = {}
     result: List[Dict[str, Any]] = []
@@ -788,7 +839,6 @@ def remove_conservative_duplicates(
             and len(norm) <= MAX_DEDUP_CHARS
         )
 
-        # Short repeated extraction artifacts are safe to collapse.
         if dedupe_candidate or known_boilerplate:
             if norm in seen:
                 removed += 1
@@ -799,13 +849,14 @@ def remove_conservative_duplicates(
 
     return result, removed
 
+
 def build_chunk_records(
     document_id: str,
     document_name: str,
     disease: str,
     blocks: List[Dict[str, Any]],
 ) -> Tuple[List[Dict[str, Any]], int]:
-    prepared = make_chunks_from_blocks(blocks)
+    prepared = make_chunks_from_blocks(blocks, doc_id=document_id)
     prepared, duplicate_count = remove_conservative_duplicates(prepared)
 
     records: List[Dict[str, Any]] = []
@@ -815,8 +866,6 @@ def build_chunk_records(
         if not content:
             continue
 
-        # Final hard invariant. It should never trigger, but protects against
-        # future changes to splitting logic.
         if len(content) > TARGET_CHARS:
             pieces = hard_split(content, TARGET_CHARS)
         else:
@@ -836,11 +885,18 @@ def build_chunk_records(
                 "content_type": item["type"],
                 "content": piece,
                 "char_count": len(piece),
-                "exclude_from_embedding": False,
+                "exclude_from_embedding": is_disclaimer_boilerplate(piece),
             }
 
             if item.get("page") is not None:
                 rec["page"] = item["page"]
+            if item.get("table_id"):
+                rec["table_id"] = item["table_id"]
+                rec["table_part"] = item.get("table_part", 1)
+                rec["table_total_parts"] = item.get("table_total_parts", 1)
+                rec["is_continuation"] = item.get("is_continuation", False)
+            if item.get("comorbidity"):
+                rec["comorbidity"] = item["comorbidity"]
 
             records.append(rec)
 

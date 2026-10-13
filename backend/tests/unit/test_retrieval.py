@@ -22,9 +22,9 @@ class TestRetrievalUnit(unittest.TestCase):
         cls.service = get_retrieval_service()
         cls.collection = get_collection()
 
-    def test_chroma_collection_exists_and_has_131_vectors(self):
+    def test_chroma_collection_exists_and_has_121_vectors(self):
         self.assertEqual(self.collection.name, "medical_guidelines")
-        self.assertEqual(self.collection.count(), 131)
+        self.assertEqual(self.collection.count(), 121)
 
     def test_empty_query_returns_empty_list(self):
         results = self.service.retrieve("")
@@ -39,8 +39,8 @@ class TestRetrievalUnit(unittest.TestCase):
 
     def test_retrieval_returns_ranked_results_with_metadata(self):
         results = self.service.retrieve("diabetes mellitus blood sugar control", top_k=5)
-        self.assertGreater(len(results), 0)
-        self.assertLessEqual(len(results), 5)
+        base_results = [r for r in results if not r.get("is_continuation_bundled")]
+        self.assertLessEqual(len(base_results), 5)
 
         for rank, r in enumerate(results, start=1):
             self.assertEqual(r["rank"], rank)

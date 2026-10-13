@@ -23,7 +23,8 @@ from app.schemas.prescriptions import (
 from app.rag.clinical_matcher import (
     ClinicalProfile,
     extract_clinical_profile,
-    RESPIRATORY_TABLE_MAP,
+    parse_spo2_details,
+    parse_hrct_details,
 )
 
 logger = get_logger("conflict-resolver")
@@ -45,6 +46,9 @@ def extract_parameters_from_text(text: str) -> Dict[str, Any]:
         "severity": None,
         "hrct_score": None,
         "spo2": None,
+        "hrct_severity": None,
+        "spo2_severity": None,
+        "biomarker_contradiction": False,
         "comorbidities_present": [],
         "comorbidities_absent": [],
         "symptoms": []
@@ -61,9 +65,15 @@ def extract_parameters_from_text(text: str) -> Dict[str, Any]:
     elif any(w in lower for w in ["child", "children", "pediatric", "below 15", "under 15", "bal"]):
         params["is_adult"] = False
 
-    # 2. Disease classification
-    is_resp = any(w in lower for w in ["respiratory", "viral", "kasa", "jwara", "hrct", "pranvah", "cough", "rhinorrhea", "shwasa"])
-    is_dm = any(w in lower for w in ["diabetes", "prameha", "sugar", "glucose", "hba1c", "nephropathy", "trushna", "aruchi"])
+    # 2. Disease classification (with negation awareness)
+    dm_tokens = ["diabetes", "prameha", "sugar", "glucose", "hba1c", "nephropathy", "trushna", "aruchi"]
+    resp_tokens = ["respiratory", "viral", "kasa", "jwara", "hrct", "pranvah", "cough", "rhinorrhea", "shwasa", "covid"]
+
+    negated_dm = bool(re.search(r'\b(?:without|no|zero|free of)\s+(?:known\s+)?(?:diabetes|prameha|sugar|glucose)\b', lower))
+    negated_resp = bool(re.search(r'\b(?:without|no|zero|free of)\s+(?:known\s+)?(?:respiratory|viral infection|cough|kasa)\b', lower))
+
+    is_resp = any(w in lower for w in resp_tokens) and not negated_resp
+    is_dm = any(w in lower for w in dm_tokens) and not negated_dm
 
     if is_resp and not is_dm:
         params["disease"] = "respiratory_viral_infection"
@@ -71,33 +81,38 @@ def extract_parameters_from_text(text: str) -> Dict[str, Any]:
         params["disease"] = "diabetes"
     elif is_resp and is_dm:
         # Check primary focus vs comorbidity
-        if any(w in lower for w in ["comorbidity", "sahvyadhi", "udakvah srotas vyadhi (diabetes"]):
+        if any(w in lower for w in ["comorbidity", "sahvyadhi", "udakvah", "with diabetes", "having diabetes"]):
             params["disease"] = "respiratory_viral_infection"
         else:
             params["disease"] = "coexisting_conditions"
 
-    # 3. Severity & Biomarkers
-    hrct_match = re.search(r'hrct\s*(?:score)?\s*(?:of)?\s*([0-9\-\>\<\s]+|greater than \d+|less than \d+)', lower)
-    if hrct_match:
-        params["hrct_score"] = hrct_match.group(1).strip()
+    # 3. Severity & Objective Biomarkers
+    hrct_raw, hrct_sev = parse_hrct_details(lower)
+    spo2_raw, spo2_sev = parse_spo2_details(lower)
 
-    spo2_match = re.search(r'spo2\s*(?:of)?\s*([><]?\s*\d{1,3}%?|\d{1,3}\s*(?:to|-)\s*\d{1,3}%?|above \d+|below \d+)', lower)
-    if spo2_match:
-        params["spo2"] = spo2_match.group(1).strip()
+    params["hrct_score"] = hrct_raw
+    params["hrct_severity"] = hrct_sev
+    params["spo2"] = spo2_raw
+    params["spo2_severity"] = spo2_sev
 
-    # Determine severity based on objective biomarkers first
-    if any(w in lower for w in ["hrct >15", "hrct > 15", "greater than 15", "spo2 <90", "spo2 below 90", "below 90"]):
-        params["severity"] = "severe"
-    elif any(w in lower for w in ["hrct 9-15", "hrct 9–15", "hrct 9 to 15", "9 to 15", "spo2 90-94", "spo2 90 to 94", "90 to 94"]):
-        params["severity"] = "moderate"
-    elif any(w in lower for w in ["hrct 0-8", "hrct 0–8", "hrct 0 to 8", "0 to 8", "spo2 >94", "spo2 above 94", "above 94"]):
-        params["severity"] = "mild"
-    elif "moderate" in lower and not re.search(r'\b(?:without|no)\s+moderate\b', lower):
-        params["severity"] = "moderate"
-    elif "severe" in lower and not re.search(r'\b(?:without|no)\s+severe\b', lower):
-        params["severity"] = "severe"
-    elif "mild" in lower and not re.search(r'\b(?:without|no)\s+mild\b', lower):
-        params["severity"] = "mild"
+    if hrct_sev and spo2_sev:
+        if hrct_sev != spo2_sev:
+            params["biomarker_contradiction"] = True
+            params["severity"] = None
+        else:
+            params["severity"] = hrct_sev
+    elif hrct_sev:
+        params["severity"] = hrct_sev
+    elif spo2_sev:
+        params["severity"] = spo2_sev
+    else:
+        # Qualitative severity fallback
+        if "severe" in lower and not re.search(r'\b(?:without|no)\s+severe\b', lower):
+            params["severity"] = "severe"
+        elif "moderate" in lower and not re.search(r'\b(?:without|no)\s+moderate\b', lower):
+            params["severity"] = "moderate"
+        elif "mild" in lower and not re.search(r'\b(?:without|no)\s+mild\b', lower):
+            params["severity"] = "mild"
 
     # 4. Comorbidities Present vs Absent
     comorbidity_keys = {
@@ -304,9 +319,47 @@ def resolve_clinical_context(
        without overwriting registered patient records, maintaining exact citations.
     5. If no conflicts exist: builds authoritative ClinicalProfile smoothly.
     """
+    query_params = extract_parameters_from_text(query)
+
+    # Detect intra-query biomarker contradictions (e.g. HRCT 7 [mild] vs SpO2 90% [moderate])
+    intra_conflicts: List[ClinicalConflict] = []
+    if query_params.get("biomarker_contradiction"):
+        intra_conflicts.append(ClinicalConflict(
+            parameter="biomarkers",
+            registered_value=f"HRCT {query_params.get('hrct_score')} ({str(query_params.get('hrct_severity', '')).upper()})",
+            query_value=f"SpO2 {query_params.get('spo2')} ({str(query_params.get('spo2_severity', '')).upper()})",
+            conflict_type="biomarker_contradiction",
+            message=(
+                f"Biomarker contradiction: Query specifies HRCT score '{query_params.get('hrct_score')}' "
+                f"({str(query_params.get('hrct_severity', '')).upper()} severity) but SpO2 '{query_params.get('spo2')}' "
+                f"({str(query_params.get('spo2_severity', '')).upper()} severity). Guideline dosing protocols differ strictly."
+            )
+        ))
+
     # 1. Custom / unregistered query (no patient record attached)
     if not patient_info or not patient_info.patient_id:
         profile = extract_clinical_profile(query=query, patient_info=None, disease=disease)
+        if intra_conflicts and not confirm_override:
+            summary = (
+                f"Detected {len(intra_conflicts)} clinical biomarker contradiction(s) within query. "
+                "Physician confirmation required before generating prescription."
+            )
+            result = ConflictResolutionResult(
+                has_conflict=True,
+                requires_confirmation=True,
+                conflicts=intra_conflicts,
+                resolution_summary=summary
+            )
+            return result, profile
+        elif intra_conflicts and confirm_override:
+            result = ConflictResolutionResult(
+                has_conflict=True,
+                requires_confirmation=False,
+                conflicts=intra_conflicts,
+                resolution_summary="Physician confirmed clinical override of contradictory biomarkers."
+            )
+            return result, profile
+
         result = ConflictResolutionResult(
             has_conflict=False,
             requires_confirmation=False,
@@ -315,12 +368,13 @@ def resolve_clinical_context(
         )
         return result, profile
 
-    # 2. Extract parameters from both sources
+    # 2. Extract parameters from patient source
     patient_params = extract_parameters_from_patient(patient_info)
-    query_params = extract_parameters_from_text(query)
 
     # 3. Detect conflicts
     conflicts = detect_clinical_conflicts(patient_params, query_params)
+    if intra_conflicts:
+        conflicts.extend(intra_conflicts)
 
     # 4. Handle unresolved conflict
     if conflicts and not confirm_override:

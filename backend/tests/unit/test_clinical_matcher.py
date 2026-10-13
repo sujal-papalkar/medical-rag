@@ -16,7 +16,6 @@ from app.rag.clinical_matcher import (
     is_chunk_applicable_for_profile,
     prioritize_and_isolate_chunks,
     sanitize_prescribed_medicines,
-    RESPIRATORY_TABLE_MAP,
 )
 
 
@@ -33,15 +32,12 @@ class TestClinicalMatcher(unittest.TestCase):
         self.assertEqual(profile.severity, "mild")
         self.assertFalse(profile.has_comorbidities)
         self.assertEqual(profile.comorbidities, [])
-        self.assertEqual(profile.matched_page, 17)
-        self.assertEqual(profile.target_chunk_id, "DOC-FC76496810AB-0035-77484627D9DE")
 
     def test_extract_pediatric_profile(self):
         query = "What are the prophylactic Rasayana guidelines for an 8-year-old child with respiratory viral infection risk?"
         profile = extract_clinical_profile(query)
         self.assertEqual(profile.age, 8)
         self.assertFalse(profile.is_adult)
-        self.assertEqual(profile.matched_page, 16)
 
     def test_extract_diabetic_comorbidity_profile(self):
         query = (
@@ -72,7 +68,7 @@ class TestClinicalMatcher(unittest.TestCase):
             "chunk_id": "DOC-FC76496810AB-0040-5EE61CBFB45B",
             "page": 19,
             "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
-            "content": "| MILD (0 to 8) SpO2 above 94 | Sutendra | 1-0-0 | with honey/warm water |"
+            "content": "Subsection: Udakvah srotas vyadhi (Diabetes Mellitus)\n| MILD (0 to 8) SpO2 above 94 | Sutendra | 1-0-0 | with honey/warm water |"
         }
         is_app, reason = is_chunk_applicable_for_profile(chunk_page_19, profile)
         self.assertFalse(is_app)
@@ -83,7 +79,7 @@ class TestClinicalMatcher(unittest.TestCase):
             "chunk_id": "DOC-FC76496810AB-0043-40B6B7FCDD58",
             "page": 20,
             "section": "RASAYANA GUIDELINES FOR RESPIRATORY VIRAL INFECTION AS PER CT SCORE/ DISEASE SEVERITY ALONG WITH OTHER CO MORBIDITIES",
-            "content": "| MILD (0 to 8) SpO2 above 94 | Heeraka Rasayana | 1-0-0 |"
+            "content": "Subsection: Mootravah srotas vyadhi (Chronic Renal Failure)\n| MILD (0 to 8) SpO2 above 94 | Heeraka Rasayana | 1-0-0 |"
         }
         is_app, reason = is_chunk_applicable_for_profile(chunk_page_20, profile)
         self.assertFalse(is_app)
@@ -124,16 +120,14 @@ class TestClinicalMatcher(unittest.TestCase):
         sanitized = sanitize_prescribed_medicines(raw_medicines, profile, evidence_chunks)
         med_names = [m.medicine for m in sanitized]
 
-        # Sutendra and Heeraka Rasayana must be completely removed
+        # Sutendra, Heeraka Rasayana, Mahalakshmi Vilas are not in evidence_chunks, must be completely removed
         self.assertNotIn("Sutendra", med_names)
         self.assertNotIn("Heeraka Rasayana", med_names)
         self.assertNotIn("Mahalakshmi Vilas", med_names)
 
-        # Exact adult mild medicines must be present
+        # Exact adult mild medicines that exist in evidence_chunks must be present
         self.assertIn("Somtajvir", med_names)
         self.assertIn("Pranvir", med_names)
-        self.assertIn("Rasaka Rasayana", med_names)
-        self.assertIn("Sindhurbhushan Rasayan", med_names)
 
         # Supporting chunk ID must strictly be Page 17 chunk only!
         for m in sanitized:

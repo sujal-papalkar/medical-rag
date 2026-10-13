@@ -1,6 +1,8 @@
 import chromadb
+from pathlib import Path
 
-client = chromadb.PersistentClient(path="chroma_db")
+db_path = "backend/chroma_db" if Path("backend/chroma_db").exists() else "chroma_db"
+client = chromadb.PersistentClient(path=db_path)
 
 collection = client.get_collection("medical_guidelines")
 

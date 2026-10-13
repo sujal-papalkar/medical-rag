@@ -36,7 +36,6 @@ from app.rag.clinical_matcher import (
     extract_clinical_profile,
     prioritize_and_isolate_chunks,
     sanitize_prescribed_medicines,
-    RESPIRATORY_TABLE_MAP,
 )
 
 logger = get_logger("prescription-generator")
@@ -70,7 +69,8 @@ def call_gemini_with_fallback(
             try:
                 response = client.models.generate_content(
                     model=model_name,
-                    contents=prompt
+                    contents=prompt,
+                    config={"temperature": 0.0, "top_p": 1.0, "seed": 42}
                 )
                 if response and response.text:
                     return {
@@ -314,16 +314,12 @@ def generate_structured_prescription(
                 if not any("age" in str(lim).lower() for lim in limitations):
                     limitations.append(age_lim)
 
-            if profile.disease == "respiratory_viral_infection" and profile.severity is None:
-                sev_lim = "Disease severity / HRCT score is not specified; guideline formulations vary strictly across mild, moderate, and severe stages."
-                if not any("severity" in str(lim).lower() or "hrct" in str(lim).lower() for lim in limitations):
-                    limitations.append(sev_lim)
-
             parsed_candidates.append({
                 "clinical_guidance": clinical_guidance,
                 "medicines": sanitized_medicines,
                 "limitations": limitations,
-                "raw": raw_text
+                "raw": raw_text,
+                "candidate_idx": candidate_idx
             })
 
         except (json.JSONDecodeError, ValidationError) as parse_err:
@@ -335,8 +331,11 @@ def generate_structured_prescription(
 
     # 10. Selection of best valid candidate
     if parsed_candidates:
-        # Choose candidate with the most complete validated medicine items and guidance
-        best = max(parsed_candidates, key=lambda c: (len(c["medicines"]), len(c["clinical_guidance"].key_recommendations)))
+        # Choose candidate with the most complete validated medicine items and guidance, with deterministic tie-breaking
+        best = max(
+            parsed_candidates,
+            key=lambda c: (len(c["medicines"]), len(c["clinical_guidance"].key_recommendations), -c.get("candidate_idx", 0))
+        )
 
         all_limitations = list(best["limitations"])
         if conflict_res.conflicts:

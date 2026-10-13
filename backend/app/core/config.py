@@ -53,12 +53,21 @@ class Settings(BaseSettings):
     CHROMA_COLLECTION_NAME: str = "medical_guidelines"
     CHROMA_PERSIST_DIR: str = str(CHROMA_DB_PATH)
 
-    # Retrieval and Reranking Parameters (70% Semantic + 30% Lexical)
+    # Retrieval and Reranking Parameters (Hybrid Semantic + BM25 + Cross-Encoder)
     RETRIEVAL_CANDIDATE_K: int = 20
     DEFAULT_TOP_K: int = 5
     EVALUATION_TOP_K: int = 10
     SEMANTIC_WEIGHT: float = 0.70
     LEXICAL_WEIGHT: float = 0.30
+
+    # Cross-Encoder Reranking Parameters
+    ENABLE_CROSS_ENCODER: bool = True
+    CROSS_ENCODER_MODEL: str = "cross-encoder/ms-marco-MiniLM-L-6-v2"
+    CROSS_ENCODER_TOP_N: int = 10
+    RERANKING_MODE: str = "hybrid"  # "hybrid" (calibrated ensemble) or "cascade" (cross-encoder reordering)
+    CROSS_ENCODER_WEIGHT: float = 0.50
+    HYBRID_SEMANTIC_WEIGHT: float = 0.35
+    HYBRID_LEXICAL_WEIGHT: float = 0.15
 
     # Generation Parameters
     GEMINI_GENERATION_MODEL: str = "gemini-3.5-flash-lite"
